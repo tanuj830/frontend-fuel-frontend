@@ -2,11 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import Editor from '@monaco-editor/react';
 import { Code, CornerUpLeft, Undo } from 'lucide-react';
-import {
-    ResizableHandle,
-    ResizablePanel,
-    ResizablePanelGroup,
-  } from "@/components/ui/resizable"
+
 
   
 const CodeEditor = ({quest, code, setCode}:any) => {
@@ -23,6 +19,8 @@ const CodeEditor = ({quest, code, setCode}:any) => {
         setCode(quest.starterCode)
         setQuestion(quest)
   },[quest])
+
+
 
   return (
     <div className="flex flex-col  rounded-xl w-full h-full">
@@ -65,7 +63,9 @@ const CodeEditor = ({quest, code, setCode}:any) => {
           onChange={handleEditorChange}
           options={{
             fontSize: 12,
-            lineHeight: 14,
+            fontWeight:"500",
+fontFamily: "Fira Code, monospace",
+            lineHeight: 20,
             minimap: { enabled: false },
             wordWrap: 'on',
             scrollBeyondLastLine: false,

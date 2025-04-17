@@ -25,12 +25,34 @@ console.log(question)
     })
   }, [params.slug])
   return (
-    <div className='w-full  p-6'>
+    <div className='w-full  lg:p-6'>
+
+{/* mobile view */}
+<div
+        className="flex flex-col  gap-5 lg:hidden"
+      >
+        <div>
+
+          <QuestionDispScreen question={question} />
+        </div>
+
+<div className='h-[60vh]'>
+
+          <CodeEditor quest={question} />
+</div>
+
+  <div className='pb-20'>
+        <TestCases question={question} setQuestion={setQuestion} />
+    </div>      
+      </div>
+
+{/* pc view */}
+<div className='hidden lg:inline-block'>
 
       <ResizablePanelGroup
         direction="horizontal"
-        className=" rounded-lg border "
-      >
+        className=" rounded-lg border"
+        >
         <ResizablePanel defaultSize={60} className='h-full'>
           {/* question disp screen */}
           <QuestionDispScreen question={question} />
@@ -49,6 +71,7 @@ console.log(question)
           </ResizablePanelGroup>
         </ResizablePanel>
       </ResizablePanelGroup>
+        </div>
     </div>
   )
 }

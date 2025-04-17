@@ -6,7 +6,7 @@ const QuestionDispScreen = ({ question }: any) => {
 
     const [window, setWindow] = React.useState("description")
     return (
-        <div className='p-5 h-[90vh] overflow-auto'>
+        <div className='p-5 lg:h-[90vh] overflow-auto'>
 
             {/* toggle window buttons */}
             <div className='flex items-center gap-5'>
@@ -29,12 +29,12 @@ const QuestionDispScreen = ({ question }: any) => {
             <div>
                 <h1 className='text-2xl font-bold leading-16 py-3 '>{question.title}</h1>
             </div>
-            <div className='text-xs text-muted-foreground  flex items-center flex-wrap gap-7 pb-6'>
+            <div className='text-xs text-muted-foreground  flex items-center flex-wrap gap-3 lg:gap-7 pb-6'>
                 <div className='flex items-center gap-1'>
                     <img src="/image.png" className='w-8 h-8 scale-110 rounded-full object-cover' alt="author_image" />
                     <div className='flex flex-col'>
                         <span className='text-xs font-medium text-accent-foreground'>Tanuj Bhatt</span>
-                        <span className='text-xs font-medium'>American Express, Infosys</span>
+                        <span className='text-xs font-medium'>Amex, Infosys</span>
 
                     </div>
                 </div>

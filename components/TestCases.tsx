@@ -81,7 +81,7 @@ const CodeEvaluate = ({question, setQuestion}:any) => {
               </div>
             }
         </div>
-      <div className='flex items-center gap-3 fixed bottom-0 right-8 '>
+      <div className='flex items-center gap-3 fixed bottom-1 lg:bottom-0 right-1 lg:right-8 '>
         <button className={`bg-muted rounded-lg py-1 px-2 flex items-center gap-2 text-xs cursor-pointer ${question.completed && 'bg-primary'}`} > <Check width={16} height={16} onClick={()=>handleCompleted}/>Mark as completed</button>
         <button className='bg-muted rounded-lg py-1 px-2 flex items-center gap-2 text-xs cursor-pointer' onClick={handleRunTests}> <Play width={16} height={16}/>Run</button>
         <button className='bg-primary rounded-lg py-1 px-2 flex items-center gap-2 text-xs cursor-pointer' onClick={()=>setWindow("Submit")}>Submit</button>

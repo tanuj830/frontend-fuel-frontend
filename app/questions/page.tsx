@@ -18,7 +18,7 @@ const Questions = () => {
 
     useEffect(() => {
         // axios.get("/api/challenges").then(res => setQuestions(res.data))
-        axios.get(`${BASE_URL}/api/questions`).then(res => console.log(res.data)).catch(err=>console.log(err))
+        axios.get(`${BASE_URL}/api/questions`).then(res => setQuestions(res.data)).catch(err=>console.log(err))
     }, [])
 
     return (

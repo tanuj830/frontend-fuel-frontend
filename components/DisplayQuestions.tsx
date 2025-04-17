@@ -27,16 +27,16 @@ const DisplayQuestions: React.FC<QuestionsPlaygroundProps> = ({ questions }) => 
 
                 questions.map(question => (
                     <Link href={question.category === "Algo coding" ? "/questions/algo/" + question.id : question.category === "UI coding" ? "/questions/user-interface/" + question.id : "/questions/javascript/" + question.id} key={question.id}
-                        className='w-full border flex items-center gap-5 p-5 bg-muted rounded-lg hover:border hover:border-primary'>
+                        className='w-full border flex items-center gap-3 lg:gap-5 p-3 lg:p-5 bg-muted rounded-lg hover:border hover:border-primary'>
                         <div>
                             <button className='text-muted-foreground hover:text-green-600'><BadgeCheck width={30} height={30} /></button>
                         </div>
-                        <div className='min-w-[85%] max-w-[85%]'>
+                        <div className='min-w-[73%] max-w-[73%] lg:min-w-[85%] lg:max-w-[85%]'>
                             <h6>{question.title}</h6>
-                            <p className='truncate text-muted-foreground text-sm py-3'>{htmlToText(question.description)}</p>
-                            <div className='flex items-center text-xs text-muted-foreground gap-8 mt-2'>
-                                <span>{question.category}</span>
-                                <div className='flex items-center gap-1'>
+                            <p className='truncate text-muted-foreground text-sm pt-2 lg:py-3'>{htmlToText(question.description)}</p>
+                            <div className='flex lg:items-center flex-col lg:flex-row text-xs text-muted-foreground gap-3 lg:gap-8 mt-2'>
+                                <div className='flex items-center gap-2'>
+                                <span className='whitespace-nowrap'>{question.category}</span>
                                     <Flame width={21} height={21} />
                                     {
                                         question.difficulty === "easy" ? <span className='capitalize text-green-600 font-semibold'>{question.difficulty}</span> :

@@ -85,13 +85,13 @@ const QuestionsPlayground: React.FC<QuestionsPlaygroundProps> = ({ questions }) 
     }, [questions]);
 
     return (
-        <div className='w-[60vw]'>
+        <div className='lg:w-[60vw]'>
             <div>
 
                 {/* input */}
                 <form className='flex items-center gap-3'>
                     <div className='relative w-full'>
-                        <Input placeholder='Search within this list of questions' className='px-10 py-3' onChange={handleQuery} />
+                        <Input placeholder='Search within this list of questions' className='px-10 py-3 text-xs lg:text-sm' onChange={handleQuery} />
                         <span className='absolute top-2 left-2 text-muted-foreground'>
                             <Search width={20} height={20} />
                         </span>
@@ -114,7 +114,7 @@ const QuestionsPlayground: React.FC<QuestionsPlaygroundProps> = ({ questions }) 
                     }
                 </div>
 
-                <div className='text-muted-foreground flex gap-12 items-center '>
+                <div className='text-muted-foreground flex gap-8 items-center '>
                     <div className='flex items-center gap-2'>
                         <BookOpenText width={20} height={20} />
                         <span className='text-muted-foreground text-xs'>{filteredQuestions.length > 0 ? filteredQuestions?.length : questions?.length} questions</span>

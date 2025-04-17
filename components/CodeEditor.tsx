@@ -9,11 +9,10 @@ import {
   } from "@/components/ui/resizable"
 
   
-const CodeEditor = ({quest}:any) => {
+const CodeEditor = ({quest, code, setCode}:any) => {
   const [language, setLanguage] = useState("javascript");
   const [theme, setTheme] = useState("dracula");
   const [question, setQuestion] = useState({} as any)
-    const [code, setCode] = useState("")
 
   const handleEditorChange = (value: string | undefined) => {
     setCode(value || "")

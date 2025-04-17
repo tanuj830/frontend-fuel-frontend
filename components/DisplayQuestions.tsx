@@ -23,6 +23,7 @@ const DisplayQuestions: React.FC<QuestionsPlaygroundProps> = ({ questions }) => 
 
     return (
         <div className='flex flex-col'>
+            
             {
 
                 questions.map(question => (

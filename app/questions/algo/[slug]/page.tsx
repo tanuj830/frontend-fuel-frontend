@@ -13,11 +13,13 @@ import { BASE_URL } from '@/lib/utils';
 const page = () => {
 
   const [question, setQuestion] = React.useState({} as any)
-console.log(question)
+  const [code, setCode] = React.useState("")
+
   const params = useParams()
 
   useEffect(() => {
-    axios.get(`${BASE_URL}/api/questions`).then(res => {
+    // axios.get(`${BASE_URL}/api/questions`).then(res => {
+    axios.get(`/api/challenges`).then(res => {
       const quest = res.data.find((quest: any) => quest.id === params.slug);
       if (quest) setQuestion(quest)
 
@@ -38,11 +40,11 @@ console.log(question)
 
 <div className='h-[60vh]'>
 
-          <CodeEditor quest={question} />
+          <CodeEditor quest={question} code={code} setCode={setCode} />
 </div>
 
   <div className='pb-20'>
-        <TestCases question={question} setQuestion={setQuestion} />
+        <TestCases question={question} setQuestion={setQuestion} code={code} />
     </div>      
       </div>
 
@@ -62,11 +64,11 @@ console.log(question)
           <ResizablePanelGroup direction="vertical">
             <ResizablePanel defaultSize={25}>
               {/* code editor screen */}
-              <CodeEditor quest={question} />
+              <CodeEditor quest={question} code={code} setCode={setCode}/>
             </ResizablePanel>
             <ResizableHandle className='' />
             <ResizablePanel defaultSize={10}>
-              <TestCases question={question} setQuestion={setQuestion} />
+              <TestCases question={question} setQuestion={setQuestion} code={code}/>
             </ResizablePanel>
           </ResizablePanelGroup>
         </ResizablePanel>

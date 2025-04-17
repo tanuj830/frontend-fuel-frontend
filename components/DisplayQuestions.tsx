@@ -26,7 +26,7 @@ const DisplayQuestions: React.FC<QuestionsPlaygroundProps> = ({ questions }) => 
             {
 
                 questions.map(question => (
-                    <Link href={question.category === "Algo coding" ? "/questions/algo/" + question.id : question.category === "UI coding" ? "/questions/user-interface/" + question.id : "/questions/javascript/" + question.id} key={question.id}
+                    <Link href={question.category === "Algo coding" || question.category === "JS functions" ? "/questions/algo/" + question.id : question.category === "UI coding" ? "/questions/user-interface/" + question.id : "#"} key={question.id}
                         className='w-full border flex items-center gap-3 lg:gap-5 p-3 lg:p-5 bg-muted rounded-lg hover:border hover:border-primary'>
                         <div>
                             <button className='text-muted-foreground hover:text-green-600'><BadgeCheck width={30} height={30} /></button>

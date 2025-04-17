@@ -5,7 +5,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-
+export const BASE_URL = "https://frontend-fuel-backend-o3sh.onrender.com"
 
 // sortby feature in QuestionsSortBy
 const difficultyOrder:any = {

@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button'
 import { DropdownMenu, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import { Input } from '@/components/ui/input'
 import { Separator } from '@/components/ui/separator'
+import { BASE_URL } from '@/lib/utils';
 import axios from 'axios'
 import { ArrowDown01, BadgeCheck, PanelTop, Search, TestTube } from 'lucide-react'
 import React, { useEffect } from 'react'
@@ -17,7 +18,7 @@ const Questions = () => {
 
     useEffect(() => {
         // axios.get("/api/challenges").then(res => setQuestions(res.data))
-        axios.get("http://localhost:8080/api/questions").then(res => setQuestions(res.data))
+        axios.get(`${BASE_URL}/api/questions`).then(res => console.log(res.data)).catch(err=>console.log(err))
     }, [])
 
     return (

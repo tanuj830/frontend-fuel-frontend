@@ -46,7 +46,7 @@ const DisplayQuestions: React.FC<QuestionsPlaygroundProps> = ({ questions }) => 
                                 </div>
                                 <div className='flex gap-1 items-center'>
                                     {
-                                        question?.tags?.map((tag:any) => (<span key={tag.name} className='border p-1 rounded-lg'>{tag.name}</span>))
+                                        question?.tags?.map((tag) => (<span key={tag} className='border p-1 rounded-lg'>{tag}</span>))
                                     }
                                 </div>
                             </div>

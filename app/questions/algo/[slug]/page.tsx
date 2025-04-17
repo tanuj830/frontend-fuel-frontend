@@ -7,6 +7,7 @@ import CodeEditor from '@/components/CodeEditor';
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@/components/ui/resizable';
 import QuestionDispScreen from '@/components/QuestionDispScreen';
 import TestCases from '@/components/TestCases';
+import { BASE_URL } from '@/lib/utils';
 
 
 const page = () => {
@@ -16,7 +17,7 @@ console.log(question)
   const params = useParams()
 
   useEffect(() => {
-    axios.get("/api/challenges").then(res => {
+    axios.get(`${BASE_URL}/api/questions`).then(res => {
       const quest = res.data.find((quest: any) => quest.id === params.slug);
       if (quest) setQuestion(quest)
 

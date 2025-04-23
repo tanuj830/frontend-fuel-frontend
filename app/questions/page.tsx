@@ -15,10 +15,16 @@ import React, { useEffect } from 'react'
 const Questions = () => {
 
     const [questions, setQuestions] = React.useState([])
+    const [user, setUser] = React.useState({} as any)
 
     useEffect(() => {
-        axios.get("/api/challenges").then(res => setQuestions(res.data))
+        // axios.get("/api/challenges").then(res => setQuestions(res.data))
         // axios.get(`${BASE_URL}/api/questions`).then(res => setQuestions(res.data)).catch(err=>console.log(err))
+        axios.get(`http://localhost:8080/api/questions`).then(res => setQuestions(res.data)).catch(err=>console.log(err))
+        
+        const savedUser = localStorage.getItem("user")
+        if(savedUser)setUser(JSON.parse(savedUser))
+
     }, [])
 
     return (

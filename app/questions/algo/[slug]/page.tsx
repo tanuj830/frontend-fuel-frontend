@@ -18,10 +18,14 @@ const page = () => {
   const params = useParams()
 
   useEffect(() => {
-    // axios.get(`${BASE_URL}/api/questions`).then(res => {
-    axios.get(`/api/challenges`).then(res => {
-      const quest = res.data.find((quest: any) => quest.id === params.slug);
-      if (quest) setQuestion(quest)
+    // axios.get(`/api/challenges`).then(res => {
+    // axios.get(`${BASE_URL}/api/questions/`+params.slug).then(res => {
+    axios.get(`http://localhost:8080/api/questions/`+params.slug).then(res => {
+      if (res.data){
+        console.log(res.data, "222")
+        setQuestion(res.data)
+
+      } 
 
       else alert("No question found...try solving other question")
     })
@@ -49,18 +53,18 @@ const page = () => {
       </div>
 
 {/* pc view */}
-<div className='hidden lg:inline-block'>
+<div className='hidden lg:inline-block w-[100%] overflow-hidden'>
 
       <ResizablePanelGroup
         direction="horizontal"
         className=" rounded-lg border"
         >
-        <ResizablePanel defaultSize={60} className='h-full'>
+        <ResizablePanel defaultSize={60} className='w-full h-full'>
           {/* question disp screen */}
           <QuestionDispScreen question={question} />
         </ResizablePanel>
         <ResizableHandle />
-        <ResizablePanel defaultSize={60}>
+        <ResizablePanel defaultSize={40}>
           <ResizablePanelGroup direction="vertical">
             <ResizablePanel defaultSize={25}>
               {/* code editor screen */}

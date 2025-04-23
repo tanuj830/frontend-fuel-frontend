@@ -7,7 +7,7 @@ import { Code, CornerUpLeft, Undo } from 'lucide-react';
   
 const CodeEditor = ({quest, code, setCode}:any) => {
   const [language, setLanguage] = useState("javascript");
-  const [theme, setTheme] = useState("dracula");
+  const [theme, setTheme] = useState("vs-dark");
   const [question, setQuestion] = useState({} as any)
 
   const handleEditorChange = (value: string | undefined) => {
@@ -23,7 +23,7 @@ const CodeEditor = ({quest, code, setCode}:any) => {
 
 
   return (
-    <div className="flex flex-col  rounded-xl w-full h-full">
+    <div className="flex flex-col min-w-[25vw] rounded-xl  h-full">
       {/* Header */}
       <div className="flex justify-between items-center p-3">
         <div className="flex justify-between items-center  w-full">

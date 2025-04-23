@@ -1,14 +1,36 @@
+"use client";
 import React from 'react'
 import { Menubar } from './ui/menubar'
 import {Menu} from './Menu'
 import { ModeToggle } from './ModeToggle'
+import Link from 'next/link'
+import { X } from 'lucide-react'
 
 const Navbar = () => {
+  const [showAddBar, setShowAddBar] = React.useState(true)
   return (
-    <div className=' flex justify-end gap-2 px-2 '>
-      <Menu />
+    <>
+    {
+      showAddBar &&
+
+    <div className='text-[10px] lg:text-xs bg-primary p-1.5 text-center flex'>
+      <div className='w-full'>
+
+    Enjoy 20% off all plans by following our social accounts! Check it out
+      </div>
+
+      <X onClick={()=>setShowAddBar(false)} className='cursor-pointer' width={16} height={16}/>
+    </div>
+    }
+    <div className=' flex justify-end items-center gap-5 px-6 lg:px-10 py-2  text-sm border-b border-muted'>
+      
+
+        <Link href="/questions">Sign out</Link>
+        <Link href="/sign-up">Sign in / up</Link>
+      
       <ModeToggle/>
     </div>
+    </>
   )
 }
 

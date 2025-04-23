@@ -1,6 +1,7 @@
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
 
+
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
@@ -13,6 +14,7 @@ const difficultyOrder:any = {
   medium: 2,
   hard: 3,
 };
+
 
 export const sortByEasyToHard = (questions:any, filteredQuestions:any, setFilteredQuestions:any) => {
   const listToSort = filteredQuestions?.length > 0 ? [...filteredQuestions] : [...questions];

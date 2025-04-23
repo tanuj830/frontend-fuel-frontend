@@ -2,13 +2,15 @@ import React, { useEffect } from 'react'
 import { Button } from './ui/button'
 import { Ban, Captions, Check, CircleCheck, Cross, EyeOff, FlaskConical, Play, TestTube, X } from 'lucide-react'
 import axios from 'axios'
+import XpPopupCard from './XPPopUpCard'
 
 const CodeEvaluate = ({question, setQuestion, code}:any) => {
   const [window, setWindow] = React.useState("Test code")
   const [testCaseClicked, setTestCaseClicked] = React.useState("initial") // initial, loading, passed, failed
   const [submitClicked, setSubmitClicked] = React.useState("initial") // initial, loading, showResults, failed
   const [response, setResponse] = React.useState([])// response for all testcases 
-  
+  const [showXpCard, setShowXpCard] = React.useState(false);
+
  
 
   const handleTestCode = () => {
@@ -16,10 +18,12 @@ const CodeEvaluate = ({question, setQuestion, code}:any) => {
     setTestCaseClicked("loading")
     const data = {
       code,
-      testCases: question.testCases
+      testCases: [question.testCases[0]]
     }
-    axios.post("https://codeexecutor.onrender.com/run-single", data).then(res=>res.data.result == true ? setTestCaseClicked("passed"): setTestCaseClicked("failed")).catch(err=>console.log(err))
+    axios.post("http://localhost:8000/run", data).then(res=>res.data.results[0].passed == true ? setTestCaseClicked("passed"): setTestCaseClicked("failed")).catch(err=>console.log(err))
   }
+
+
   const handleSubmit = () => {
     setWindow("Submit")
     setSubmitClicked("loading")
@@ -27,9 +31,23 @@ const CodeEvaluate = ({question, setQuestion, code}:any) => {
       code,
       testCases: question.testCases
     }
-    axios.post("https://codeexecutor.onrender.com/run-all", data).then(res=>{
+    // axios.post("https://codeexecutor.onrender.com/run-all", data).then(res=>{
+    axios.post("http://localhost:8000/run", data).then(res=>{
       res.data.results?.length > 0 ? setSubmitClicked("showResults"): setSubmitClicked("failed")
-      setResponse(res.data.results)}
+      setResponse(res.data.results)
+      let allCasesPassed = true
+      res.data.results.map((res:any)=>{if(res.passed == false) allCasesPassed = false})
+        if(allCasesPassed){
+          const user = localStorage.getItem("user")
+          if(user){
+
+            axios.post("http://localhost:8080/api/questions/submit", {user:JSON.parse(user), question, code}).then(res=>{
+              // console.log(res.data, "109")
+            })
+            setShowXpCard(true)
+            }
+      }
+    }
     ).catch(err=>console.log(err))
 
   }
@@ -41,7 +59,10 @@ const CodeEvaluate = ({question, setQuestion, code}:any) => {
   }
   console.log(testCaseClicked)
   return (
-    <div className='flex flex-col justify-between'>
+    <div className='flex flex-col  min-w-[25vw] justify-between'>
+      {
+        showXpCard && <XpPopupCard question={question} xp={20} onClose={() => setShowXpCard(false)}/>
+      }
         <div className='p-5'>
         <div className='flex items-center gap-7'>
                 <button className={`text-xs flex items-center gap-1 text-muted-foreground cursor-pointer  ${window === "Test code" ? 'text-primary-foreground': 'hover:text-primary'}`} onClick={() => setWindow("Test code")}>
@@ -117,15 +138,15 @@ const CodeEvaluate = ({question, setQuestion, code}:any) => {
                   submitClicked == "showResults" ? //showResults will show all test cases
                   <>
                   {
-                    response.map((res:any)=>(
-                      <div className='flex items-center gap-3 bg-muted p-3 rounded-xl mt-2' key={res.testCaseNumber}>
+                    response.map((res:any, testCaseNumber)=>(
+                      <div className='flex items-center gap-3 bg-muted p-3 rounded-xl mt-2' key={testCaseNumber}>
                         {
                           res.passed ? 
                           <Check className='text-green-600 font-extrabold' width={19} height={19}/>
                          : <X className='text-red-600 font-extrabold' width={19} height={19}/>
                         }
                   <span>
-                    Test Case {res.testCaseNumber} {'>'} input : {JSON.stringify(res.inputs)}
+                    Test Case {res.testCaseNumber} {'>'} input : {JSON.stringify(question.testCases[testCaseNumber].inputs)}
                   </span>
                 </div>
                     ))

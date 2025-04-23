@@ -1,12 +1,22 @@
+import axios from 'axios'
 import { Captions, Clock3, Flame, Lightbulb, NotebookText } from 'lucide-react'
 import { Span } from 'next/dist/trace'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 const QuestionDispScreen = ({ question }: any) => {
 
     const [window, setWindow] = React.useState("description")
+    const [user, setUser] = React.useState({} as any)
+    const [submissons, setSubmissons] = React.useState([] as any)
+
+    useEffect(()=>{
+        const savedUser = localStorage.getItem("user")
+        if(savedUser)setUser(JSON.parse(savedUser))
+console.log(user.id)
+        axios.post("http://localhost:8080/api/questions/submissons/"+user.id, question).then(res=>setSubmissons(res.data)).catch(err=>console.log(err))
+    }, [window])
     return (
-        <div className='p-5 lg:h-[90vh] overflow-auto'>
+        <div className='p-5 lg:h-[83vh] min-w-[20vw]  overflow-auto'>
 
             {/* toggle window buttons */}
             <div className='flex items-center gap-5'>
@@ -69,13 +79,38 @@ const QuestionDispScreen = ({ question }: any) => {
                             {/* show solution */}
                             <div className='text-secondary-foreground ' id='disp' dangerouslySetInnerHTML={{ __html: question?.solutionCode }} />
                         </div> :
-                                <div className='flex items-center justify-center bg-muted h-[50vh]'>
+                                <div className='flex  p-5 bg-muted min-w-[46vw] h-[50vh]'>
                             {/* show submissions */}
-                        <div className='flex flex-col text-muted-foreground text-center'>
+                        {
+                            submissons ? 
+                            <div className='flex flex-col  gap-3 text-sm w-full overflow-scroll'>
+                            {
+                                submissons.map((sub:any)=>(
+
+                                <div className='flex  justify-between w-full gap-10 border-b'>
+                            <div className='font-semibold text-green-500'>
+                                        ACCEPTED
+                            </div>
+                            <div className='text-nowrap '>
+                                {question.title}
+                            </div>
+                            <div>
+                                {Date.parse(sub.solvedOn)}
+                            </div>
+                            <div>
+                                {}
+                            </div>
+</div>
+))
+}
+                            </div>
+                            : 
+                            <div className='flex flex-col  text-muted-foreground text-center'>
 
                                 <small>No submission found</small>
                                 <small>To see your submission details first submit your code</small>
                                 </div>
+                        }
                         </div>
             }
 

@@ -127,8 +127,6 @@ background: #000;
 }
 
 
-
-
 #disp pre{
   @apply bg-muted text-muted-foreground rounded-xl p-3 my-3 overflow-auto
 }

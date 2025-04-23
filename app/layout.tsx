@@ -5,6 +5,7 @@ import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 import { AppSidebar } from "@/components/app-sidebar"
 import { ThemeProvider } from "@/components/theme-provider"
 import Navbar from "@/components/Navbar";
+import { AuthProvider } from "@/components/AuthContext";
 
 
 const geistSans = Geist({
@@ -39,6 +40,7 @@ export default function RootLayout({
             disableTransitionOnChange
             
           >
+            <AuthProvider>
         {/* <SidebarProvider > */}
       {/* <AppSidebar /> */}
       <main className="w-full">
@@ -51,6 +53,7 @@ export default function RootLayout({
             </div>
       </main>
     {/* </SidebarProvider> */}
+    </AuthProvider>
           </ThemeProvider>
       </body>
     </html>

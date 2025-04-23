@@ -3,6 +3,7 @@ import { Button } from './ui/button'
 import { Ban, Captions, Check, CircleCheck, Cross, EyeOff, FlaskConical, Play, TestTube, X } from 'lucide-react'
 import axios from 'axios'
 import XpPopupCard from './XPPopUpCard'
+import { BASE_URL } from '@/lib/utils'
 
 const CodeEvaluate = ({question, setQuestion, code}:any) => {
   const [window, setWindow] = React.useState("Test code")
@@ -41,7 +42,7 @@ const CodeEvaluate = ({question, setQuestion, code}:any) => {
           const user = localStorage.getItem("user")
           if(user){
 
-            axios.post("http://localhost:8080/api/questions/submit", {user:JSON.parse(user), question, code}).then(res=>{
+            axios.post(`${BASE_URL}/api/questions/submit`, {user:JSON.parse(user), question, code}).then(res=>{
               // console.log(res.data, "109")
             })
             setShowXpCard(true)
@@ -59,7 +60,7 @@ const CodeEvaluate = ({question, setQuestion, code}:any) => {
   }
   console.log(testCaseClicked)
   return (
-    <div className='flex flex-col  min-w-[25vw] justify-between'>
+    <div className='flex flex-col  min-w-[25vw] justify-between overflow-y-scroll'>
       {
         showXpCard && <XpPopupCard question={question} xp={20} onClose={() => setShowXpCard(false)}/>
       }
@@ -136,7 +137,7 @@ const CodeEvaluate = ({question, setQuestion, code}:any) => {
               </div>
                   :
                   submitClicked == "showResults" ? //showResults will show all test cases
-                  <>
+                  <div className='overflow-y-scroll'>
                   {
                     response.map((res:any, testCaseNumber)=>(
                       <div className='flex items-center gap-3 bg-muted p-3 rounded-xl mt-2' key={testCaseNumber}>
@@ -151,7 +152,7 @@ const CodeEvaluate = ({question, setQuestion, code}:any) => {
                 </div>
                     ))
                 }
-                  </>
+                  </div>
                 : submitClicked == "failed" ? 
                 <div className='flex items-center justify-center gap-3 bg-muted p-4 rounded-xl mt-2'>
                 <div className='flex flex-col items-center gap-2'>

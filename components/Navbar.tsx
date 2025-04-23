@@ -5,9 +5,18 @@ import {Menu} from './Menu'
 import { ModeToggle } from './ModeToggle'
 import Link from 'next/link'
 import { X } from 'lucide-react'
+import {useAuth} from "@/components/AuthContext"
 
 const Navbar = () => {
   const [showAddBar, setShowAddBar] = React.useState(true)
+  const [hasMounted, setHasMounted] = React.useState(false);
+  const {logout, user} = useAuth()
+
+  React.useEffect(() => {
+    setHasMounted(true);
+  }, []);
+
+  if (!hasMounted) return null;
   return (
     <>
     {
@@ -24,9 +33,11 @@ const Navbar = () => {
     }
     <div className=' flex justify-end items-center gap-5 px-6 lg:px-10 py-2  text-sm border-b border-muted'>
       
-
-        <Link href="/questions">Sign out</Link>
-        <Link href="/sign-up">Sign in / up</Link>
+      {
+        user ? 
+        <button className='cursor-pointer' onClick={logout}>Sign out</button>
+      :  <Link className='cursor-pointer' href="/sign-up">Sign in / up</Link>
+      }
       
       <ModeToggle/>
     </div>

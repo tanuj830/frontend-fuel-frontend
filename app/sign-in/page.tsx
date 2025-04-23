@@ -1,41 +1,55 @@
 "use client";
+import { useAuth } from '@/components/AuthContext';
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { BASE_URL } from '@/lib/utils';
+import withAuth from '@/lib/withAuth';
 import axios from 'axios'
 import { Chrome, Github } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation';
-import React from 'react'
-
+import React, { useEffect } from 'react'
 const page = () => {
-    const [status, setStatus] = React.useState("initial") // initial, loading, success, failed
-    const [user, setUser] = React.useState({} as any)
-
+  const [status, setStatus] = React.useState("initial") // initial, loading, success, failed
+  const [userInfo, setUserInfo] = React.useState({} as any)
+  
+  const {user, setUser}:any = useAuth();
     const router = useRouter()
 
-    const authenticateUser = (e:any) => {
-        e.preventDefault()
-        setStatus("loading")
-        // axios.post(`${BASE_URL}/api/questions`, user).then(res=>{
-        axios.post(`http://localhost:8080/api/users/authenticate`, user).then(res=>{
-          if(res.data){
-            console.log(res.data)
-            setStatus("success")
-            // localStorage.setItem("user", JSON.stringify(res.data))
-            router.push("/questions")
+    const authenticateUser = (e: any) => {
+      e.preventDefault();
+      setStatus("loading");
+    
+      axios
+        .post(`${BASE_URL}/api/users/authenticate`, userInfo, { withCredentials: true })
+        .then((res) => {
+          if (res.data) {
+            setUser(res.data);
+            setStatus("success");
+            localStorage.setItem("user", JSON.stringify(res.data));
+            router.push("/questions");
+          } else {
+            setStatus("failed");
           }
-          else setStatus("failed")
-        }).catch(err=>setStatus("failed"))
-    }
+        })
+        .catch((err) => {
+          console.error(err);
+          setStatus("failed");
+        });
+    };
+    
 
 
     const handleChange = (e:any) =>{
         const value = e.target.value
         const name = e.target.name
     
-        setUser({...user, [name]: value})
+        setUserInfo({...userInfo, [name]: value})
       }
 
+      useEffect(()=>{
+        if(user)router.push("/questions")
+      },[])
 
 
   return (
@@ -47,9 +61,9 @@ const page = () => {
             <h1 className='text-2xl font-bold py-2'>Sign in to your account</h1>
             <span className='text-sm text-muted-foreground'>Don't have an account? <Link className='text-primary' href="/sign-up">Sign up for free</Link></span>
             </div>
-            <div className='flex flex-col lg:flex-row w-full items-center gap-3 py-5'>
-                <Button className='bg-muted/90 hover:bg-muted rounded-lg border border-muted-foreground/50 w-full'><Chrome/>Continue with Google</Button>
-                <Button className='bg-muted/90 hover:bg-muted rounded-lg border border-muted-foreground/50 w-full'><Github/>Continue with GitHub</Button>
+            <div className='flex flex-col lg:flex-row w-full items-center lg:justify-center gap-3 py-5'>
+                <Button className='bg-muted/90 hover:bg-muted rounded-lg border border-muted-foreground/50 w-full lg:w-fit'><Chrome/>Continue with Google</Button>
+                <Button className='bg-muted/90 hover:bg-muted rounded-lg border border-muted-foreground/50 w-full lg:w-fit'><Github/>Continue with GitHub</Button>
             </div>
             {
                           status === "failed" && <div className='text-destructive text-xs text-start w-full'>Credentials mismatched, try again with correct credentials!</div>

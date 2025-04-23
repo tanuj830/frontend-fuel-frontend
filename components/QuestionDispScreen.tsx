@@ -1,3 +1,4 @@
+import { BASE_URL } from '@/lib/utils'
 import axios from 'axios'
 import { Captions, Clock3, Flame, Lightbulb, NotebookText } from 'lucide-react'
 import { Span } from 'next/dist/trace'
@@ -13,7 +14,7 @@ const QuestionDispScreen = ({ question }: any) => {
         const savedUser = localStorage.getItem("user")
         if(savedUser)setUser(JSON.parse(savedUser))
 console.log(user.id)
-        axios.post("http://localhost:8080/api/questions/submissons/"+user.id, question).then(res=>setSubmissons(res.data)).catch(err=>console.log(err))
+        axios.post(`${BASE_URL}/api/questions/submissons/`+user.id, question).then(res=>setSubmissons(res.data)).catch(err=>console.log(err))
     }, [window])
     return (
         <div className='p-5 lg:h-[83vh] min-w-[20vw]  overflow-auto'>
@@ -87,7 +88,7 @@ console.log(user.id)
                             {
                                 submissons.map((sub:any)=>(
 
-                                <div className='flex  justify-between w-full gap-10 border-b'>
+                                <div className='flex  justify-between w-full gap-10 border-b' key={sub.id}>
                             <div className='font-semibold text-green-500'>
                                         ACCEPTED
                             </div>
@@ -105,7 +106,7 @@ console.log(user.id)
 }
                             </div>
                             : 
-                            <div className='flex flex-col  text-muted-foreground text-center'>
+                            <div className='flex flex-col justify-center items-center w-full  text-muted-foreground text-center'>
 
                                 <small>No submission found</small>
                                 <small>To see your submission details first submit your code</small>

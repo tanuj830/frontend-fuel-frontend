@@ -2,12 +2,14 @@
 
 import React, { useEffect } from 'react'
 import { useParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import axios from 'axios';
 import CodeEditor from '@/components/CodeEditor';
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@/components/ui/resizable';
 import QuestionDispScreen from '@/components/QuestionDispScreen';
 import TestCases from '@/components/TestCases';
 import { BASE_URL } from '@/lib/utils';
+import withAuth from "@/lib/withAuth";
 
 
 const page = () => {
@@ -18,9 +20,8 @@ const page = () => {
   const params = useParams()
 
   useEffect(() => {
-    // axios.get(`/api/challenges`).then(res => {
-    // axios.get(`${BASE_URL}/api/questions/`+params.slug).then(res => {
-    axios.get(`http://localhost:8080/api/questions/`+params.slug).then(res => {
+    // axios.get(`http://localhost:8080/api/questions/`+params.slug).then(res => {
+      axios.get(`${BASE_URL}/api/questions/`+params.slug).then(res => {
       if (res.data){
         console.log(res.data, "222")
         setQuestion(res.data)
@@ -30,6 +31,27 @@ const page = () => {
       else alert("No question found...try solving other question")
     })
   }, [params.slug])
+
+
+  const router = useRouter()
+ const verifyUser = async () => {
+  try {
+    const res = await axios.get(`${BASE_URL}/api/users/verify`, {
+      withCredentials: true,
+    });
+
+    if (!res.data || !res.data.username) {
+      router.push('/sign-in');
+    }
+  } catch (err) {
+    router.push('/sign-in');
+  }
+};
+
+useEffect(()=>{
+  verifyUser()
+}, [])
+
   return (
     <div className='w-full  lg:p-6'>
 
@@ -82,4 +104,4 @@ const page = () => {
   )
 }
 
-export default page
+export default withAuth(page)

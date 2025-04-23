@@ -6,12 +6,12 @@ import { Button } from './ui/button';
 const XpPopupCard = ({ question, xp, onClose }:any) => {
   return (
     <motion.div
-      className="fixed bottom-0 left-0 top-0 right-0 z-50 w-full h-full bg-muted/55"
+      className="fixed bottom-0 left-0 top-0 right-0 z-50 w-full h-full bg-muted/55 "
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0 }}
     >
-      <div className="flex flex-col justify-center items-center text-center w-full h-full">
+      <div className="flex flex-col justify-center items-center text-center w-full h-full scale-75 lg:scale-100">
         <div className='flex flex-col min-h-72 min-w-96 bg-muted rounded-xl shadow-2xl gap-8 p-5'>
         <div className='flex justify-between items-center'>
             <div className='flex items-center gap-2'>

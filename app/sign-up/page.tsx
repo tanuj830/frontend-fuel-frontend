@@ -19,7 +19,7 @@ const page = () => {
     e.preventDefault()
     setStatus("loading")
     // axios.post(`${BASE_URL}/api/questions`, user).then(res=>{
-    axios.post(`http://localhost:8080/api/user`, user).then(res=>{
+    axios.post(`${BASE_URL}/api/users`, user).then(res=>{
       if(res.data.id){
         setStatus("success")
         router.push("/sign-in")
@@ -44,9 +44,9 @@ const page = () => {
             <h1 className='text-2xl font-bold py-2'>Create a new account</h1>
             <span className='text-sm text-muted-foreground'>Already have an account? <Link className='text-primary' href="/sign-in"> Sign in</Link></span>
              </div>
-            <div className='flex flex-col lg:flex-row items-center gap-3 py-5 w-full'>
-                <Button className='bg-muted/90 hover:bg-muted rounded-lg border border-muted-foreground/50 w-full'><Chrome/>Continue with Google</Button>
-                <Button className='bg-muted/90 hover:bg-muted rounded-lg border border-muted-foreground/50 w-full'><Github/>Continue with GitHub</Button>
+            <div className='flex flex-col lg:flex-row items-center gap-3 py-5 lg:justify-center w-full'>
+                <Button className='bg-muted/90 hover:bg-muted rounded-lg border border-muted-foreground/50 w-full lg:w-fit'><Chrome/>Continue with Google</Button>
+                <Button className='bg-muted/90 hover:bg-muted rounded-lg border border-muted-foreground/50 w-full lg:w-fit'><Github/>Continue with GitHub</Button>
             </div>
                 <div className='flex w-full gap-4'>
                     <div className='border-t w-full mt-2.5'/>

@@ -21,7 +21,7 @@ const CodeEvaluate = ({question, setQuestion, code}:any) => {
       code,
       testCases: [question.testCases[0]]
     }
-    axios.post("http://localhost:8000/run", data).then(res=>res.data.results[0].passed == true ? setTestCaseClicked("passed"): setTestCaseClicked("failed")).catch(err=>console.log(err))
+    axios.post("https://codeexecutor.onrender.com/run", data).then(res=>res.data.results[0].passed == true ? setTestCaseClicked("passed"): setTestCaseClicked("failed")).catch(err=>console.log(err))
   }
 
 
@@ -33,7 +33,7 @@ const CodeEvaluate = ({question, setQuestion, code}:any) => {
       testCases: question.testCases
     }
     // axios.post("https://codeexecutor.onrender.com/run-all", data).then(res=>{
-    axios.post("http://localhost:8000/run", data).then(res=>{
+    axios.post("https://codeexecutor.onrender.com/run", data).then(res=>{
       res.data.results?.length > 0 ? setSubmitClicked("showResults"): setSubmitClicked("failed")
       setResponse(res.data.results)
       let allCasesPassed = true

@@ -4,14 +4,16 @@ import { Ban, Captions, Check, CircleCheck, Cross, EyeOff, FlaskConical, Play, T
 import axios from 'axios'
 import XpPopupCard from './XPPopUpCard'
 import { BASE_URL } from '@/lib/utils'
+import { useAuth } from './AuthContext'
 
 const CodeEvaluate = ({question, setQuestion, code, setTestCaseWindowHeight, submitClicked, setSubmitClicked}:any) => {
   const [window, setWindow] = React.useState("Test code")
   const [testCaseClicked, setTestCaseClicked] = React.useState("initial") // initial, loading, passed, failed
   const [response, setResponse] = React.useState([])// response for all testcases 
   const [showXpCard, setShowXpCard] = React.useState(false);
-
- 
+  const [pastSolution, setPastSolution] = React.useState({} as any);
+  
+ const user = useAuth()
 
   const handleTestCode = () => {
     setWindow("Test code")
@@ -54,11 +56,20 @@ const CodeEvaluate = ({question, setQuestion, code, setTestCaseWindowHeight, sub
   }
 
   const handleCompleted = () => {
-    const clonedQuestion = {...question}
-    clonedQuestion.completed = true
-    setQuestion(clonedQuestion)
-  }
-  console.log(testCaseClicked)
+    const request = {
+      userId: user.user.id,
+      questionId: question.id,
+      solved: pastSolution.solved ? false : true,
+    };
+  
+    axios
+      .put("http://localhost:8080/api/solved-by-user/update", request)
+      .then(() => fetchSolution()) // Fetch the updated solution after marking as completed
+      .catch((err) => console.log(err));
+  };
+
+  useEffect(()=>{fetchSolution()},[question, user])
+
   return (
     <div className='flex flex-col  min-w-[25vw] justify-between '>
       {
@@ -181,12 +192,25 @@ const CodeEvaluate = ({question, setQuestion, code, setTestCaseWindowHeight, sub
             }
         </div>
       <div className='flex items-center gap-3 fixed bottom-1 lg:bottom-0 right-1 lg:right-8 '>
-        <button className={`bg-muted rounded-lg py-1 px-2 flex items-center gap-2 text-xs cursor-pointer ${question.completed && 'bg-primary'}`} > <Check width={16} height={16} onClick={()=>handleCompleted}/>Mark as completed</button>
+        <button className={`bg-muted rounded-lg py-1 px-2 flex items-center gap-2 text-xs cursor-pointer ${pastSolution?.solved && 'bg-primary'}`} onClick={handleCompleted}> <Check width={16} height={16} />Mark as completed</button>
         <button className='bg-muted rounded-lg py-1 px-2 flex items-center gap-2 text-xs cursor-pointer' onClick={handleTestCode}> <Play width={16} height={16}/>Run</button>
         <button className='bg-primary rounded-lg py-1 px-2 flex items-center gap-2 text-xs cursor-pointer' onClick={handleSubmit}>Submit</button>
       </div>
     </div>
   )
+
+
+function fetchSolution(){
+  const request:any = {
+    userId: user.user.id,
+    questionId:question.id,
+
+
+  }
+
+  axios.get(`http://localhost:8080/api/solved-by-user/get?userId=${user.user.id}&questionId=${question.id}`, request).then(res=>setPastSolution(res.data)).catch(err=>console.log(err))
+    
+}
 }
 
 export default CodeEvaluate

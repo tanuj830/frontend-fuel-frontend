@@ -5,10 +5,9 @@ import axios from 'axios'
 import XpPopupCard from './XPPopUpCard'
 import { BASE_URL } from '@/lib/utils'
 
-const CodeEvaluate = ({question, setQuestion, code}:any) => {
+const CodeEvaluate = ({question, setQuestion, code, setTestCaseWindowHeight, submitClicked, setSubmitClicked}:any) => {
   const [window, setWindow] = React.useState("Test code")
   const [testCaseClicked, setTestCaseClicked] = React.useState("initial") // initial, loading, passed, failed
-  const [submitClicked, setSubmitClicked] = React.useState("initial") // initial, loading, showResults, failed
   const [response, setResponse] = React.useState([])// response for all testcases 
   const [showXpCard, setShowXpCard] = React.useState(false);
 
@@ -26,6 +25,7 @@ const CodeEvaluate = ({question, setQuestion, code}:any) => {
 
 
   const handleSubmit = () => {
+    setTestCaseWindowHeight(50)
     setWindow("Submit")
     setSubmitClicked("loading")
     const data = {
@@ -60,7 +60,7 @@ const CodeEvaluate = ({question, setQuestion, code}:any) => {
   }
   console.log(testCaseClicked)
   return (
-    <div className='flex flex-col  min-w-[25vw] justify-between overflow-y-scroll'>
+    <div className='flex flex-col  min-w-[25vw] justify-between '>
       {
         showXpCard && <XpPopupCard question={question} xp={20} onClose={() => setShowXpCard(false)}/>
       }
@@ -117,7 +117,7 @@ const CodeEvaluate = ({question, setQuestion, code}:any) => {
               </div>
                 }
               </div>:
-              <div className='mt-7 text-xs '>
+              <div className='mt-7 text-xs overflow-y-auto'>
                 {/* Submit */}
                 {
                   submitClicked == "initial" ?
@@ -136,23 +136,26 @@ const CodeEvaluate = ({question, setQuestion, code}:any) => {
                   </div>
               </div>
                   :
-                  submitClicked == "showResults" ? //showResults will show all test cases
-                  <div className='overflow-y-scroll'>
-                  {
-                    response.map((res:any, testCaseNumber)=>(
-                      <div className='flex items-center gap-3 bg-muted p-3 rounded-xl mt-2' key={testCaseNumber}>
+                  
+                    submitClicked == "showResults" ? //showResults will show all test casesss
+                      <div className='overflow-y-auto  max-h-[100vh] mt-2'> 
                         {
-                          res.passed ? 
-                          <Check className='text-green-600 font-extrabold' width={19} height={19}/>
-                         : <X className='text-red-600 font-extrabold' width={19} height={19}/>
+                          response.map((res:any, testCaseNumber) => (
+                            <div className='flex items-center gap-3 bg-muted p-3 rounded-xl mt-2' key={testCaseNumber}>
+                              {
+                                res.passed ? 
+                                <Check className='text-green-600 font-extrabold' width={19} height={19}/>
+                               : <X className='text-red-600 font-extrabold' width={19} height={19}/>
+                              }
+                              <span>
+                                Test Case {res.testCaseNumber} {'>'} input : {JSON.stringify(question.testCases[testCaseNumber].inputs)}
+                              </span>
+                            </div>
+                          ))
                         }
-                  <span>
-                    Test Case {res.testCaseNumber} {'>'} input : {JSON.stringify(question.testCases[testCaseNumber].inputs)}
-                  </span>
-                </div>
-                    ))
-                }
-                  </div>
+                      </div>
+
+                  
                 : submitClicked == "failed" ? 
                 <div className='flex items-center justify-center gap-3 bg-muted p-4 rounded-xl mt-2'>
                 <div className='flex flex-col items-center gap-2'>

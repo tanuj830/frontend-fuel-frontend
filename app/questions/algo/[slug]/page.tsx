@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'next/navigation'
 import { useRouter } from 'next/navigation'
 import axios from 'axios';
@@ -16,8 +16,14 @@ const page = () => {
 
   const [question, setQuestion] = React.useState({} as any)
   const [code, setCode] = React.useState("")
+  const [testCaseWindowHeight, setTestCaseWindowHeight] = useState(10)
+  // this state is of TestCases.tsx component
+  const [submitClicked, setSubmitClicked] = React.useState("initial") // initial, loading, showResults, failed
 
   const params = useParams()
+
+
+  useEffect(()=>{setTestCaseWindowHeight(0)}, [testCaseWindowHeight])
 
   useEffect(() => {
     // axios.get(`http://localhost:8080/api/questions/`+params.slug).then(res => {
@@ -48,6 +54,7 @@ const page = () => {
   }
 };
 
+console.log(testCaseWindowHeight)
 useEffect(()=>{
   verifyUser()
 }, [])
@@ -70,31 +77,31 @@ useEffect(()=>{
 </div>
 
   <div className='pb-20'>
-        <TestCases question={question} setQuestion={setQuestion} code={code} />
+        <TestCases question={question} setQuestion={setQuestion} code={code} submitClicked={submitClicked} setSubmitClicked={setSubmitClicked}/>
     </div>      
       </div>
 
 {/* pc view */}
-<div className='hidden lg:inline-block w-[100%] overflow-hidden'>
+<div className='hidden lg:inline-block w-[100%] '>
 
       <ResizablePanelGroup
         direction="horizontal"
-        className=" rounded-lg border"
+        className=""
         >
-        <ResizablePanel defaultSize={60} className='w-full h-full'>
+        <ResizablePanel defaultSize={50}  className='w-full h-full bg-muted/50 rounded-2xl  mr-1'>
           {/* question disp screen */}
-          <QuestionDispScreen question={question} />
+          <QuestionDispScreen  question={question} submitClicked={submitClicked}/>
         </ResizablePanel>
-        <ResizableHandle />
-        <ResizablePanel defaultSize={40}>
+        <ResizableHandle className='hover:bg-primary'/>
+        <ResizablePanel defaultSize={50} className='ml-1'>
           <ResizablePanelGroup direction="vertical">
-            <ResizablePanel defaultSize={25}>
+            <ResizablePanel defaultSize={25} className='rounded-2xl  mb-1 bg-muted/50'>
               {/* code editor screen */}
               <CodeEditor quest={question} code={code} setCode={setCode}/>
             </ResizablePanel>
-            <ResizableHandle className='' />
-            <ResizablePanel defaultSize={10}>
-              <TestCases question={question} setQuestion={setQuestion} code={code}/>
+            <ResizableHandle className='hover:bg-primary' />
+            <ResizablePanel minSize={testCaseWindowHeight} defaultSize={10} className='rounded-2xl mt-1  bg-muted/50 '>
+              <TestCases question={question} setQuestion={setQuestion} code={code} setTestCaseWindowHeight={setTestCaseWindowHeight} submitClicked={submitClicked} setSubmitClicked={setSubmitClicked}/>
             </ResizablePanel>
           </ResizablePanelGroup>
         </ResizablePanel>

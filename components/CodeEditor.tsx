@@ -23,7 +23,7 @@ const CodeEditor = ({quest, code, setCode}:any) => {
 
 
   return (
-    <div className="flex flex-col min-w-[25vw] rounded-xl  h-full">
+    <div className="flex flex-col min-w-[25vw] rounded-xl  h-full ">
       {/* Header */}
       <div className="flex justify-between items-center p-3">
         <div className="flex justify-between items-center  w-full">

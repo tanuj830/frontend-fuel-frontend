@@ -5,6 +5,9 @@ import { useRouter } from "next/navigation";
 import { useAuth } from "@/components/AuthContext";
 
 const withAuth = (Component: any) => {
+
+   
+  
   return function ProtectedComponent(props: any) {
     const { user, loading } = useAuth();
     const router = useRouter();

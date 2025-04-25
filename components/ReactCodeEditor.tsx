@@ -107,45 +107,18 @@ ReactDOM.render(
       <SandpackLayout     style={{backgroundColor: "transparent", border:"none"}}
       >
         {/* Mobile View */}
-       <div className="lg:hidden flex flex-col  gap-4">
-       <div className="h-[83vh] flex flex-col">
-              <div className="flex items-center px-4 py-2 bg-muted/50 gap-2 ">
-                {
-                    showFileExplorer ?
-                    <span className={`cursor-pointer flex items-center gap-1 text-xs ${showFileExplorer ? "text-primary-foreground": "text-muted-foreground"}`} >
-                    <FolderClosed width={13} height={13}/><span>File explorer</span>
-                </span>
-                    :<span className={`cursor-pointer flex items-center gap-1 text-xs ${showFileExplorer ? "text-primary-foreground": "text-muted-foreground"}`} onClick={() => setShowFileExplorer(!showFileExplorer)}>
-                    <FolderClosed width={13} height={13}/><span>File explorer</span>
-                </span>
-                }
-                {
-                    showFileExplorer && <button className={`cursor-pointer  ${showFileExplorer ? "text-primary-foreground": "text-muted-foreground"}`} onClick={() => setShowFileExplorer(!showFileExplorer)}>
-                    <X className="hover:bg-muted-foreground/50 text-muted-foreground/50 hover:text-inherit   rounded-sm scale-125" width={10} height={10}/>
-                </button>
-                }
-              </div>
+       <div className="lg:hidden flex flex-col items-center justify-center  gap-4 px-4">
+       <div className="h-[83vh] flex flex-col flex-grow">
 
-              <div className="flex-grow flex ">
-                {showFileExplorer && (
-                 <div className=" border-r bg-muted/50">
-
-                    <CustomFileExplorer />
-                  </div>
-                )}
-                <div className="flex-grow">
-                    {/* <SandpackTests/> */}
                   <SandpackCodeEditor
-                    style={{ height: "100%" , backgroundColor: "transparent"}}
-                    className="h-full"
+                    style={{ height: "100%", width:"92vw" , backgroundColor: "transparent"}}
+                    className="h-full w-full overflow-x-auto"
                     extensions={[autocompletion()]}
 
                   />
-                </div>
-              </div>
             </div>
 
-            <div className="h-[83vh] flex flex-col">
+            <div className="h-[83vh] flex flex-col w-full">
               <div className="bg-muted/50 px-4 py-2 pr-6  font-semibold flex items-center gap-6">
                 <button
                   onClick={() => setActiveTab("preview")}
@@ -175,7 +148,7 @@ ReactDOM.render(
 <SandpackConsole
 
   standalone
-  className="h-full text-xs font-mono "
+  className="h-full text-xs font-mono w-[92vw]"
   showHeader={true}
   showResetConsoleButton
   showSetupProgress={true}

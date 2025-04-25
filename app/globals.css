@@ -132,7 +132,10 @@ background: #000;
 }
 
 #disp p{
-  @apply py-1 text-sm leading-6 text-justify
+  @apply py-1 text-sm leading-7 
+}
+#disp ul{
+  @apply py-1 text-sm leading-7
 }
 #disp div{
   @apply py-5

@@ -1,57 +1,90 @@
 "use client";
 
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import axios from 'axios';
 import CodeEditor from '@/components/CodeEditor';
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@/components/ui/resizable';
 import QuestionDispScreen from '@/components/QuestionDispScreen';
-import LivePreviewEditor from '@/components/LivePreviewEditor';
+import TestCases from '@/components/TestCases';
+import { BASE_URL } from '@/lib/utils';
+import withAuth from "@/lib/withAuth";
+import { LiveEditor, LivePreview, LiveProvider } from 'react-live';
+import ReactCodeEditor from '@/components/ReactCodeEditor';
+import { Sandpack, SandpackProvider } from "@codesandbox/sandpack-react";
+import ReactQuestionDispScreen from '@/components/ReactQuestionDispScreen';
 
 
-const page = () => {
+const page = ({query}:any) => {
 
   const [question, setQuestion] = React.useState({} as any)
+  const [code, setCode] = React.useState("")
+  const [testCaseWindowHeight, setTestCaseWindowHeight] = useState(10)
+  // this state is of TestCases.tsx component
+  const [submitClicked, setSubmitClicked] = React.useState("initial") // initial, loading, showResults, failed
 
   const params = useParams()
+  useEffect(()=>{
 
-  useEffect(() => {
-    axios.get("/api/challenges").then(res => {
-      const quest = res.data.find((quest: any) => quest.id === params.slug);
-      if (quest) setQuestion(quest)
-
-      else alert("No question found...try solving other question")
+    axios.get("/api/questions").then(res=>{
+      setQuestion(res.data.filter((d:any)=>d.id === params.slug)[0])
     })
-  }, [params.slug])
+  },[])
+
+console.log(question)
   return (
-    <div className='w-full h-[95vh] p-6 overflow-y-auto'>
+
+
+    <div className='w-full  lg:p-6'>
+
+{/* mobile view */}
+<div
+        className="flex flex-col  gap-5 lg:hidden"
+        >
+        <div>
+
+          <QuestionDispScreen question={question} />
+        </div>
+
+<div className='h-[60vh]'>
+
+          <ReactCodeEditor  />
+</div>
+   
+      </div>
+
+{/* pc view */}
+<div className='hidden lg:inline-block w-[100%] '>
 
       <ResizablePanelGroup
         direction="horizontal"
-        className=" rounded-lg border min-h-[90vh] "
-      >
-        <ResizablePanel defaultSize={60} className=''>
+        className=""
+        >
+        <ResizablePanel defaultSize={30}  className='w-full h-full bg-muted/50 rounded-2xl  mr-1'>
           {/* question disp screen */}
-          <QuestionDispScreen question={question} />
+          {/* <LiveEditor /> */}
+          <ReactQuestionDispScreen  question={question} submitClicked={submitClicked}/>
         </ResizablePanel>
-        <ResizableHandle />
-        <ResizablePanel defaultSize={60}>
-          <ResizablePanelGroup direction="vertical">
-            <ResizablePanel defaultSize={25}>
+        <ResizableHandle className='hover:bg-primary'/>
+
+
+            <ResizablePanel defaultSize={70} className='rounded-2xl  h-full'>
               {/* code editor screen */}
-              <LivePreviewEditor />
+             
+              <ReactCodeEditor />
             </ResizablePanel>
-            <ResizableHandle className='' />
-            <ResizablePanel defaultSize={10}>
-              <div className="flex h-full items-center justify-center p-6">
-                <span className="font-semibold">Three</span>
-              </div>
-            </ResizablePanel>
-          </ResizablePanelGroup>
-        </ResizablePanel>
+            {/* <ResizableHandle className='hover:bg-primary' />
+            <ResizablePanel minSize={testCaseWindowHeight} defaultSize={30} className='rounded-2xl mt-1  bg-muted/50 '>
+            <LivePreview />
+              <TestCases question={question} setQuestion={setQuestion} code={code} setTestCaseWindowHeight={setTestCaseWindowHeight} submitClicked={submitClicked} setSubmitClicked={setSubmitClicked}/>
+            </ResizablePanel> */}
+
       </ResizablePanelGroup>
+        </div>
     </div>
+
   )
 }
 
-export default page
+export default withAuth(page)

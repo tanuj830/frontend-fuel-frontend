@@ -22,7 +22,7 @@ const Navbar = () => {
     {
       showAddBar &&
 
-    <div className='text-[10px] lg:text-xs bg-primary p-1.5 text-center flex'>
+    <div className='text-[10px] lg:text-[12px] bg-primary p-1 text-center flex'>
       <div className='w-full'>
 
     Enjoy 20% off all plans by following our social accounts! Check it out

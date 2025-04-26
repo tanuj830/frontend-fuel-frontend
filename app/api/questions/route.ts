@@ -48,7 +48,7 @@ export default Navbar;
   <li>Working with conditional rendering and state toggling.</li>
 </ul>
 `,
-      difficulty: "Medium",
+      difficulty: "medium",
       tags: ["react", "responsive design", "navbar", "css", "javascript"],
       starterCode: "function Navbar() {\n  return (\n    <nav>\n      {/* Your code here */}\n    </nav>\n  );\n}\n\nexport default Navbar;",
       solutionCode: "import React, { useState } from 'react';\n\nfunction Navbar() {\n  const [isOpen, setIsOpen] = useState(false);\n\n  return (\n    <nav className=\"bg-gray-800 text-white p-4\">\n      <div className=\"container mx-auto flex justify-between items-center\">\n        <h1 className=\"text-xl font-bold\">Logo</h1>\n        <button className=\"md:hidden\" onClick={() => setIsOpen(!isOpen)}>\n          ☰\n        </button>\n        <ul className={`md:flex space-x-4 ${isOpen ? 'block' : 'hidden'} md:block`}>\n          <li>Home</li>\n          <li>About</li>\n          <li>Contact</li>\n        </ul>\n      </div>\n    </nav>\n  );\n}\n\nexport default Navbar;",
@@ -74,7 +74,7 @@ export default Navbar;
       title: "Create a Custom Modal Component in React",
       category: "UI coding",
       description: "Design and build a reusable modal component in React with open/close functionality and overlay.",
-      difficulty: "Easy",
+      difficulty: "easy",
       tags: ["react", "modal", "hooks", "css", "ui"],
       starterCode: "function Modal({ isOpen, onClose }) {\n  if (!isOpen) return null;\n  return (\n    <div className=\"modal\">\n      {/* Your code here */}\n    </div>\n  );\n}\n\nexport default Modal;",
       solutionCode: "function Modal({ isOpen, onClose, children }) {\n  if (!isOpen) return null;\n\n  return (\n    <div className=\"fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center\">\n      <div className=\"bg-white p-6 rounded shadow-lg\">\n        <button onClick={onClose} className=\"float-right\">✕</button>\n        {children}\n      </div>\n    </div>\n  );\n}\n\nexport default Modal;",
@@ -100,7 +100,7 @@ export default Navbar;
       title: "Implement a Drag and Drop Todo List",
       category: "UI coding",
       description: "Build a Todo List where items can be reordered using drag-and-drop functionality.",
-      difficulty: "Hard",
+      difficulty: "hard",
       tags: ["react", "drag and drop", "todo", "dnd-kit", "framer-motion"],
       starterCode: "function TodoList() {\n  return (\n    <div>\n      {/* Your code here */}\n    </div>\n  );\n}\n\nexport default TodoList;",
       solutionCode: "// Using dnd-kit\nimport { DndContext, closestCenter } from '@dnd-kit/core';\n// Continue with setting up DnDProvider, sortable context, etc.\n\nfunction TodoList() {\n  // drag logic here\n  return <div>{/* Draggable todo items */}</div>;\n}",

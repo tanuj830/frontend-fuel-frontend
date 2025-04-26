@@ -27,7 +27,7 @@ const ReactQuestionDispScreen = ({ question, submitClicked }: any) => {
             {/* toggle window buttons */}
             <div className='flex items-center gap-5'>
                 <button
-                    className={`text-xs flex items-center gap-2 text-muted-foreground cursor-pointer ${window === "description" ? 'text-primary-foreground' : 'hover:text-primary'}`}
+                    className={`text-xs flex items-center gap-2 text-muted-foreground cursor-pointer ${window === "description" ? 'dark:text-primary-foreground text-primary font-semibold' : 'hover:text-primary'}`}
                     onClick={() => handleWindowChange("description")}
                 >
                     <NotebookText width={19} height={19} />
@@ -35,7 +35,7 @@ const ReactQuestionDispScreen = ({ question, submitClicked }: any) => {
                 </button>
 
                 <button
-                    className={`text-xs flex items-center gap-2 text-muted-foreground cursor-pointer ${window === "solution" ? 'text-primary-foreground' : 'hover:text-primary'}`}
+                    className={`text-xs flex items-center gap-2 text-muted-foreground cursor-pointer ${window === "solution" ? 'dark:text-primary-foreground text-primary font-semibold' : 'hover:text-primary'}`}
                     onClick={() => handleWindowChange("solution")}
                 >
                     <Lightbulb width={19} height={19} />
@@ -43,7 +43,7 @@ const ReactQuestionDispScreen = ({ question, submitClicked }: any) => {
                 </button>
 
                 <button
-                    className={`text-xs flex items-center gap-2 text-muted-foreground cursor-pointer ${window === "submisson" ? 'text-primary-foreground' : 'hover:text-primary'}`}
+                    className={`text-xs flex items-center gap-2 text-muted-foreground cursor-pointer ${window === "submisson" ? 'dark:text-primary-foreground text-primary font-semibold' : 'hover:text-primary'}`}
                     onClick={() => handleWindowChange("submisson")}
                 >
                     <Captions width={19} height={19} />
@@ -86,12 +86,12 @@ const ReactQuestionDispScreen = ({ question, submitClicked }: any) => {
             {
                 window === "description" ? (
                     <>
-                    <div className='text-primary-foreground/80  text-sm' id='disp' dangerouslySetInnerHTML={{ __html: question?.description }} />
+                    <div className='' id='disp' dangerouslySetInnerHTML={{ __html: question?.description }} />
                     </>
                 ) : window === "solution" ? (
-                    <div className='text-secondary-foreground text-sm' id='disp' dangerouslySetInnerHTML={{ __html: question?.solutionCode }} />
+                    <div className='' id='disp' dangerouslySetInnerHTML={{ __html: question?.solutionCode }} />
                 ) : (
-                    <div className='flex p-5 bg-muted min-w-[46vw] h-[50vh]'>
+                    <div className='flex p-5 bg-muted  h-[50vh]'>
                         {
                             submissions?.length > 0 ? (
                                 <SubmissonTable question={question} submissons={submissions} />

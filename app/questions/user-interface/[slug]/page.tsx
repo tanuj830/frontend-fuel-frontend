@@ -36,7 +36,7 @@ console.log(question)
   return (
 
 
-    <div className='w-full  lg:p-6'>
+    <div className='w-full  lg:p-6 bg-muted'>
 
 {/* mobile view */}
 <div
@@ -59,9 +59,9 @@ console.log(question)
 
       <ResizablePanelGroup
         direction="horizontal"
-        className=""
+        className=" "
         >
-        <ResizablePanel defaultSize={30}  className='w-full h-full bg-muted/50 rounded-2xl  mr-1'>
+        <ResizablePanel defaultSize={30}  className='w-full h-full  border rounded-2xl  mr-1 bg-popover'>
           {/* question disp screen */}
           {/* <LiveEditor /> */}
           <ReactQuestionDispScreen  question={question} submitClicked={submitClicked}/>
@@ -69,7 +69,7 @@ console.log(question)
         <ResizableHandle className='hover:bg-primary'/>
 
 
-            <ResizablePanel defaultSize={70} className='rounded-2xl  h-full'>
+            <ResizablePanel defaultSize={70} className='rounded-2xl h-full '>
               {/* code editor screen */}
              
               <ReactCodeEditor />

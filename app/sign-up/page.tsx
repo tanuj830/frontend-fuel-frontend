@@ -19,7 +19,9 @@ const page = () => {
     e.preventDefault()
     setStatus("loading")
     // axios.post(`${BASE_URL}/api/questions`, user).then(res=>{
-    axios.post(`${BASE_URL}/api/users`, user).then(res=>{
+    axios.post(`${BASE_URL}/api/users`, user,{
+      withCredentials: true,
+    }).then(res=>{
       if(res.data.id){
         setStatus("success")
         router.push("/sign-in")

@@ -465,11 +465,11 @@ ReactDOM.render(
                   />
             </div>
 
-            <div className="h-[83vh] flex flex-col w-full">
+            <div className="h-[83vh] flex flex-col w-full border bg-popover rounded-t-xl">
               <div className="bg-muted/50 px-4 py-2 pr-6  font-semibold flex items-center gap-6">
                 <button
                   onClick={() => setActiveTab("preview")}
-                  className={` flex items-center gap-2 text-[12px] cursor-pointer ${activeTab === "preview" ? "text-primary-foreground" : "text-muted-foreground"}`}
+                  className={` flex items-center gap-2 text-[12px] cursor-pointer ${activeTab === "preview" ? "text-black dark:text-white" : "text-muted-foreground"}`}
                 >
 <PanelTop width={13} height={13}/>
                     <span>
@@ -478,7 +478,7 @@ ReactDOM.render(
                 </button>
                 <button
                   onClick={() => setActiveTab("console")}
-                  className={`flex items-center gap-2 text-[12px] cursor-pointer ${activeTab === "console" ? "text-primary-foreground" : "text-muted-foreground"}`}
+                  className={`flex items-center gap-2 text-[12px] cursor-pointer ${activeTab === "console" ? "text-black dark:text-white" : "text-muted-foreground"}`}
                 >
 <SquareChevronRight width={13} height={13}/>
                     <span>

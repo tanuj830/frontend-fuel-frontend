@@ -40,14 +40,14 @@ console.log(question)
 
 {/* mobile view */}
 <div
-        className="flex flex-col  gap-5 lg:hidden"
+        className="flex flex-col  gap-5 lg:hidden "
         >
         <div>
 
           <QuestionDispScreen question={question} />
         </div>
 
-<div className='h-[60vh]'>
+<div className='min-h-[50vh]'>
 
           <ReactCodeEditor  />
 </div>

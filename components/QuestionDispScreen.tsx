@@ -27,7 +27,7 @@ const QuestionDispScreen = ({ question, submitClicked }: any) => {
             {/* toggle window buttons */}
             <div className='flex items-center gap-5'>
                 <button
-                    className={`text-xs flex items-center gap-2 text-muted-foreground cursor-pointer ${window === "description" ? 'text-primary-foreground' : 'hover:text-primary'}`}
+                    className={`text-xs flex items-center gap-2 text-muted-foreground cursor-pointer ${window === "description" ? 'text-primary dark:text-white' : 'hover:text-primary'}`}
                     onClick={() => handleWindowChange("description")}
                 >
                     <NotebookText width={19} height={19} />
@@ -35,7 +35,7 @@ const QuestionDispScreen = ({ question, submitClicked }: any) => {
                 </button>
 
                 <button
-                    className={`text-xs flex items-center gap-2 text-muted-foreground cursor-pointer ${window === "solution" ? 'text-primary-foreground' : 'hover:text-primary'}`}
+                    className={`text-xs flex items-center gap-2 text-muted-foreground cursor-pointer ${window === "solution" ? 'text-primary dark:text-white' : 'hover:text-primary'}`}
                     onClick={() => handleWindowChange("solution")}
                 >
                     <Lightbulb width={19} height={19} />
@@ -43,7 +43,7 @@ const QuestionDispScreen = ({ question, submitClicked }: any) => {
                 </button>
 
                 <button
-                    className={`text-xs flex items-center gap-2 text-muted-foreground cursor-pointer ${window === "submisson" ? 'text-primary-foreground' : 'hover:text-primary'}`}
+                    className={`text-xs flex items-center gap-2 text-muted-foreground cursor-pointer ${window === "submisson" ? 'text-primary dark:text-white' : 'hover:text-primary'}`}
                     onClick={() => handleWindowChange("submisson")}
                 >
                     <Captions width={19} height={19} />

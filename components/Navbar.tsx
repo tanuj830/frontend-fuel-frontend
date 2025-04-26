@@ -10,6 +10,7 @@ import Logo from './Logo';
 import Prepare from './Prepare';
 import Products from './Products';
 import UserProfile from './UserProfile';
+import NavbarSheet from './HamburgerMenu';
 
 const Navbar = () => {
   const [showAddBar, setShowAddBar] = React.useState(true)
@@ -59,6 +60,7 @@ const Navbar = () => {
 
 <div className='flex items-center gap-3'>
   <button className='rounded-full bg-primary text-primary-foreground text-xs py-2 px-3 text-nowrap font-semibold cursor-pointer'>Get full access</button>
+      <NavbarSheet/>
 </div>
 </div>
 

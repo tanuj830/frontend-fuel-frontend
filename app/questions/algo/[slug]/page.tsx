@@ -27,14 +27,17 @@ const page = () => {
 
   useEffect(() => {
     // axios.get(`http://localhost:8080/api/questions/`+params.slug).then(res => {
-      axios.get(`${BASE_URL}/api/questions/`+params.slug).then(res => {
-      if (res.data){
-        console.log(res.data, "222")
-        setQuestion(res.data)
+    //   axios.get(`${BASE_URL}/api/questions/`+params.slug).then(res => {
+    //   if (res.data){
+    //     console.log(res.data, "222")
+    //     setQuestion(res.data)
 
-      } 
+    //   } 
 
-      else alert("No question found...try solving other question")
+    //   else alert("No question found...try solving other question")
+    // })
+    axios.get("/api/questions").then(res=>{
+      setQuestion(res.data.filter((d:any)=>d.id === params.slug)[0])
     })
   }, [params.slug])
 

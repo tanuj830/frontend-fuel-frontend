@@ -73,7 +73,7 @@ const NavbarSheet = () => {
   <AvatarImage src="https://github.com/shadcn.png" />
   <AvatarFallback className='uppercase pl-3 '>{user?.username.slice(0,2)}</AvatarFallback>
 </Avatar>
-<span className='capitalize'>{user.username}</span>
+<span className='capitalize'>{user?.username}</span>
           </div>
 <span><ChevronRight/></span>
 

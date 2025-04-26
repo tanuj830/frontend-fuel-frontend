@@ -65,19 +65,26 @@ const NavbarSheet = () => {
 </button>
 }
 </div>
-        <div className='border-t pt-4 px-5'>
+        <div className={`border-t  w-full ${user ? "px-5 pt-4" : "px-0"}`}>
+       {
+        user ? 
         <button className='cursor-pointer flex w-full justify-between items-center '>
-          <div className='flex items-center gap-3 '>
+        <div className='flex items-center gap-3  '>
 
-          <Avatar>
-  <AvatarImage src="https://github.com/shadcn.png" />
-  <AvatarFallback className='uppercase pl-3 '>{user?.username.slice(0,2)}</AvatarFallback>
+        <Avatar>
+<AvatarImage src="https://github.com/shadcn.png" />
+<AvatarFallback className='uppercase pl-3 '>{user?.username.slice(0,2)}</AvatarFallback>
 </Avatar>
 <span className='capitalize'>{user?.username}</span>
-          </div>
+        </div>
 <span><ChevronRight/></span>
 
-            </button>  
+          </button>  : 
+          <div className='w-full flex'>
+
+          <Link href="/sign-in" className='cursor-pointer w-full border-b  text-start px-3 py-3'>Sign in/up</Link>
+          </div>
+       }
         </div>
         </div>
       </div>

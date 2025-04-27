@@ -35,7 +35,7 @@ const Questions = () => {
             <div className='flex items-center flex-wrap  gap-5 my-5 text-muted-foreground text-sm w-full'>
                 <div className='flex items-center w-fit gap-2 whitespace-nowrap'>
                     <BadgeCheck />
-                    <span>Solved by ex-interviewers</span>
+                    <span>Solved by developers</span>
                 </div>
                 <div className='flex items-center w-fit gap-2'>
                     <TestTube />

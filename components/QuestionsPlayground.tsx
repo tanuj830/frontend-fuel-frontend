@@ -51,7 +51,7 @@ const QuestionsPlayground: React.FC<QuestionsPlaygroundProps> = ({ questions }) 
                 filterQuestions.push(question);
             }
         });
-        console.log(filterQuestions)
+
         setFilteredQuestions(filterQuestions);
     };
     

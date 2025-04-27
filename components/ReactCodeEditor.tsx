@@ -380,6 +380,7 @@ import { FolderClosed, PanelTop, SquareChevronRight, X } from "lucide-react";
 import { autocompletion, completionKeymap } from "@codemirror/autocomplete";
 import { useTheme } from "next-themes"
 import CustomFileExplorer from "./CustomFileExplorer";
+import SandpackEditor from "./SandpackEditor";
 
   
 
@@ -395,8 +396,102 @@ export default function ReactIDE() {
   const [showFileExplorer, setShowFileExplorer] = React.useState(false);
   const [activeTab, setActiveTab] = React.useState("preview");
   const [mode, setMode] = React.useState<String>(theme)
-
-
+  const [activeFile, setActiveFile] = React.useState<String>("/public/index.html")
+  const [indexHtml, setIndexHtml] = React.useState<string>(() => {
+    const stored = localStorage.getItem("codezz");
+    if (stored) {
+      const parsed = JSON.parse(stored);
+      return parsed["/public/index.html"].code || `<!DOCTYPE html>
+  <html lang="en">
+    <head><meta charset="UTF-8" /><title>React IDE</title></head>
+    <body><div id="root"></div></body>
+  </html>`;
+    } else {
+      return `<!DOCTYPE html>
+  <html lang="en">
+    <head><meta charset="UTF-8" /><title>React IDE</title></head>
+    <body><div id="root"></div></body>
+  </html>`;
+    }
+  });
+  
+  const [index, setIndex] = React.useState<string>(() => {
+    const stored = localStorage.getItem("codezz");
+    if (stored) {
+      const parsed = JSON.parse(stored);
+      return parsed["/src/index.js"].code || `import React from 'react';
+  import ReactDOM from 'react-dom';
+  import App from './App';
+  
+  ReactDOM.render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>,
+    document.getElementById('root')
+  );`;
+    }
+    return `import React from 'react';
+  import ReactDOM from 'react-dom';
+  import App from './App';
+  
+  ReactDOM.render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>,
+    document.getElementById('root')
+  );`;
+  });
+  
+  const [app, setApp] = React.useState<string>(() => {
+    const stored = localStorage.getItem("codezz");
+    if (stored) {
+      const parsed = JSON.parse(stored);
+      return parsed["/src/App.js"].code || `export default function App() {
+    return <h1 className="title">Hello from App.js</h1>;
+  }`;
+    }
+    return `export default function App() {
+    return <h1 className="title">Hello from App.js</h1>;
+  }`;
+  });
+  
+  const [style, setStyle] = React.useState<string>(() => {
+    const stored = localStorage.getItem("codezz");
+    if (stored) {
+      const parsed = JSON.parse(stored);
+      return parsed["/src/style.css"].code || `.title {
+    color: red;
+    font-size: 2rem;
+  }`;
+    }
+    return `.title {
+    color: red;
+    font-size: 2rem;
+  }`;
+  });
+  
+  const [packageJson, setPackageJson] = React.useState<string>(() => {
+    const stored = localStorage.getItem("codezz");
+    if (stored) {
+      const parsed = JSON.parse(stored);
+      return parsed["/package.json"].code || `{
+    "name": "react-ide",
+    "main": "/src/index.js",
+    "dependencies": {
+      "react": "^18.2.0",
+      "react-dom": "^18.2.0"
+    }
+  }`;
+    }
+    return `{
+    "name": "react-ide",
+    "main": "/src/index.js",
+    "dependencies": {
+      "react": "^18.2.0",
+      "react-dom": "^18.2.0"
+    }
+  }`;
+  });
   
   useEffect(()=>setMode(theme),[theme])
   return (
@@ -409,45 +504,20 @@ export default function ReactIDE() {
       }}
       files={{
         "/public/index.html": {
-          code: `<!DOCTYPE html>
-<html lang="en">
-  <head><meta charset="UTF-8" /><title>React IDE</title></head>
-  <body><div id="root"></div></body>
-</html>`,
+          code: indexHtml,
         },
         "/src/index.js": {
-          code: `import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);`,
+          code: index,
           active: true,
         },
         "/src/App.js": {
-          code: `export default function App() {
-  return <h1 className="title">Hello from App.js</h1>;
-}`,
+          code: app,
         },
         "/src/style.css": {
-          code: `.title {
-  color: red;
-  font-size: 2rem;
-}`,
+          code: style,
         },
         "/package.json": {
-          code: `{
-  "name": "react-ide",
-  "main": "/src/index.js",
-  "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
-  }
-}`,
+          code: packageJson,
         },
       }}
     >
@@ -455,14 +525,14 @@ ReactDOM.render(
       >
         {/* Mobile View */}
        <div className="lg:hidden flex flex-col items-center justify-center  gap-4 px-4 ">
-       <div className="h-[83vh] flex flex-col flex-grow">
-
-                  <SandpackCodeEditor
+       <div className=  "h-[83vh] flex flex-col flex-grow">
+                  <SandpackEditor/>
+                  {/* <SandpackCodeEditor
                     style={{ height: "100%", width:"92vw" , backgroundColor: "transparent"}}
                     className="h-full w-full overflow-x-auto"
                     extensions={[autocompletion()]}
 
-                  />
+                  /> */}
             </div>
 
             <div className="h-[83vh] flex flex-col w-full border bg-popover rounded-t-xl">
@@ -541,15 +611,10 @@ ReactDOM.render(
                 <div className="flex-grow">
                     {/* <SandpackTests/> */}
                   {
-                    showFileExplorer ? <CustomFileExplorer setShowFileExplorer={setShowFileExplorer}/> : <SandpackCodeEditor
-                    showTabs={false}
-                    showLineNumbers
-                    showInlineErrors
-                    style={{ height: "100%" , backgroundColor: "transparent"}}
-                    className="h-full"
-                    extensions={[autocompletion()]}
-
-                  />
+                    showFileExplorer ? <CustomFileExplorer setFile={setActiveFile} setShowFileExplorer={setShowFileExplorer}/> : 
+                    
+                    <SandpackEditor file={activeFile}/>
+                    
                   }
                 </div>
               </div>

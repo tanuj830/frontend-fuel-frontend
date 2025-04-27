@@ -28,6 +28,7 @@ const page = ({query}:any) => {
   useEffect(()=>{
 
     axios.get("/api/questions").then(res=>{
+    // axios.get(`${BASE_URL}/api/questions`).then(res=>{
       setQuestion(res.data.filter((d:any)=>d.id === params.slug)[0])
     })
   },[])

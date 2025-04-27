@@ -27,37 +27,21 @@ const organizeFiles = (files: Record<string, any>) => {
   return structure;
 };
 
-const CustomFileExplorer = ({setShowFileExplorer}:any) => {
+const CustomFileExplorer = ({setFile, setShowFileExplorer}:any) => {
     const { sandpack } = useSandpack();
-    const { files, activeFile, openFile, setActiveFile } = sandpack;
+    const { files, activeFile, setActiveFile } = sandpack;
     
-
-  const [closeWindow, setCloseWindow] = React.useState(false)
   const fileStructure = useMemo(() => organizeFiles(files), [files]);
-//   console.log("Sandpack files:", fileStructure);
 
 
+useEffect(()=>{setActiveFile(activeFile)},[])
 
 const handleFile = (file:any) => {
-    // const activeFileClone = activeFile
-    // sandpack.openFile(activeFile)
-    // setActiveFile(file)
-    // setCloseWindow(true)
-    openFile(file); // ✅ opens the file tab
-  setActiveFile(file); // ✅ activates the file
+
+  setFile(file); // set file is like activate file
   setShowFileExplorer(false);
     
 }
-
-// console.log(activeFile)
-// useEffect(()=>{
-//     if(closeWindow){
-//         setShowFileExplorer(false)
-//     }
-    
-//     },[closeWindow])
-
-
 
   const getFileIcon = (filename: string) => {
     const ext = filename.split('.').pop();

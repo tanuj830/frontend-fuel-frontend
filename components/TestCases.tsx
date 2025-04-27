@@ -77,12 +77,12 @@ const CodeEvaluate = ({question, setQuestion, code, setTestCaseWindowHeight, sub
       }
         <div className='p-5'>
         <div className='flex items-center gap-7'>
-                <button className={`text-xs flex items-center gap-1 text-muted-foreground cursor-pointer  ${window === "Test code" ? 'text-primary-foreground': 'hover:text-primary'}`} onClick={() => setWindow("Test code")}>
+                <button className={`text-xs flex items-center gap-1 text-muted-foreground cursor-pointer  ${window === "Test code" ? 'text-primary dark:text-white': 'hover:text-primary'}`} onClick={() => setWindow("Test code")}>
                     <TestTube width={19} height={19} /><span>
                         Test code
                     </span>
                 </button>
-                <button className={`text-xs flex items-center gap-2 text-muted-foreground cursor-pointer  ${window === "Submit" ? 'text-primary-foreground': 'hover:text-primary'}`} onClick={() => setWindow("Submit")}>
+                <button className={`text-xs flex items-center gap-2 text-muted-foreground cursor-pointer  ${window === "Submit" ? 'text-primary dark:text-white': 'hover:text-primary'}`} onClick={() => setWindow("Submit")}>
                     <Captions width={19} height={19} /><span>
                         Submit
                     </span>
@@ -194,7 +194,7 @@ const CodeEvaluate = ({question, setQuestion, code, setTestCaseWindowHeight, sub
       <div className='flex items-center gap-3 fixed bottom-1 lg:bottom-0 right-1 lg:right-8 '>
         <button className={`bg-muted rounded-lg py-1 px-2 flex items-center gap-2 text-xs cursor-pointer ${pastSolution?.solved && 'bg-primary'}`} onClick={handleCompleted}> <Check width={16} height={16} />Mark as completed</button>
         <button className='bg-muted rounded-lg py-1 px-2 flex items-center gap-2 text-xs cursor-pointer' onClick={handleTestCode}> <Play width={16} height={16}/>Run</button>
-        <button className='bg-primary rounded-lg py-1 px-2 flex items-center gap-2 text-xs cursor-pointer' onClick={handleSubmit}>Submit</button>
+        <button className='bg-primary text-primary-foreground rounded-lg py-1 px-2 flex items-center gap-2 text-xs cursor-pointer' onClick={handleSubmit}>Submit</button>
       </div>
     </div>
   )
@@ -209,6 +209,7 @@ function fetchSolution(){
   }
 
   axios.get(`http://localhost:8080/api/solved-by-user/get?userId=${user.user.id}&questionId=${question.id}`, request).then(res=>setPastSolution(res.data)).catch(err=>console.log(err))
+  // axios.get(`${BASE_URL}/api/solved-by-user/get?userId=${user.user.id}&questionId=${question.id}`, request).then(res=>setPastSolution(res.data)).catch(err=>console.log(err))
     
 }
 }

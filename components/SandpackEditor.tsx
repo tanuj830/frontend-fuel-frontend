@@ -8,14 +8,14 @@ const SandpackEditor = ({file}:any) => {
 
 useEffect(()=>{
     
-    const savedCode = localStorage.getItem("files") || ""
-    if(savedCode){
+    // const savedCode = localStorage.getItem("files") || ""
+    // if(savedCode.length > 10){
 
-        setTimeout(()=>{
+        // setTimeout(()=>{
             localStorage.setItem("files", JSON.stringify(sandpack.files))
-        }, 2000)
-    }
-    else localStorage.setItem("files", JSON.stringify(sandpack.files))
+        // }, 2000)
+    // }
+    // else if(savedCode.length < 9) localStorage.setItem("files", JSON.stringify(sandpack.files))
 }, [sandpack.files])
 
 

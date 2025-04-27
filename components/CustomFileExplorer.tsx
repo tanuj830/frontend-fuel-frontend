@@ -33,7 +33,6 @@ const CustomFileExplorer = ({setFile, setShowFileExplorer}:any) => {
     
   const fileStructure = useMemo(() => organizeFiles(files), [files]);
 
-
 useEffect(()=>{setActiveFile(activeFile)},[])
 
 const handleFile = (file:any) => {

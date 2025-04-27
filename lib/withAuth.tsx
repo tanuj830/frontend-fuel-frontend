@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/components/AuthContext";
+import Loader from "@/components/Loader";
 
 const withAuth = (Component: any) => {
 
@@ -19,7 +20,7 @@ const withAuth = (Component: any) => {
     }, [user, loading]);
 
     // 👉 Only block rendering if loading is true
-    if (loading) return <div className="p-4">Checking session...</div>; // Optional loader
+    if (loading) return <Loader/>; // Optional loader
     if (!user) return null; // user is null after loading, redirecting
 
     return <Component {...props} />;

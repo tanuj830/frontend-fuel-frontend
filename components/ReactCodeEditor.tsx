@@ -507,10 +507,10 @@ export default function ReactIDE() {
         },
         "/src/index.js": {
           code: index,
-          active: true,
         },
         "/src/App.js": {
           code: app,
+          active: true,
         },
         "/src/style.css": {
           code: style,

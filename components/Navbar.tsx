@@ -74,7 +74,7 @@ const Navbar = () => {
 
     < div className='flex items-center gap-5'>
     <Link href="/" className='cursor-pointer'>
-      <Logo />
+      <Logo  showFull={true}/>
     </Link>
       <div className='border-r-2 h-6 border-muted' />
     </div>

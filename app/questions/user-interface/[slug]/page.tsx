@@ -14,6 +14,7 @@ import { LiveEditor, LivePreview, LiveProvider } from 'react-live';
 import ReactCodeEditor from '@/components/ReactCodeEditor';
 import { Sandpack, SandpackProvider } from "@codesandbox/sandpack-react";
 import ReactQuestionDispScreen from '@/components/ReactQuestionDispScreen';
+import Loader from '@/components/Loader';
 
 
 const page = ({query}:any) => {
@@ -37,7 +38,7 @@ console.log(question)
   return (
 
 
-    <div className='w-full  lg:p-6 bg-muted'>
+    <div className='w-full  lg:p-6 bg-muted relative'>
 
 {/* mobile view */}
 <div

@@ -495,7 +495,7 @@ export default function ReactIDE() {
   useEffect(()=>setMode(theme),[theme])
   return (
     <SandpackProvider
-      theme={theme}
+      theme={theme === "dark" ? "dark" : "light"}
       className=""
       customSetup={{
         entry: "/src/index.js",
@@ -523,7 +523,7 @@ export default function ReactIDE() {
       <SandpackLayout     style={{backgroundColor: "transparent", border:"none"}}
       >
         {/* Mobile View */}
-       <div className="lg:hidden flex flex-col items-center justify-center  gap-4 px-4 ">
+       <div className="lg:hidden flex flex-col items-center justify-center  gap-4 px-4 " >
        <div className=  "h-[83vh] flex flex-col flex-grow">
                   <SandpackEditor file={activeFile}/>
                   {/* <SandpackCodeEditor

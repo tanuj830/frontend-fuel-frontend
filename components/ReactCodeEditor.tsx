@@ -377,7 +377,6 @@ import {
 } from "./ui/resizable";
 import React, { useEffect } from "react";
 import { FolderClosed, PanelTop, SquareChevronRight, X } from "lucide-react";
-import { autocompletion, completionKeymap } from "@codemirror/autocomplete";
 import { useTheme } from "next-themes"
 import CustomFileExplorer from "./CustomFileExplorer";
 import SandpackEditor from "./SandpackEditor";
@@ -396,9 +395,9 @@ export default function ReactIDE() {
   const [showFileExplorer, setShowFileExplorer] = React.useState(false);
   const [activeTab, setActiveTab] = React.useState("preview");
   const [mode, setMode] = React.useState<String>(theme)
-  const [activeFile, setActiveFile] = React.useState<String>("/public/index.html")
+  const [activeFile, setActiveFile] = React.useState<String>("/src/App.js")
   const [indexHtml, setIndexHtml] = React.useState<string>(() => {
-    const stored = localStorage.getItem("codezz");
+    const stored = localStorage.getItem("files");
     if (stored) {
       const parsed = JSON.parse(stored);
       return parsed["/public/index.html"].code || `<!DOCTYPE html>
@@ -416,7 +415,7 @@ export default function ReactIDE() {
   });
   
   const [index, setIndex] = React.useState<string>(() => {
-    const stored = localStorage.getItem("codezz");
+    const stored = localStorage.getItem("files");
     if (stored) {
       const parsed = JSON.parse(stored);
       return parsed["/src/index.js"].code || `import React from 'react';
@@ -443,7 +442,7 @@ export default function ReactIDE() {
   });
   
   const [app, setApp] = React.useState<string>(() => {
-    const stored = localStorage.getItem("codezz");
+    const stored = localStorage.getItem("files");
     if (stored) {
       const parsed = JSON.parse(stored);
       return parsed["/src/App.js"].code || `export default function App() {
@@ -456,7 +455,7 @@ export default function ReactIDE() {
   });
   
   const [style, setStyle] = React.useState<string>(() => {
-    const stored = localStorage.getItem("codezz");
+    const stored = localStorage.getItem("files");
     if (stored) {
       const parsed = JSON.parse(stored);
       return parsed["/src/style.css"].code || `.title {
@@ -471,7 +470,7 @@ export default function ReactIDE() {
   });
   
   const [packageJson, setPackageJson] = React.useState<string>(() => {
-    const stored = localStorage.getItem("codezz");
+    const stored = localStorage.getItem("files");
     if (stored) {
       const parsed = JSON.parse(stored);
       return parsed["/package.json"].code || `{
@@ -526,7 +525,7 @@ export default function ReactIDE() {
         {/* Mobile View */}
        <div className="lg:hidden flex flex-col items-center justify-center  gap-4 px-4 ">
        <div className=  "h-[83vh] flex flex-col flex-grow">
-                  <SandpackEditor/>
+                  <SandpackEditor file={activeFile}/>
                   {/* <SandpackCodeEditor
                     style={{ height: "100%", width:"92vw" , backgroundColor: "transparent"}}
                     className="h-full w-full overflow-x-auto"
@@ -536,7 +535,7 @@ export default function ReactIDE() {
             </div>
 
             <div className="h-[83vh] flex flex-col w-full border bg-popover rounded-t-xl">
-              <div className="bg-muted/50 px-4 py-2 pr-6  font-semibold flex items-center gap-6">
+              <div className="bg-popover px-4 pt-5 pb-1 pr-6   font-semibold flex items-center gap-6">
                 <button
                   onClick={() => setActiveTab("preview")}
                   className={` flex items-center gap-2 text-[12px] cursor-pointer ${activeTab === "preview" ? "text-black dark:text-white" : "text-muted-foreground"}`}
@@ -584,7 +583,7 @@ export default function ReactIDE() {
        <ResizablePanelGroup direction="horizontal" className="">
           <ResizablePanel defaultSize={65} className="w-full h-full rounded-2xl mr-1">
             <div className="h-[83vh] flex flex-col">
-              <div className="flex items-center px-4 py-2 bg-popover  gap-2 ">
+              <div className="flex items-center  pl-6 py-3 bg-popover  gap-2 ">
                 {
                     showFileExplorer ?
                     <span className={`cursor-pointer flex items-center gap-1 text-xs ${showFileExplorer ? "text-popover-foreground": "text-muted-foreground"}`} >
@@ -625,7 +624,7 @@ export default function ReactIDE() {
 
           <ResizablePanel defaultSize={35} className="w-full h-full rounded-2xl ml-1 bg-muted/50 ">
             <div className="h-[83vh] flex flex-col">
-              <div className="bg-popover px-4 py-2 pr-6  font-semibold flex items-center gap-6">
+              <div className="bg-popover px-4 pt-5 pb-1 pr-6   font-semibold flex items-center gap-6">
                 <button
                   onClick={() => setActiveTab("preview")}
                   className={` flex items-center gap-2 text-[12px] cursor-pointer ${activeTab === "preview" ? "text-popover-foreground" : "text-muted-foreground"}`}

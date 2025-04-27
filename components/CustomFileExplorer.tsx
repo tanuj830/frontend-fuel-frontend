@@ -64,7 +64,7 @@ const handleFile = (file:any) => {
 
   
   return (
-    <div className=" h-full p-2 bg-popover text-popover-foreground text-sm pt-5">
+    <div className=" h-full p-2 px-8 bg-popover text-popover-foreground text-sm pt-5">
       
       {/* Folders */}
       {Object.entries(fileStructure).map(([folder, files]) =>

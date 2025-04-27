@@ -17,7 +17,7 @@ import ReactQuestionDispScreen from '@/components/ReactQuestionDispScreen';
 import Loader from '@/components/Loader';
 
 
-const page = ({query}:any) => {
+const page = ({ query }: any) => {
 
   const [question, setQuestion] = React.useState({} as any)
   const [code, setCode] = React.useState("")
@@ -26,64 +26,49 @@ const page = ({query}:any) => {
   const [submitClicked, setSubmitClicked] = React.useState("initial") // initial, loading, showResults, failed
 
   const params = useParams()
-  useEffect(()=>{
+  useEffect(() => {
 
-    axios.get("/api/questions").then(res=>{
-    // axios.get(`${BASE_URL}/api/questions`).then(res=>{
-      setQuestion(res.data.filter((d:any)=>d.id === params.slug)[0])
+    axios.get("/api/questions").then(res => {
+      // axios.get(`${BASE_URL}/api/questions`).then(res=>{
+      setQuestion(res.data.filter((d: any) => d.id === params.slug)[0])
     })
-  },[])
+  }, [])
 
-console.log(question)
+  console.log(question)
   return (
 
 
     <div className='w-full  lg:p-6 bg-muted relative'>
-
-{/* mobile view */}
-<div
-        className="flex flex-col  gap-5 lg:hidden "
-        >
+      {/* mobile view */}
+      <div className="flex flex-col  gap-5 lg:hidden ">
         <div>
-
           <QuestionDispScreen question={question} />
         </div>
-
-<div className='min-h-[50vh]'>
-
+        <div className='min-h-[50vh]'>
           <ReactCodeEditor  />
-</div>
-   
+        </div>
       </div>
 
-{/* pc view */}
-<div className='hidden lg:inline-block w-[100%] '>
+      {/* pc view */}
+      <div className='hidden lg:inline-block w-[100%] '>
 
-      <ResizablePanelGroup
-        direction="horizontal"
-        className=" "
+        <ResizablePanelGroup
+          direction="horizontal"
+          className=" "
         >
-        <ResizablePanel defaultSize={30}  className='w-full h-full  border rounded-2xl  mr-1 bg-popover'>
-          {/* question disp screen */}
-          {/* <LiveEditor /> */}
-          <ReactQuestionDispScreen  question={question} submitClicked={submitClicked}/>
-        </ResizablePanel>
-        <ResizableHandle className='hover:bg-primary'/>
+          <ResizablePanel defaultSize={30} className='w-full h-full  border rounded-2xl  mr-1 bg-popover'>
+            {/* question disp screen */}
+            <ReactQuestionDispScreen question={question} submitClicked={submitClicked} />
+          </ResizablePanel>
+          <ResizableHandle className='hover:bg-primary' />
 
 
-            <ResizablePanel defaultSize={70} className='rounded-2xl h-full '>
-              {/* code editor screen */}
-             
-              <ReactCodeEditor />
-            </ResizablePanel>
-            {/* <ResizableHandle className='hover:bg-primary' />
-            <ResizablePanel minSize={testCaseWindowHeight} defaultSize={30} className='rounded-2xl mt-1  bg-muted/50 '>
-            <LivePreview />
-              <TestCases question={question} setQuestion={setQuestion} code={code} setTestCaseWindowHeight={setTestCaseWindowHeight} submitClicked={submitClicked} setSubmitClicked={setSubmitClicked}/>
-            </ResizablePanel> */}
-
-      </ResizablePanelGroup>
-        </div>
+          <ResizablePanel defaultSize={70} className='rounded-2xl h-full '>
+            {/* code editor screen */}
+            <ReactCodeEditor />
+          </ResizablePanel>
+        </ResizablePanelGroup>
+      </div>
     </div>
 
   )

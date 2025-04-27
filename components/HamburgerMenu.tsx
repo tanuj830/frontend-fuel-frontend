@@ -48,7 +48,7 @@ const NavbarSheet = () => {
 
         {/* footer */}
         <div>
-        <img src="/discount.png" alt="" />
+        {/* <img src="/discount.png" alt="" /> */}
         <div className='py-4 px-5 bg-muted '>
 
 {

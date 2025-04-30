@@ -8,6 +8,8 @@ import ReactQuestionDispScreen from './ReactQuestionDispScreen';
 import AlgoCodingPage from './AlgoCodingPage';
 import { Button } from './ui/button';
 import QuestionHomeDashboard from './QuestionHomeDashboard';
+import { motion } from "framer-motion";
+import AnimatedHeading from './AnimatedHeading';
 
 const Home = () => {
   const [questions, setQuestions] = React.useState<any[]>([]);
@@ -22,7 +24,7 @@ const Home = () => {
 
   return (
     <div className='p-6 mt-5'>
-      <div className='flex flex-col gap-8 lg:px-[10vw] lg:pt-10 lg:w-[60vw]'>
+      <div className='flex flex-col gap-8 lg:px-[10vw] lg:pt-10 lg:w-[60vw] transition-all ease-in duration-3000'>
         <div className='flex flex-col gap-3'>
           <div className='flex gap-3 items-center'>
             <span className='py-1 px-2 bg-primary text-xs rounded-md'>New</span>
@@ -30,12 +32,10 @@ const Home = () => {
               <span>React questions</span> <ArrowRight width={15} />
             </Link>
           </div>
-          <h4 className='text-4xl lg:text-5xl font-semibold'>
-            Grow with insights from seasoned developers
-          </h4>
+          <AnimatedHeading sentence={"Grow with insights from seasoned developers"}/>
         </div>
         <p className='lg:text-lg'>
-          Learn from experienced developers and colleagues, and master the skills you need to succeed.
+          Learn from experienced developers and colleagues, and master the skills you need to succeed. Prepare smarter with the help of experienced developers and supportive colleagues.
         </p>
         <div className='w-fit flex flex-col gap-2'>
           <Link
@@ -51,7 +51,10 @@ const Home = () => {
           )}
         </div>
       </div>
+      <div className='mt-10'>
+
             <QuestionHomeDashboard/>
+      </div>
     </div>
   );
 };

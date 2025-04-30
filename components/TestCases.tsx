@@ -6,7 +6,7 @@ import XpPopupCard from './XPPopUpCard'
 import { BASE_URL } from '@/lib/utils'
 import { useAuth } from './AuthContext'
 
-const CodeEvaluate = ({question, setQuestion, code, setTestCaseWindowHeight, submitClicked, setSubmitClicked}:any) => {
+const CodeEvaluate = ({renderingInHomepage, question, setQuestion, code, setTestCaseWindowHeight, submitClicked, setSubmitClicked}:any) => {
   const [window, setWindow] = React.useState("Test code")
   const [testCaseClicked, setTestCaseClicked] = React.useState("initial") // initial, loading, passed, failed
   const [response, setResponse] = React.useState([])// response for all testcases 
@@ -191,11 +191,13 @@ const CodeEvaluate = ({question, setQuestion, code, setTestCaseWindowHeight, sub
               </div>
             }
         </div>
-      <div className='flex items-center gap-3 fixed bottom-1 lg:bottom-0 right-1 lg:right-8 '>
-        <button className={`bg-muted rounded-lg py-1 px-2 flex items-center gap-2 text-xs cursor-pointer ${pastSolution?.solved && 'bg-primary'}`} onClick={handleCompleted}> <Check width={16} height={16} />Mark as completed</button>
-        <button className='bg-muted rounded-lg py-1 px-2 flex items-center gap-2 text-xs cursor-pointer' onClick={handleTestCode}> <Play width={16} height={16}/>Run</button>
-        <button className='bg-primary text-primary-foreground rounded-lg py-1 px-2 flex items-center gap-2 text-xs cursor-pointer' onClick={handleSubmit}>Submit</button>
-      </div>
+     {
+      !renderingInHomepage &&  <div className='flex items-center gap-3 fixed bottom-1 lg:bottom-0 right-1 lg:right-8 '>
+      <button className={`bg-muted rounded-lg py-1 px-2 flex items-center gap-2 text-xs cursor-pointer ${pastSolution?.solved && 'bg-primary'}`} onClick={handleCompleted}> <Check width={16} height={16} />Mark as completed</button>
+      <button className='bg-muted rounded-lg py-1 px-2 flex items-center gap-2 text-xs cursor-pointer' onClick={handleTestCode}> <Play width={16} height={16}/>Run</button>
+      <button className='bg-primary text-primary-foreground rounded-lg py-1 px-2 flex items-center gap-2 text-xs cursor-pointer' onClick={handleSubmit}>Submit</button>
+    </div>
+     }
     </div>
   )
 

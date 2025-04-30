@@ -155,3 +155,14 @@ background: #000;
   color: #ef4444 !important; /* red-500 */
   background-color: #fee2e2 !important; /* red-100 */
 }
+
+
+/* global.css or tailwind styles with custom class */
+.slanted {
+  transform: rotate(-50deg);
+  transition: transform 0.6s ease-in-out;
+}
+
+.straight {
+  transform: rotate(0deg);
+}

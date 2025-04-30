@@ -33,14 +33,14 @@ const Home = () => {
           <p>Learn from experienced developers and colleagues, and master the skills you need to succeed.</p>
         </div>
         <div className='w-fit flex flex-col gap-2'>
-          <Button><span>Get started now</span><ArrowRight width={16} /> </Button>
+          <Link href="/questions" className='bg-primary text-primary-foreground flex items-center py-2 px-5 rounded-lg text-sm gap-2'><span>Get started now</span><ArrowRight width={16} /> </Link>
           {
             questions?.length > 0 ? <small>{questions?.length}+ questions are free to do</small>
             : <div className='w-full h-3 animate-pulse bg-muted rounded-full'/>
           }
         </div>
       </div>
-      <div className='border  my-10 w-full h-[70vh] overflow-y-scroll relative rounded-xl'>
+      <div className='border  my-10 w-full h-[60vh] overflow-y-scroll relative rounded-xl'>
         <div className='flex items-center px-2 sticky top-0 py-2 dark:bg-black bg-white z-[100]'>
           <div className='w-fit flex items-center gap-1'>
             <div className='w-4 h-4 rounded-full bg-muted'/>

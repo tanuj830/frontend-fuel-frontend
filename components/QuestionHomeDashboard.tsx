@@ -84,18 +84,27 @@ const QuestionHomeDashboard = () => {
           </div>
   
           {/* Editor */}
-          <div className="w-full">
+          {
+            featuredQuestions && <div className="w-full">
             {
-              index === 0 ? <UICodingPage featuredQuestion={featuredQuestions[index]} params=""/> :
-            <AlgoCodingPage renderingInHomepage={true} featuredQuestion={featuredQuestions[index]} params="" />
+              index === 0 ? <UICodingPage  params={{slug:featuredQuestions[index].id}}/> :
+            <AlgoCodingPage renderingInHomepage={true} params={{slug:featuredQuestions[index].id}} />
             }
           </div>
   
+          }
           {/* Bottom CTA */}
           <div className='w-full flex sticky bottom-0 justify-center bg-primary'>
+            {
+              index === 0 ?
+            <Link href={`/questions/user-interface/${featuredQuestions[index].id}`} className='text-xs py-1 z-[100]'>
+              Click here to try out the actual workspace
+            </Link>
+              :
             <Link href={`/questions/algo/${featuredQuestions[index].id}`} className='text-xs py-1 z-[100]'>
               Click here to try out the actual workspace
             </Link>
+            }
           </div>
         </div>
       </div>

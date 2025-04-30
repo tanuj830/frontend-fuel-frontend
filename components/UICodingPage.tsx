@@ -10,7 +10,7 @@ import ReactQuestionDispScreen from '@/components/ReactQuestionDispScreen';
 import { BASE_URL } from '@/lib/utils';
 
 
-const UICodingPage = ({featuredQuestion,params}:any) => {
+const UICodingPage = ({params}:any) => {
 
   const [question, setQuestion] = React.useState({} as any)
   const [code, setCode] = React.useState("")
@@ -21,14 +21,12 @@ const UICodingPage = ({featuredQuestion,params}:any) => {
  
   useEffect(() => {
 
-    if(params === "")setQuestion(featuredQuestion)
-        else{
     // axios.get("/api/questions").then(res => {
         axios.get(`${BASE_URL}/api/questions`).then(res=>{
             setQuestion(res.data.filter((d: any) => d.id === params.slug)[0])
         })
-    }
-  }, [params])
+
+  }, [params.slug])
 
   return (
 

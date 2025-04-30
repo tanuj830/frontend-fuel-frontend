@@ -11,7 +11,7 @@ import { BASE_URL } from '@/lib/utils';
 import withAuth from "@/lib/withAuth";
 
 
-const AlgoCodingPage = ({featuredQuestion,renderingInHomepage, params}:any) => {
+const AlgoCodingPage = ({renderingInHomepage, params}:any) => {
 
   const [question, setQuestion] = React.useState({} as any)
   const [code, setCode] = React.useState("")
@@ -25,8 +25,6 @@ const AlgoCodingPage = ({featuredQuestion,renderingInHomepage, params}:any) => {
   useEffect(()=>{setTestCaseWindowHeight(0)}, [testCaseWindowHeight])
 
   useEffect(() => {
-    if(params === "")setQuestion(featuredQuestion)
-      else{
     // prod phase
     // axios.get(`http://localhost:8080/api/questions/`+params.slug).then(res => {
       axios.get(`${BASE_URL}/api/questions/`+params.slug).then(res => {
@@ -38,7 +36,6 @@ const AlgoCodingPage = ({featuredQuestion,renderingInHomepage, params}:any) => {
         
         else alert("No question found...try solving other question")
       })
-    }
 
     // dev phase
     // // axios.get("/api/questions").then(res=>{

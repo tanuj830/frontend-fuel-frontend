@@ -11,7 +11,7 @@ import QuestionsPlayground from './QuestionsPlayground';
 import ReactQuestionDispScreen from './ReactQuestionDispScreen';
 
 const Home = () => {
-  const [questions, setQuestions] = React.useState([])
+  const [questions, setQuestions] = React.useState([] as any)
 
   React.useEffect(()=>{
     axios.get(`${BASE_URL}/api/questions`).then(res=>setQuestions(res.data)).catch(err=>console.log(err))
@@ -60,7 +60,7 @@ const Home = () => {
         }
         <div className='w-full flex sticky bottom-0 justify-center bg-primary text-primary-foreground'>
 
-        <Link href={"/questions"} className=' text-xs py-1 z-[100]'>Click here to try out the actual workspace</Link>
+        <Link href={"/questions/algo/"+questions[0]?.id} className=' text-xs py-1 z-[100]'>Click here to try out the actual workspace</Link>
         </div>
       </div>
     </div>

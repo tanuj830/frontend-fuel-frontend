@@ -40,8 +40,8 @@ const Home = () => {
           }
         </div>
       </div>
-      <div className='border pt-2  my-10 w-full h-[60vh] overflow-y-scroll relative rounded-xl'>
-        <div className='flex items-center px-2'>
+      <div className='border  my-10 w-full h-[60vh] overflow-y-scroll relative rounded-xl'>
+        <div className='flex items-center px-2 sticky top-0 py-2 dark:bg-black bg-white'>
           <div className='w-fit flex items-center gap-1'>
             <div className='w-4 h-4 rounded-full bg-muted'/>
             <div className='w-4 h-4 rounded-full bg-muted'/>

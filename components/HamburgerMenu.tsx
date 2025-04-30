@@ -24,9 +24,9 @@ const NavbarSheet = () => {
 
   return (
     <div>
-      <Sheet >
+      <Sheet>
   <SheetTrigger><Menu/></SheetTrigger>
-  <SheetContent className='h-full'>
+  <SheetContent className='h-full z-[1000]'>
     <SheetHeader>
       <SheetTitle className='flex items-center'>
     <Logo showFull={true}/>

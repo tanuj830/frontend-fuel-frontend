@@ -52,7 +52,7 @@ const ReactQuestionDispScreen = ({ question, submitClicked }: any) => {
             </div>
 
             <div className='mt-3'>
-                <h1 className='text-xl lg:text-2xl font-bold leading-8 py-3 '>{question.title}</h1>
+                <h1 className='text-xl lg:text-2xl font-bold leading-8 py-3 '>{question?.title}</h1>
 
                 <div className='text-xs text-muted-foreground flex items-center flex-wrap gap-5 lg:gap-7 pb-6'>
                     <div className='flex items-center gap-1'>
@@ -65,20 +65,20 @@ const ReactQuestionDispScreen = ({ question, submitClicked }: any) => {
 
                     <div className='flex items-center gap-1'>
                         {
-                            question.category ? <Badge>{question.category}</Badge> : <Badge>Loading...</Badge>
+                            question?.category ? <Badge>{question?.category}</Badge> : <Badge>Loading...</Badge>
                         }
                     </div>
 
                     <div className='flex items-center gap-1'>
                         <Flame width={18} height={18} />
-                        <span className={`capitalize font-semibold ${question.difficulty === "easy" ? "text-green-600" : question.difficulty === "medium" ? "text-yellow-600" : "text-red-600"}`}>
-                            {question.difficulty ? <>{question.difficulty}</>: <>hard</>}
+                        <span className={`capitalize font-semibold ${question?.difficulty === "easy" ? "text-green-600" : question?.difficulty === "medium" ? "text-yellow-600" : "text-red-600"}`}>
+                            {question?.difficulty ? <>{question?.difficulty}</>: <>hard</>}
                         </span>
                     </div>
 
                     <div className='flex items-center gap-1'>
                         <Clock3 width={19} height={19} />
-                        <span className='text-muted-foreground text-xs'>{question.duration ? <>{question.duration}</>: <>0</>} mins</span>
+                        <span className='text-muted-foreground text-xs'>{question?.duration ? <>{question?.duration}</>: <>0</>} mins</span>
                     </div>
                 </div>
             </div>

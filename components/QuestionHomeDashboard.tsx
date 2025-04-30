@@ -5,6 +5,7 @@ import React from 'react';
 import AlgoCodingPage from './AlgoCodingPage';
 import { Button } from './ui/button';
 import Link from 'next/link';
+import UICodingPage from './UICodingPage';
 
 const QuestionHomeDashboard = () => {
   const [rotation, setRotation] = React.useState(15);
@@ -84,7 +85,10 @@ const QuestionHomeDashboard = () => {
   
           {/* Editor */}
           <div className="w-full">
-            <AlgoCodingPage renderingInHomepage={true} params={{ slug: featuredQuestions[index].id }} />
+            {
+              index === 0 ? <UICodingPage featuredQuestion={featuredQuestions[index]} params=""/> :
+            <AlgoCodingPage renderingInHomepage={true} featuredQuestion={featuredQuestions[index]} params="" />
+            }
           </div>
   
           {/* Bottom CTA */}

@@ -1,6 +1,7 @@
 "use client";
 
 import AlgoCodingPage from '@/components/AlgoCodingPage'
+import withAuth from '@/lib/withAuth';
 import { useParams } from 'next/navigation'
 import React from 'react'
 
@@ -13,4 +14,4 @@ const page = () => {
   )
 }
 
-export default page
+export default withAuth(page)

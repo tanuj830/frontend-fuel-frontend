@@ -29,8 +29,7 @@ const Navbar = () => {
 
         <div className='text-[10px] lg:text-[12px] bg-primary text-primary-foreground p-1 text-center flex'>
           <div className='w-full'>
-
-            Enjoy 20% off all plans by following our social accounts! Check it out
+        Platform is in the building phase, and a complete experience will be available soon.
           </div>
 
           <X onClick={() => setShowAddBar(false)} className='cursor-pointer' width={16} height={16} />

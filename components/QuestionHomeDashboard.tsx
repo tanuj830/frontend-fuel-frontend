@@ -94,7 +94,7 @@ const QuestionHomeDashboard = () => {
   
           }
           {/* Bottom CTA */}
-          <div className='w-full flex sticky bottom-0 justify-center bg-primary'>
+          <div className='w-full flex sticky bottom-0 justify-center bg-primary text-primary-foreground'>
             {
               index === 0 ?
             <Link href={`/questions/user-interface/${featuredQuestions[index].id}`} className='text-xs py-1 z-[100]'>

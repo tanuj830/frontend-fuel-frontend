@@ -18,8 +18,8 @@ const Questions = () => {
 
 
     useEffect(() => {
-        axios.get("/api/questions").then(res => setQuestions(res.data)).catch(err=>console.log(err))
-        // axios.get(`${BASE_URL}/api/questions`).then(res => setQuestions(res.data)).catch(err=>console.log(err))
+        // axios.get("/api/questions").then(res => setQuestions(res.data)).catch(err=>console.log(err))
+        axios.get(`${BASE_URL}/api/questions`).then(res => setQuestions(res.data)).catch(err=>console.log(err))
         // axios.get(`${BASE_URL}/api/questions`).then(res => setQuestions(res.data)).catch(err=>console.log(err))
 
     }, [])

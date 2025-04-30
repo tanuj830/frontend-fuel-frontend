@@ -40,7 +40,7 @@ const Home = () => {
           }
         </div>
       </div>
-      <div className='border  my-10 w-full h-[60vh] overflow-y-scroll relative rounded-xl'>
+      <div className={`border  my-10 w-full min-h-[60vh] overflow-y-scroll relative rounded-xl ${questions.length <= 0 && "animate-pulse"}`}>
         <div className='flex items-center px-2 sticky top-0 py-2 dark:bg-black bg-white z-[100]'>
           <div className='w-fit flex items-center gap-1'>
             <div className='w-4 h-4 rounded-full bg-muted'/>
@@ -56,12 +56,14 @@ const Home = () => {
         </div>
         {
           questions?.length > 0 &&
+        <>
         <ReactQuestionDispScreen question={questions[0]}/>
-        }
         <div className='w-full flex sticky bottom-0 justify-center bg-primary text-primary-foreground'>
 
         <Link href={"/questions/algo/"+questions[0]?.id} className=' text-xs py-1 z-[100]'>Click here to try out the actual workspace</Link>
         </div>
+        </>
+        }
       </div>
     </div>
   );

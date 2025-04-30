@@ -29,7 +29,7 @@ const Navbar = () => {
 
         <div className='text-[10px] lg:text-[12px] bg-primary text-primary-foreground p-1 text-center flex'>
           <div className='w-full'>
-        Platform is in the building phase, and a complete experience will be available soon.
+          Platform is in building phase, launching soon 🔥
           </div>
 
           <X onClick={() => setShowAddBar(false)} className='cursor-pointer' width={16} height={16} />

@@ -9,7 +9,7 @@ const page = () => {
   const params = useParams()
   return (
     <div>
-      <UICodingPage/>
+      <UICodingPage params={params}/>
     </div>
   )
 }

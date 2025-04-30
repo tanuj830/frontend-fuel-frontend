@@ -41,7 +41,7 @@ const Home = () => {
         </div>
       </div>
       <div className='border  my-10 w-full h-[70vh] overflow-y-scroll relative rounded-xl'>
-        <div className='flex items-center px-2 sticky top-0 py-2 dark:bg-black bg-white'>
+        <div className='flex items-center px-2 sticky top-0 py-2 dark:bg-black bg-white z-[100]'>
           <div className='w-fit flex items-center gap-1'>
             <div className='w-4 h-4 rounded-full bg-muted'/>
             <div className='w-4 h-4 rounded-full bg-muted'/>
@@ -60,7 +60,7 @@ const Home = () => {
         }
         <div className='w-full flex sticky bottom-0 justify-center bg-primary text-primary-foreground'>
 
-        <Link href={"/questions"} className=' text-xs py-1'>Click here to try out the actual workspace</Link>
+        <Link href={"/questions"} className=' text-xs py-1 z-[100]'>Click here to try out the actual workspace</Link>
         </div>
       </div>
     </div>

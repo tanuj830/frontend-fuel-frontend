@@ -25,7 +25,7 @@ const UserProfile = () => {
     }
 
   return (
-<div>
+user &&<div>
 
             <HoverCard>
   <HoverCardTrigger className='flex items-center gap-1 cursor-pointer'> 

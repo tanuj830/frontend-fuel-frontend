@@ -1,5 +1,4 @@
-import React from 'react'
-import { useAuth } from './AuthContext'
+import React, { useEffect } from 'react'
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import {
   HoverCard,
@@ -7,19 +6,37 @@ import {
   HoverCardTrigger,
 } from "@/components/ui/hover-card"
 import Link from 'next/link'
+import { supabase } from '@/lib/supabaseClient'
+import { useRouter } from 'next/navigation'
 const UserProfile = () => {
+  const [user, setUser] = React.useState({} as any)
+  
+  useEffect(()=>{
+    supabase.auth.getUser().then(res=>{
+      if(res.data.user)setUser(res.data.user)
+    })
+  },[])
 
-    const { logout, user } = useAuth()
+  const router = useRouter()
+    const logout = () => {
+      const { error }:any =  supabase.auth.signOut();
+      if(error)return <small>Something went wrong...</small>
+      router.push("/sign-in")
+    }
 
   return (
-    user && <div>
+<div>
 
             <HoverCard>
   <HoverCardTrigger className='flex items-center gap-1 cursor-pointer'> 
           <button className='cursor-pointer'>
           <Avatar>
   <AvatarImage src="https://github.com/shadcn.png" />
-  <AvatarFallback className='uppercase pl-3 '>{user?.username.slice(0,2)}</AvatarFallback>
+  {user && user.email ? 
+  <AvatarFallback className='uppercase pl-3 '>{user.email.slice(0,2)}</AvatarFallback> 
+  : <AvatarFallback className='uppercase pl-3 '>TB</AvatarFallback>
+}
+
 </Avatar>
 
 
@@ -30,7 +47,7 @@ const UserProfile = () => {
     <div className='p-1'>
         <div className='pb-3 border-b'>
 
-        <h6 className='text-sm font-semibold capitalize'>{user.username}</h6>
+        <h6 className='text-sm font-semibold capitalize'>{user  && user.email}</h6>
         </div>
         <div className='flex flex-col transition-all duration-2000 pt-2'>
             <Link href="/settings" className=' hover:bg-muted py-1 px-2 rounded-lg text-muted-foreground text-sm'>Settings</Link>

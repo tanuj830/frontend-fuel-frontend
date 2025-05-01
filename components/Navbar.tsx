@@ -5,7 +5,6 @@ import { Menu } from './Menu'
 import { ModeToggle } from './ModeToggle'
 import Link from 'next/link'
 import { X } from 'lucide-react'
-import { useAuth } from "@/components/AuthContext"
 import Logo from './Logo';
 import Prepare from './Prepare';
 import Products from './Products';
@@ -14,14 +13,8 @@ import NavbarSheet from './HamburgerMenu';
 
 const Navbar = () => {
   const [showAddBar, setShowAddBar] = React.useState(true)
-  const [hasMounted, setHasMounted] = React.useState(false);
+
   
-
-  React.useEffect(() => {
-    setHasMounted(true);
-  }, []);
-
-  if (!hasMounted) return null;
   return (
     <>
       {

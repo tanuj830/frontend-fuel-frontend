@@ -22,8 +22,11 @@ import { supabase } from '@/lib/supabaseClient'
 const NavbarSheet = () => {
 
 const [supabaseUser, setSupabaseUser] = React.useState({} as any)
-  
-    supabase.auth.getUser().then(res=>setSupabaseUser(res.data.user));
+
+useEffect(()=>{
+
+  supabase.auth.getUser().then(res=>setSupabaseUser(res.data.user));
+},[])
 
 
   const { theme, setTheme } = useTheme()

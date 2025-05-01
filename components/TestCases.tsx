@@ -4,16 +4,27 @@ import { Ban, Captions, Check, CircleCheck, Cross, EyeOff, FlaskConical, Play, T
 import axios from 'axios'
 import XpPopupCard from './XPPopUpCard'
 import { BASE_URL } from '@/lib/utils'
-import { useAuth } from './AuthContext'
+import { supabase } from '@/lib/supabaseClient'
 
-const CodeEvaluate = ({renderingInHomepage, question, setQuestion, code, setTestCaseWindowHeight, submitClicked, setSubmitClicked}:any) => {
+
+const CodeEvaluate = ({renderingInHomepage, question, code, setTestCaseWindowHeight, submitClicked, setSubmitClicked}:any) => {
   const [window, setWindow] = React.useState("Test code")
   const [testCaseClicked, setTestCaseClicked] = React.useState("initial") // initial, loading, passed, failed
   const [response, setResponse] = React.useState([])// response for all testcases 
   const [showXpCard, setShowXpCard] = React.useState(false);
   const [pastSolution, setPastSolution] = React.useState({} as any);
+
+  const getCurrentUser = async () => {
+    const { data, error }:any = await supabase.auth.getUser();
   
- const user = useAuth()
+    if (error || !data) {
+      console.error('Error fetching user:', error.message);
+      return null;
+    }
+    return data.user;
+  };
+  
+  const user:any = getCurrentUser();
 
   const handleTestCode = () => {
     setWindow("Test code")
@@ -41,23 +52,40 @@ const CodeEvaluate = ({renderingInHomepage, question, setQuestion, code, setTest
       let allCasesPassed = true
       res.data.results.map((res:any)=>{if(res.passed == false) allCasesPassed = false})
         if(allCasesPassed){
-          const user = localStorage.getItem("user")
+
           if(user){
 
-            axios.post(`${BASE_URL}/api/questions/submit`, {user:JSON.parse(user), question, code}).then(res=>{
-              // console.log(res.data, "109")
-            })
+            const { data, error }:any = supabase
+            .from('submissions')
+            .insert([
+              {
+                user_id: user?.id,
+                question_id: question?.id,
+                code,
+                is_correct: true,
+                runtime: 0.234,
+                memory: 15.2
+              }
+            ])
+        
+          if (error) {
+            console.error('Insert error:', error)
+          } else {
+            console.log('Submission inserted:', data)
             setShowXpCard(true)
-            }
+          }
+
+            
       }
     }
+  }
     ).catch(err=>console.log(err))
 
   }
 
   const handleCompleted = () => {
     const request = {
-      userId: user.user.id,
+      userId: user.id,
       questionId: question.id,
       solved: pastSolution.solved ? false : true,
     };
@@ -204,13 +232,13 @@ const CodeEvaluate = ({renderingInHomepage, question, setQuestion, code, setTest
 
 function fetchSolution(){
   const request:any = {
-    userId: user.user.id,
-    questionId:question.id,
+    userId: user.id,
+    questionId:question?.id,
 
 
   }
 
-  axios.get(`http://localhost:8080/api/solved-by-user/get?userId=${user.user.id}&questionId=${question.id}`, request).then(res=>setPastSolution(res.data)).catch(err=>console.log(err))
+  axios.get(`http://localhost:8080/api/solved-by-user/get?userId=${user?.id}&questionId=${question?.id}`, request).then(res=>setPastSolution(res.data)).catch(err=>console.log(err))
   // axios.get(`${BASE_URL}/api/solved-by-user/get?userId=${user.user.id}&questionId=${question.id}`, request).then(res=>setPastSolution(res.data)).catch(err=>console.log(err))
     
 }

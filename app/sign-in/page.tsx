@@ -2,6 +2,7 @@
 import { useAuth } from '@/components/AuthContext';
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { supabase } from '@/lib/supabaseClient';
 import { BASE_URL } from '@/lib/utils';
 import withAuth from '@/lib/withAuth';
 import axios from 'axios'
@@ -11,31 +12,31 @@ import { useRouter } from 'next/navigation';
 import React, { useEffect } from 'react'
 const page = () => {
   const [status, setStatus] = React.useState("initial") // initial, loading, success, failed
+  const [message, setMessage] = React.useState("") 
   const [userInfo, setUserInfo] = React.useState({} as any)
   
   const {user, setUser}:any = useAuth();
     const router = useRouter()
 
-    const authenticateUser = (e: any) => {
+    const authenticateUser = async(e: any) => {
       e.preventDefault();
       setStatus("loading");
-    
-      axios
-        .post(`${BASE_URL}/api/users/authenticate`, userInfo, { withCredentials: true })
-        .then((res) => {
-          if (res.data) {
-            setUser(res.data);
+      
+console.log(userInfo)
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: userInfo.email,
+        password: userInfo.password
+      })
+      console.log(data)
+      if(error) {
+      setStatus("failed");
+      setMessage(error.message)
+    }
+else if(data) {
+            setUser(data);
             setStatus("success");
-            localStorage.setItem("user", JSON.stringify(res.data));
             router.push("/questions");
-          } else {
-            setStatus("failed");
           }
-        })
-        .catch((err) => {
-          console.error(err);
-          setStatus("failed");
-        });
     };
     
 
@@ -66,7 +67,7 @@ const page = () => {
                 <Button className='bg-muted/90 hover:bg-muted rounded-lg border border-muted-foreground/50 w-full lg:w-fit'><Github/>Continue with GitHub</Button>
             </div>
             {
-                          status === "failed" && <div className='text-destructive text-xs text-start w-full'>Credentials mismatched, try again with correct credentials!</div>
+                          status === "failed" && <div className='text-destructive text-xs text-start w-full'>{message}</div>
             }
                 <div className='flex w-full gap-4'>
                     <div className='border-t w-full mt-2.5'/>
@@ -74,8 +75,8 @@ const page = () => {
                     <div className='border-t w-full mt-2.5'/>
                 </div>
         <div className='w-full'>
-            <label className="text-sm">* Username or Email</label>
-            <Input name='username' onChange={handleChange} placeholder='Ex: johndoe or johndoe@gmail.com'/>
+            <label className="text-sm">* Email</label>
+            <Input name='email' onChange={handleChange} placeholder='Ex: johndoe@gmail.com'/>
         </div>
         <div className='w-full'>
             <label className="text-sm">* Password</label>
@@ -87,8 +88,8 @@ const page = () => {
         {
             status === "loading" ?
 
-            <Button disabled className='w-full rounded-lg text-sm cursor-pointer'>Sign Up</Button>
-         :   <Button className='w-full rounded-lg text-sm cursor-pointer'>Sign Up</Button>
+            <Button disabled className='w-full rounded-lg text-sm cursor-pointer'>Sign in</Button>
+         :   <Button className='w-full rounded-lg text-sm cursor-pointer'>Sign in</Button>
         }
         </div>
       </form>

@@ -10,6 +10,7 @@ import { BASE_URL } from '@/lib/utils';
 import axios from 'axios'
 import { ArrowDown01, BadgeCheck, PanelTop, Search, TestTube } from 'lucide-react'
 import React, { useEffect } from 'react'
+import { supabase } from '@/lib/supabaseClient';
 
 
 const Questions = () => {
@@ -18,8 +19,22 @@ const Questions = () => {
 
 
     useEffect(() => {
+        const fetchQuestions = async () => {
+            const { data, error }:any = await supabase
+              .from('questions')
+              .select('*'); // specify columns or use * for all
+      
+            if (error) {
+              console.error('Error fetching questions:', error);
+            } else {
+                console.log(data)
+              setQuestions(data);
+            }
+          };
+      
+          fetchQuestions();
         // axios.get("/api/questions").then(res => setQuestions(res.data)).catch(err=>console.log(err))
-        axios.get(`${BASE_URL}/api/questions`).then(res => setQuestions(res.data)).catch(err=>console.log(err))
+        // axios.get(`${BASE_URL}/api/questions`).then(res => setQuestions(res.data)).catch(err=>console.log(err))
         // axios.get(`${BASE_URL}/api/questions`).then(res => setQuestions(res.data)).catch(err=>console.log(err))
 
     }, [])

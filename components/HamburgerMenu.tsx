@@ -1,4 +1,5 @@
-import React from 'react'
+"use client"
+import React, { useEffect } from 'react'
 import {
   Sheet,
   SheetContent,
@@ -14,12 +15,17 @@ import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
 import Link from 'next/link'
 import Products from './Products'
 import { useTheme } from 'next-themes'
+import { supabase } from '@/lib/supabaseClient'
 
 
 // hamburger component for mobile devices
 const NavbarSheet = () => {
 
-  const { user } = useAuth()
+const [supabaseUser, setSupabaseUser] = React.useState({} as any)
+  
+    supabase.auth.getUser().then(res=>setSupabaseUser(res.data.user));
+
+
   const { theme, setTheme } = useTheme()
 
   return (
@@ -65,17 +71,17 @@ const NavbarSheet = () => {
                     </button>
                 }
               </div>
-              <div className={`border-t  w-full ${user ? "px-5 pt-4" : "px-0"}`}>
+              <div className={`border-t  w-full ${supabaseUser ? "px-5 pt-4" : "px-0"}`}>
                 {
-                  user ?
+                  supabaseUser ?
                     <button className='cursor-pointer flex w-full justify-between items-center '>
                       <div className='flex items-center gap-3  '>
 
                         <Avatar>
                           <AvatarImage src="https://github.com/shadcn.png" />
-                          <AvatarFallback className='uppercase pl-3 '>{user?.username.slice(0, 2)}</AvatarFallback>
+                          <AvatarFallback className='uppercase pl-3 '>{supabaseUser.email && supabaseUser?.email.slice(0, 2)}</AvatarFallback>
                         </Avatar>
-                        <span className='capitalize'>{user?.username}</span>
+                        <span className='capitalize'>{supabaseUser?.email}</span>
                       </div>
                       <span><ChevronRight /></span>
 
@@ -96,3 +102,15 @@ const NavbarSheet = () => {
 }
 
 export default NavbarSheet
+
+// import React from 'react'
+
+// const HamburgerMenu = () => {
+//   return (
+//     <div>s
+      
+//     </div>
+//   )
+// }
+
+// export default HamburgerMenu

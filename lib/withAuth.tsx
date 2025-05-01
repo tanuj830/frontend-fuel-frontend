@@ -1,9 +1,10 @@
 "use client";
 
 import { useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/router";
 import { useAuth } from "@/components/AuthContext";
 import Loader from "@/components/Loader";
+import { supabase } from "./supabaseClient";
 
 const withAuth = (Component: any) => {
 

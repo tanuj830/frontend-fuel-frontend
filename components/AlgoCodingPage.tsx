@@ -1,68 +1,34 @@
 "use client";
 
 import React, { useEffect, useState } from 'react'
-import { useRouter } from 'next/navigation'
 import axios from 'axios';
 import CodeEditor from '@/components/CodeEditor';
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@/components/ui/resizable';
 import QuestionDispScreen from '@/components/QuestionDispScreen';
 import TestCases from '@/components/TestCases';
 import { BASE_URL } from '@/lib/utils';
-import withAuth from "@/lib/withAuth";
+import { useQuestion } from '@/hooks/useQuestion';
 
 
 const AlgoCodingPage = ({renderingInHomepage, params}:any) => {
 
-  const [question, setQuestion] = React.useState({} as any)
+
   const [code, setCode] = React.useState("")
+
   const [testCaseWindowHeight, setTestCaseWindowHeight] = useState(10)
   // this state is of TestCases.tsx component
   const [submitClicked, setSubmitClicked] = React.useState("initial") // initial, loading, showResults, failed
+  
+  
+  const { question, loading, error } = useQuestion(params.slug);
+  useEffect(()=>{
+    if(error)alert("Something went wrong...")
 
-
+    },[params])
 
 
   useEffect(()=>{setTestCaseWindowHeight(0)}, [testCaseWindowHeight])
 
-  useEffect(() => {
-    // prod phase
-    // axios.get(`http://localhost:8080/api/questions/`+params.slug).then(res => {
-      axios.get(`${BASE_URL}/api/questions/`+params.slug).then(res => {
-        if (res.data){
-          console.log(res.data, "222")
-          setQuestion(res.data)
-          
-        } 
-        
-        else alert("No question found...try solving other question")
-      })
-
-    // dev phase
-    // // axios.get("/api/questions").then(res=>{
-    //   setQuestion(res.data.filter((d:any)=>d.id === params.slug)[0])
-    // })
-  }, [params.slug])
-
-
-  const router = useRouter()
- const verifyUser = async () => {
-  try {
-    const res = await axios.get(`${BASE_URL}/api/users/verify`, {
-      withCredentials: true,
-    });
-
-    if (!res.data || !res.data.username) {
-      router.push('/sign-in');
-    }
-  } catch (err) {
-    router.push('/sign-in');
-  }
-};
-
-console.log(testCaseWindowHeight)
-useEffect(()=>{
-  verifyUser()
-}, [])
 
   return (
     <div className='w-full  lg:p-6'>
@@ -82,7 +48,7 @@ useEffect(()=>{
 </div>
 
   <div className='pb-20'>
-        <TestCases renderingInHomepage={renderingInHomepage} question={question} setQuestion={setQuestion} code={code} submitClicked={submitClicked} setSubmitClicked={setSubmitClicked}/>
+        <TestCases renderingInHomepage={renderingInHomepage} question={question} code={code} submitClicked={submitClicked} setSubmitClicked={setSubmitClicked}/>
     </div>      
       </div>
 
@@ -106,7 +72,7 @@ useEffect(()=>{
             </ResizablePanel>
             <ResizableHandle className='hover:bg-primary' />
             <ResizablePanel minSize={testCaseWindowHeight} defaultSize={10} className='rounded-2xl mt-1  bg-muted/50 '>
-              <TestCases renderingInHomepage={renderingInHomepage} question={question} setQuestion={setQuestion} code={code} setTestCaseWindowHeight={setTestCaseWindowHeight} submitClicked={submitClicked} setSubmitClicked={setSubmitClicked}/>
+              <TestCases renderingInHomepage={renderingInHomepage} question={question}  code={code} setTestCaseWindowHeight={setTestCaseWindowHeight} submitClicked={submitClicked} setSubmitClicked={setSubmitClicked}/>
             </ResizablePanel>
           </ResizablePanelGroup>
         </ResizablePanel>

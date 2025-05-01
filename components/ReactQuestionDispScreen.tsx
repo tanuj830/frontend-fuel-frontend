@@ -4,16 +4,17 @@ import { Captions, Clock3, Flame, Lightbulb, NotebookText } from 'lucide-react'
 import React, { useEffect } from 'react'
 import SubmissonTable from './SubmissonTable'
 import { Badge } from './ui/badge'
+import { useCategories } from '@/hooks/useCategories'
 
 const ReactQuestionDispScreen = ({ question, submitClicked }: any) => {
     const [window, setWindow] = React.useState(() => localStorage.getItem("window") || "description");
-    const [user, setUser] = React.useState<any>(null);
+    // const [user, setUser] = React.useState<any>(null);
     const [submissions, setSubmissions] = React.useState<any>([]);
-
+    const {categories, loading:categoryLoading} = useCategories()
 
     // Effect to fetch user data from localStorage and then fetch submissions
     useEffect(() => {
-       fetchSubmisson()
+    //    fetchSubmisson()
     }, [question, submitClicked]); 
 
 
@@ -65,7 +66,7 @@ const ReactQuestionDispScreen = ({ question, submitClicked }: any) => {
 
                     <div className='flex items-center gap-1'>
                         {
-                            question?.category ? <Badge>{question?.category}</Badge> : <Badge>Loading...</Badge>
+                            !categoryLoading ? <Badge>{question?.category}</Badge> : <Badge>Loading...</Badge>
                         }
                     </div>
 
@@ -111,19 +112,19 @@ const ReactQuestionDispScreen = ({ question, submitClicked }: any) => {
 
     
 
-    function fetchSubmisson (){
-        const savedUser = localStorage.getItem("user");
+//     function fetchSubmisson (){
+//         const savedUser = localStorage.getItem("user");
 
-        if (savedUser) {
-            const userData = JSON.parse(savedUser);
-            setUser(userData); // Store user data in state
+//         if (savedUser) {
+//             const userData = JSON.parse(savedUser);
+//             setUser(userData); // Store user data in state
 
-            // Fetch submissions based on user id
-            axios.post(`${BASE_URL}/api/questions/submissons/${userData.id}`, question)
-                .then(res => setSubmissions(res.data))
-                .catch(err => console.log(err));
-        }
-    }
+//             // Fetch submissions based on user id
+//             axios.post(`${BASE_URL}/api/questions/submissons/${userData.id}`, question)
+//                 .then(res => setSubmissions(res.data))
+//                 .catch(err => console.log(err));
+//         }
+//     }
 };
 
 export default ReactQuestionDispScreen;

@@ -1,6 +1,7 @@
 "use client";
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { supabase } from '@/lib/supabaseClient';
 import { BASE_URL } from '@/lib/utils';
 import axios from 'axios';
 import { Chrome, Github } from 'lucide-react'
@@ -11,23 +12,26 @@ import React from 'react'
 const page = () => {
   const [user, setUser] = React.useState({} as any)
   const [status, setStatus] = React.useState("initial") // initial, loading, success, failed
-
+  const[message, setMessage] = React.useState("")
   const router = useRouter()
 
   
-  const createAccount = (e:any) =>{
+  const createAccount =  async(e:any) =>{
     e.preventDefault()
     setStatus("loading")
-    // axios.post(`${BASE_URL}/api/questions`, user).then(res=>{
-    axios.post(`${BASE_URL}/api/users`, user,{
-      withCredentials: true,
-    }).then(res=>{
-      if(res.data.id){
-        setStatus("success")
-        router.push("/sign-in")
-      }
-      else setStatus("failed")
-    }).catch(err=>setStatus("failed"))
+    const { data, error } = await supabase.auth.signUp({
+      email: user.email,
+      password: user.password
+    })
+    if (error) {
+          setStatus("failed")
+          setMessage(error.message)
+    }
+    else if(data){setStatus("success")
+      // router.push("/sign-in")
+    setMessage("Please check your email and confirm your address before logging in.")
+    }
+    
   }
 
     const handleChange = (e:any) =>{
@@ -36,7 +40,6 @@ const page = () => {
 
     setUser({...user, [name]: value})
   }
-  console.log(user)
   return (
     <div className='flex justify-center items-center min-h-[80vh]'>
       <form className='w-full lg:w-[40vw] p-6 min-h-[40vh]' onSubmit={createAccount}>
@@ -56,12 +59,13 @@ const page = () => {
                     <div className='border-t w-full mt-2.5'/>
                 </div>
                 {
-          status === "failed" && <div className='text-destructive text-xs text-start w-full'>Something went wrong, try after sometime!</div>
+          status === "failed" ? <div className='text-destructive text-xs text-start w-full'>{message}</div>
+          : status === "success" ? <div className='text-green-600 text-xs text-start w-full'>{message}</div> : null
         }
-        <div className='w-full'>
+        {/* <div className='w-full'>
             <label className="text-sm" >* Username</label>
             <Input name='username' onChange={handleChange} placeholder='Ex: johndoe'/>
-        </div>
+        </div> */}
         <div className='w-full'>
             <label className="text-sm">* Email</label>
             <Input name='email' onChange={handleChange} placeholder='Ex: johndoe@gmail.com'/>

@@ -16,7 +16,7 @@ const CodeEditor = ({quest, code, setCode}:any) => {
 
   useEffect(()=>{
 
-        setCode(quest.starterCode)
+        setCode(quest?.starter_code)
         setQuestion(quest)
   },[quest])
 

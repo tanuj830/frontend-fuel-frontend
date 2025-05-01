@@ -10,16 +10,27 @@ import { Button } from './ui/button';
 import QuestionHomeDashboard from './QuestionHomeDashboard';
 import { motion } from "framer-motion";
 import AnimatedHeading from './AnimatedHeading';
+import { useQuestion } from '@/hooks/useQuestion';
+import { supabase } from '@/lib/supabaseClient';
 
 const Home = () => {
   const [questions, setQuestions] = React.useState<any[]>([]);
 
-
   // fetch questions
   useEffect(() => {
-    axios.get(`${BASE_URL}/api/questions`)
-      .then(res => setQuestions(res.data))
-      .catch(err => console.log(err));
+    const fetchQuestions = async () => {
+      const { data, error }:any = await supabase
+        .from('questions')
+        .select('*'); // specify columns or use * for all
+
+      if (error) {
+        console.error('Error fetching questions:', error);
+      } else {
+        setQuestions(data);
+      }
+    };
+
+    fetchQuestions();
   }, []);
 
   return (

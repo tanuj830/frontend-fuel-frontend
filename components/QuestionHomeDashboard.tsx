@@ -1,31 +1,45 @@
 import { BASE_URL } from '@/lib/utils';
 import axios from 'axios';
 import { Lock } from 'lucide-react';
-import React from 'react';
+import React, { useEffect } from 'react';
 import AlgoCodingPage from './AlgoCodingPage';
 import { Button } from './ui/button';
 import Link from 'next/link';
 import UICodingPage from './UICodingPage';
+import { supabase } from '@/lib/supabaseClient';
+import { useQuestionsByCategories } from '@/hooks/useQuestionsByCategories';
 
 const QuestionHomeDashboard = () => {
   const [rotation, setRotation] = React.useState(15);
   const editorRef = React.useRef<HTMLDivElement>(null);
   const [selectedTab, setSelectedTab] = React.useState("UI coding");
   const [featuredQuestions, setFeaturedQuestions] = React.useState<any[]>([]);
-  const [loading, setLoading] = React.useState(true);
+  const [load, setLoading] = React.useState(true);
 
   // Get featured questions
-  React.useEffect(() => {
-    axios.get(`/api/featured`)
-      .then(res => {
-        setFeaturedQuestions(res.data);
-        setLoading(false);
-      })
-      .catch(err => {
-        console.error(err);
-        setLoading(false);
-      });
-  }, []);
+const {questions, loading, error}:any = useQuestionsByCategories()
+  
+useEffect(()=>{
+  if(error)console.log("error while fetching")
+    else if(loading)setLoading(true)
+  else{
+        let ui = {}
+        let algo = {}
+        let js = {}
+
+          questions.map((question:any)=>{
+              if(question.categories.name === "UI coding")ui = question
+              if(question.categories.name === "Algo coding")algo = question
+              if(question.categories.name === "JS functions")js = question
+  })
+  const arr = []
+  arr.push(ui)
+  arr.push(algo)
+  arr.push(js)
+  setFeaturedQuestions(arr)
+  }
+},[questions])
+
 
   // Scroll rotation effect
   React.useEffect(() => {
@@ -45,10 +59,6 @@ const QuestionHomeDashboard = () => {
 
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  if (loading) {
-    return <div className="text-center py-10">Loading questions...</div>;
-  }
 
   if (featuredQuestions.length < 3) {
     return <div className="text-center text-red-500 py-10">Not enough featured questions available.</div>;

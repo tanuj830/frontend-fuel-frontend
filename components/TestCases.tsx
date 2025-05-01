@@ -5,6 +5,8 @@ import axios from 'axios'
 import XpPopupCard from './XPPopUpCard'
 import { BASE_URL } from '@/lib/utils'
 import { supabase } from '@/lib/supabaseClient'
+import Loader from './Loader'
+import { useUserSession } from '@/hooks/useUserSession'
 
 
 const CodeEvaluate = ({renderingInHomepage, question, code, setTestCaseWindowHeight, submitClicked, setSubmitClicked}:any) => {
@@ -15,13 +17,10 @@ const CodeEvaluate = ({renderingInHomepage, question, code, setTestCaseWindowHei
   const [pastSolution, setPastSolution] = React.useState({} as any);
 
   const getCurrentUser = async () => {
-    const { data, error }:any = await supabase.auth.getUser();
-  
-    if (error || !data) {
-      console.error('Error fetching user:', error.message);
-      return null;
-    }
-    return data.user;
+    const { user, loading } = useUserSession();
+    if (loading) return <Loader/>;
+  console.log(user, "usa")
+    return user;
   };
   
   const user:any = getCurrentUser();

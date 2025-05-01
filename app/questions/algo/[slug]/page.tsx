@@ -1,28 +1,30 @@
 "use client";
 
-import AlgoCodingPage from '@/components/AlgoCodingPage'
-import { supabase } from '@/lib/supabaseClient';
-import { useParams, useRouter } from 'next/navigation'
-import React from 'react'
+import AlgoCodingPage from '@/components/AlgoCodingPage';
+import Loader from '@/components/Loader';
+import { useUserSession } from '@/hooks/useUserSession';
+import { useParams, useRouter } from 'next/navigation';
+import React, { useEffect } from 'react';
 
-const page = () => {
-  const params = useParams()
-  const router = useRouter()
+const Page = () => {
+  const params = useParams();
+  const router = useRouter();
 
-  React.useEffect(() => {
-    const checkUser = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (!session) {
-        router.push('/sign-in');
-      }
-    };
-    checkUser();
-  }, []);
+  const { user, loading } = useUserSession();
+
+  useEffect(() => {
+    if (!loading && !user) {
+      router.replace("/sign-in");
+    }
+  }, [loading, user, router]);
+
+  if (loading || !user) return <Loader />;
+
   return (
     <div>
-      <AlgoCodingPage params={params}/>
+      <AlgoCodingPage params={params} />
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default Page;

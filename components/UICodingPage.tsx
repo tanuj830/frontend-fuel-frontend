@@ -10,8 +10,6 @@ import Loader from './Loader';
 
 const UICodingPage = ({ params }: any) => {
   const { question, loading, error } = useQuestion(params.slug);
-  const [code, setCode] = useState("");
-  const [testCaseWindowHeight, setTestCaseWindowHeight] = useState(10);
   const [submitClicked, setSubmitClicked] = useState("initial");
 
   if (loading) return <Loader/>;

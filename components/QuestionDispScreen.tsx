@@ -20,12 +20,6 @@ const QuestionDispScreen = ({ question, submitClicked }: any) => {
         }
       }, []);
 
-      
-    // Effect to fetch user data from localStorage and then fetch submissions
-    useEffect(() => {
-    //    fetchSubmisson()
-    }, [question, submitClicked]); 
-
 
     const handleWindowChange = (type: string) => {
         localStorage.setItem("window", type);

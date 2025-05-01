@@ -10,7 +10,6 @@ import {
 } from "@/components/ui/sheet"
 import { ArrowRight, ChevronRight, Menu, Moon, Sun, SunMoon } from 'lucide-react'
 import Logo from './Logo'
-import { useAuth } from './AuthContext'
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
 import Link from 'next/link'
 import Products from './Products'

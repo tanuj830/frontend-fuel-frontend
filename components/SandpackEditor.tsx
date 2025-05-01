@@ -7,15 +7,7 @@ const SandpackEditor = ({file}:any) => {
     const { setActiveFile } = sandpack;
 
 useEffect(()=>{
-    
-    // const savedCode = localStorage.getItem("files") || ""
-    // if(savedCode.length > 10){
-
-        // setTimeout(()=>{
-            localStorage.setItem("files", JSON.stringify(sandpack.files))
-        // }, 2000)
-    // }
-    // else if(savedCode.length < 9) localStorage.setItem("files", JSON.stringify(sandpack.files))
+    localStorage.setItem("files", JSON.stringify(sandpack.files))
 }, [sandpack.files])
 
 

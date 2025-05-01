@@ -1,3 +1,4 @@
+"use client"
 import React, { useEffect } from 'react'
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import {
@@ -8,16 +9,16 @@ import {
 import Link from 'next/link'
 import { supabase } from '@/lib/supabaseClient'
 import { useRouter } from 'next/navigation'
+import { useUserSession } from '@/hooks/useUserSession'
+import Loader from './Loader'
+
 const UserProfile = () => {
-  const [user, setUser] = React.useState({} as any)
-  
-  useEffect(()=>{
-    supabase.auth.getUser().then(res=>{
-      if(res.data.user)setUser(res.data.user)
-    })
-  },[])
 
   const router = useRouter()
+  
+  const { user, loading } = useUserSession();
+  if (loading) return <Loader/>;
+
     const logout = () => {
       const { error }:any =  supabase.auth.signOut();
       if(error)return <small>Something went wrong...</small>

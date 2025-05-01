@@ -37,6 +37,7 @@ const page = () => {
         }}
         theme={theme === "light" ? "light" : "dark"}
         providers={['github']}
+        redirectTo="https://reactready.vercel.app/"
       />
     </div>
     </div>

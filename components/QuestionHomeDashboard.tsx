@@ -8,6 +8,7 @@ import Link from 'next/link';
 import UICodingPage from './UICodingPage';
 import { supabase } from '@/lib/supabaseClient';
 import { useQuestionsByCategories } from '@/hooks/useQuestionsByCategories';
+import Loader from './Loader';
 
 const QuestionHomeDashboard = () => {
   const [rotation, setRotation] = React.useState(15);
@@ -19,47 +20,49 @@ const QuestionHomeDashboard = () => {
   // Get featured questions
 const {questions, loading, error}:any = useQuestionsByCategories()
   
+
 useEffect(()=>{
   if(error)console.log("error while fetching")
-    else if(loading)setLoading(true)
-  else{
-        let ui = {}
-        let algo = {}
-        let js = {}
-
-          questions.map((question:any)=>{
-              if(question.categories.name === "UI coding")ui = question
-              if(question.categories.name === "Algo coding")algo = question
-              if(question.categories.name === "JS functions")js = question
+    else if(questions){
+  let ui = {}
+  let algo = {}
+  let js = {}
+  
+  questions.map((question:any)=>{
+    if(question.categories.name === "UI coding")ui = question
+    if(question.categories.name === "Algo coding")algo = question
+    if(question.categories.name === "JS functions")js = question
   })
   const arr = []
   arr.push(ui)
   arr.push(algo)
   arr.push(js)
   setFeaturedQuestions(arr)
-  }
+}
 },[questions])
 
 
-  // Scroll rotation effect
-  React.useEffect(() => {
-    const handleScroll = () => {
-      if (!editorRef.current) return;
+// Scroll rotation effect
+React.useEffect(() => {
+  const handleScroll = () => {
+    if (!editorRef.current) return;
+    
+    const rect = editorRef.current.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
+    const visible = Math.min(Math.max((windowHeight - rect.top) / windowHeight, 0), 1);
+    const angle = 30 - 30 * visible;
+    
+    setRotation(angle);
+  };
+  
+  window.addEventListener('scroll', handleScroll);
+  handleScroll();
+  
+  return () => window.removeEventListener('scroll', handleScroll);
+}, []);
 
-      const rect = editorRef.current.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-      const visible = Math.min(Math.max((windowHeight - rect.top) / windowHeight, 0), 1);
-      const angle = 30 - 30 * visible;
-
-      setRotation(angle);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    handleScroll();
-
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
+ if(loading)return <Loader/>
+ 
   if (featuredQuestions.length < 3) {
     return <div className="text-center text-red-500 py-10">Not enough featured questions available.</div>;
   }

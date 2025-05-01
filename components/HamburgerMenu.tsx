@@ -16,6 +16,7 @@ import Link from 'next/link'
 import Products from './Products'
 import { useTheme } from 'next-themes'
 import { supabase } from '@/lib/supabaseClient'
+import { useRouter } from 'next/router'
 
 
 // hamburger component for mobile devices
@@ -31,6 +32,12 @@ useEffect(()=>{
 
   const { theme, setTheme } = useTheme()
 
+  const router = useRouter()
+  const logout = () => {
+    const { error }:any =  supabase.auth.signOut();
+    if(error)return <small>Something went wrong...</small>
+    router.push("/sign-in")
+  }
   return (
     <div>
       <Sheet>
@@ -77,6 +84,7 @@ useEffect(()=>{
               <div className={`border-t  w-full ${supabaseUser ? "px-5 pt-4" : "px-0"}`}>
                 {
                   supabaseUser ?
+                    <>
                     <button className='cursor-pointer flex w-full justify-between items-center '>
                       <div className='flex items-center gap-3  '>
 
@@ -88,7 +96,10 @@ useEffect(()=>{
                       </div>
                       <span><ChevronRight /></span>
 
-                    </button> :
+                    </button> 
+
+                    <button onClick={logout} className='cursor-pointer w-full border-b  text-start px-3 py-3'>Sign out</button>
+                    </>:
                     <div className='w-full flex'>
 
                       <Link href="/sign-in" className='cursor-pointer w-full border-b  text-start px-3 py-3'>Sign in/up</Link>

@@ -7,25 +7,12 @@ import { Badge } from './ui/badge';
 
 import DisplayQuestions from './DisplayQuestions';
 import QuestionsSortBy from './QuestionsSortBy';
+import { useCategories } from '@/hooks/useCategories';
 
-interface ChallengeInterface {
-    id: string;
-    title: string;
-    category: string;
-    description: string;
-    difficulty: 'easy' | 'medium' | 'hard';
-    tags: string[];
-    starterCode: string;
-    solutionCode: string;
-    createdAt: string;
-}
 
-interface QuestionsPlaygroundProps {
-    questions: ChallengeInterface[];
-}
 
-const QuestionsPlayground: React.FC<QuestionsPlaygroundProps> = ({ questions }) => {
-    const [categories, setCategories] = React.useState<string[]>([]);
+const QuestionsPlayground = ({ questions }:any) => {
+    // const [categories, setCategories] = React.useState<string[]>([]);
     const [filterClicked, setFilterClicked] = React.useState("")
     const [query, setQuery] = React.useState("")
     const [filteredQuestions, setFilteredQuestions] = React.useState([] as any);
@@ -43,7 +30,7 @@ const QuestionsPlayground: React.FC<QuestionsPlaygroundProps> = ({ questions }) 
         const regex = new RegExp(value, "i");
         const filterQuestions: any[] = [];
     
-        questions.forEach((question) => {
+        questions.forEach((question:any) => {
             if (
                 Array.isArray(question.tags) &&
                 question.tags.some((tag: string) => regex.test(tag))
@@ -63,26 +50,15 @@ const QuestionsPlayground: React.FC<QuestionsPlaygroundProps> = ({ questions }) 
         }
         else setFilterClicked(cat)
         const clonedQuestions = [...questions]
-        const filteredQuests = clonedQuestions.filter(quest => quest.category == cat)
+        console.log(questions, "qq")
+        const filteredQuests = clonedQuestions.filter(quest => quest.category_id == cat)
         setFilteredQuestions(filteredQuests)
     }
 
 
-    useEffect(() => {
-        const map = new Map();
-        const categoriesArr: string[] = [];
+    const {categories, loading} = useCategories()
+       if(loading)<Badge variant="outline" className='animate-pulse'>Loading</Badge>
 
-        questions.forEach((question: ChallengeInterface) => {
-            if (map.has(question.category))
-                map.set(question.category, map.get(question.category) + 1)
-            else {
-                map.set(question.category, 1);
-                categoriesArr.push(question.category);
-            }
-        });
-
-        setCategories(categoriesArr);
-    }, [questions]);
 
     return (
         <div className='lg:w-[60vw]'>
@@ -102,12 +78,12 @@ const QuestionsPlayground: React.FC<QuestionsPlaygroundProps> = ({ questions }) 
                 {/* filter by categories */}
                 <div className='py-6 flex items-center flex-wrap gap-5'>
                     {
-                        categories.map((cat: string, ind:number) => (
-                            <div key={cat+ind}>
+                        Object.keys(categories).map((key: string, ind:number) => (
+                            <div key={key+ind}>
                                 {
-                                    filterClicked == cat ?
-                                        <Badge variant="outline" className={`cursor-pointer bg-primary text-primary-foreground`} onClick={() => handleFilterQuestions(cat)} >{cat}</Badge>
-                                        : <Badge variant="outline" className={`cursor-pointer`} onClick={() => handleFilterQuestions(cat)} >{cat}</Badge>
+                                    filterClicked == key ?
+                                        <Badge variant="outline" className={`cursor-pointer bg-primary text-primary-foreground`} onClick={() => handleFilterQuestions(key)} >{categories[key]}</Badge>
+                                        : <Badge variant="outline" className={`cursor-pointer`} onClick={() => handleFilterQuestions(key)} >{categories[key]}</Badge>
                                 }
                             </div>
                         ))

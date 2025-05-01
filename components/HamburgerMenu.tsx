@@ -16,7 +16,7 @@ import Link from 'next/link'
 import Products from './Products'
 import { useTheme } from 'next-themes'
 import { supabase } from '@/lib/supabaseClient'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 
 
 // hamburger component for mobile devices

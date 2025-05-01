@@ -89,7 +89,7 @@ const QuestionDispScreen = ({ question, submitClicked }: any) => {
 
             {
                 window === "description" ? (
-                    <div className='text-secondary-foreground' id='disp' dangerouslySetInnerHTML={{ __html: question?.description }} />
+                    <div className='text-secondary-foreground' id='disp' dangerouslySetInnerHTML={{ __html: question?.text }} />
                 ) : window === "solution" ? (
                     <div className='text-secondary-foreground' id='disp' dangerouslySetInnerHTML={{ __html: question?.solutionCode }} />
                 ) : (

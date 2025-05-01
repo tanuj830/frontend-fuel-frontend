@@ -29,9 +29,10 @@ useEffect(()=>{
   let js = {}
   
   questions.map((question:any)=>{
-    if(question.categories.name === "UI coding")ui = question
-    if(question.categories.name === "Algo coding")algo = question
-    if(question.categories.name === "JS functions")js = question
+    if (question?.categories && question.categories.name === "UI coding") ui = question;
+      if (question?.categories && question.categories.name === "Algo coding") algo = question;
+      if (question?.categories && question.categories.name === "JS functions") js = question;
+ 
   })
   const arr = []
   arr.push(ui)

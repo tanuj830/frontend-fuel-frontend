@@ -11,7 +11,7 @@ const QuestionDispScreen = ({ question, submitClicked }: any) => {
     // const [window, setWindow] = React.useState("description");
     const [submissions, setSubmissions] = React.useState<any>([]);
     
-    const {categories, loading:categoryLoading} = useCategories()
+    const {categories, loading} = useCategories()
 
     React.useEffect(() => {
         const storedWindow = localStorage.getItem("window");
@@ -69,7 +69,7 @@ const QuestionDispScreen = ({ question, submitClicked }: any) => {
 
                     <div className='flex items-center gap-1'>
                         {
-                            !categoryLoading ? <Badge>{categories[question?.category_id]}</Badge> : <Badge>Loading...</Badge>
+                            !loading ? <Badge>{categories[question?.category_id]}</Badge> : <Badge className='animate-pulse '>Loading...</Badge>
                         }
                     </div>
 
@@ -91,7 +91,7 @@ const QuestionDispScreen = ({ question, submitClicked }: any) => {
                 window === "description" ? (
                     <div className='text-secondary-foreground' id='disp' dangerouslySetInnerHTML={{ __html: question?.text }} />
                 ) : window === "solution" ? (
-                    <div className='text-secondary-foreground' id='disp' dangerouslySetInnerHTML={{ __html: question?.solutionCode }} />
+                    <div className='text-secondary-foreground' id='disp' dangerouslySetInnerHTML={{ __html: question?.solution_code }} />
                 ) : (
                     <div className='flex p-5 bg-muted min-w-[46vw] h-[50vh]'>
                         {

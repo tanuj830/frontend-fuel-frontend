@@ -10,7 +10,8 @@ const ReactQuestionDispScreen = ({ question, submitClicked }: any) => {
     const [window, setWindow] = React.useState(() => localStorage.getItem("window") || "description");
     // const [user, setUser] = React.useState<any>(null);
     const [submissions, setSubmissions] = React.useState<any>([]);
-    const {categories, loading:categoryLoading} = useCategories()
+    
+    const {categories, loading} = useCategories()
 
     // Effect to fetch user data from localStorage and then fetch submissions
     useEffect(() => {
@@ -66,7 +67,7 @@ const ReactQuestionDispScreen = ({ question, submitClicked }: any) => {
 
                     <div className='flex items-center gap-1'>
                         {
-                            !categoryLoading ? <Badge>{question?.category}</Badge> : <Badge>Loading...</Badge>
+                            !loading ? <Badge>{categories[question?.category_id]}</Badge> : <Badge className='animate-pulse '>Loading...</Badge>
                         }
                     </div>
 
@@ -90,7 +91,7 @@ const ReactQuestionDispScreen = ({ question, submitClicked }: any) => {
                     <div className='' id='disp' dangerouslySetInnerHTML={{ __html: question?.description }} />
                     </>
                 ) : window === "solution" ? (
-                    <div className='' id='disp' dangerouslySetInnerHTML={{ __html: question?.solutionCode }} />
+                    <div className='' id='disp' dangerouslySetInnerHTML={{ __html: question?.solution_code }} />
                 ) : (
                     <div className='flex p-5 bg-muted  h-[50vh]'>
                         {

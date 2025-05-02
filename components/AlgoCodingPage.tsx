@@ -44,7 +44,7 @@ const AlgoCodingPage = ({renderingInHomepage, params}:any) => {
 
 <div className='h-[60vh]'>
 
-          <CodeEditor quest={question} code={code} setCode={setCode} />
+          <CodeEditor question={question} code={code} setCode={setCode} />
 </div>
 
   <div className='pb-20'>
@@ -68,7 +68,7 @@ const AlgoCodingPage = ({renderingInHomepage, params}:any) => {
           <ResizablePanelGroup direction="vertical">
             <ResizablePanel defaultSize={25} className='rounded-2xl  mb-1 bg-muted/50'>
               {/* code editor screen */}
-              <CodeEditor quest={question} code={code} setCode={setCode}/>
+              <CodeEditor question={question} code={code} setCode={setCode}/>
             </ResizablePanel>
             <ResizableHandle className='hover:bg-primary' />
             <ResizablePanel minSize={testCaseWindowHeight} defaultSize={10} className='rounded-2xl mt-1  bg-muted/50 '>

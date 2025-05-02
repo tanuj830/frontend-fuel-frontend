@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { Button } from './ui/button'
-import { Ban, Captions, Check, CircleCheck, Cross, EyeOff, FlaskConical, Play, TestTube, X } from 'lucide-react'
+import { Ban, Captions, Check, CircleCheck, Cross, EyeOff, FlaskConical, Flower, Play, TestTube, X } from 'lucide-react'
 import axios from 'axios'
 import XpPopupCard from './XPPopUpCard'
 import { BASE_URL } from '@/lib/utils'
@@ -12,6 +12,7 @@ import { useUserSession } from '@/hooks/useUserSession'
 const CodeEvaluate = ({renderingInHomepage, question, code, setTestCaseWindowHeight, submitClicked, setSubmitClicked}:any) => {
   const [window, setWindow] = React.useState("Test code")
   const [testCaseClicked, setTestCaseClicked] = React.useState("initial") // initial, loading, passed, failed
+  const [responseT, setResponseT] = React.useState([])// response for single testcases 
   const [response, setResponse] = React.useState([])// response for all testcases 
   const [showXpCard, setShowXpCard] = React.useState(false);
   const [pastSolution, setPastSolution] = React.useState({} as any);
@@ -26,15 +27,17 @@ const CodeEvaluate = ({renderingInHomepage, question, code, setTestCaseWindowHei
   const user:any = getCurrentUser();
 
   const handleTestCode = () => {
+setTestCaseWindowHeight(50)
     setWindow("Test code")
     setTestCaseClicked("loading")
     const data = {
       code,
-      testCases: [question.testCases[0]]
+      testCases: [question?.test_cases[0]]
     }
-    axios.post("https://codeexecutor.onrender.com/run", data).then(res=>res.data.results[0].passed == true ? setTestCaseClicked("passed"): setTestCaseClicked("failed")).catch(err=>console.log(err))
-  }
+    // axios.post("http://localhost:8000/run", data).then(res=>{setResponseT(res.data.results); res.data.results[0].passed == true ? setTestCaseClicked("passed"): setTestCaseClicked("failed")}).catch(err=>console.log(err))
+    axios.post("https://codeexecutor.onrender.com/run", data).then(res=>{setResponseT(res.data.results); res.data.results[0].passed == true ? setTestCaseClicked("passed"): setTestCaseClicked("failed")}).catch(err=>console.log(err))
 
+  }
 
   const handleSubmit = () => {
     setTestCaseWindowHeight(50)
@@ -42,9 +45,10 @@ const CodeEvaluate = ({renderingInHomepage, question, code, setTestCaseWindowHei
     setSubmitClicked("loading")
     const data = {
       code,
-      testCases: question.testCases
+      testCases: question.test_cases
     }
-    // axios.post("https://codeexecutor.onrender.com/run-all", data).then(res=>{
+
+    // axios.post("http://localhost:8000/run", data).then(res=>{
     axios.post("https://codeexecutor.onrender.com/run", data).then(res=>{
       res.data.results?.length > 0 ? setSubmitClicked("showResults"): setSubmitClicked("failed")
       setResponse(res.data.results)
@@ -89,13 +93,13 @@ const CodeEvaluate = ({renderingInHomepage, question, code, setTestCaseWindowHei
       solved: pastSolution.solved ? false : true,
     };
   
-    axios
-      .put("http://localhost:8080/api/solved-by-user/update", request)
-      .then(() => fetchSolution()) // Fetch the updated solution after marking as completed
-      .catch((err) => console.log(err));
+    // axios
+    //   .put("http://localhost:8080/api/solved-by-user/update", request)
+    //   .then(() => fetchSolution()) // Fetch the updated solution after marking as completed
+    //   .catch((err) => console.log(err));
   };
 
-  useEffect(()=>{fetchSolution()},[question, user])
+  // useEffect(()=>{fetchSolution()},[question, user])
 
   return (
     <div className='flex flex-col  min-w-[25vw] justify-between '>
@@ -118,44 +122,46 @@ const CodeEvaluate = ({renderingInHomepage, question, code, setTestCaseWindowHei
             </div>
             {
               window === "Test code" ?
-              <div className='mt-7 text-xs'>
+              <div className='mt-4 text-xs'>
                 {/* Test code */}
                 {
-                  testCaseClicked == "passed" ?
-                  <div className='flex items-center gap-3 bg-muted p-3 rounded-xl'>
-                  <Check className='text-green-600 font-extrabold' width={19} height={19}/>
-                  <span>
-                    Test Case {'>'} input: {JSON.stringify(question.testCases[0].inputs)}
-                  </span>
-                </div>
-               : testCaseClicked === "failed" ? <div className='flex items-center gap-3 bg-muted p-3 rounded-xl mt-2'>
-                  <X className='text-red-600 font-extrabold' width={19} height={19}/>
-                  <span>
-                    Test Case {'>'} numbers = [1, 2, 3]
-                  </span>
-                </div>
-               : testCaseClicked === "loading" ? <div className='flex items-center gap-3 bg-muted/75 p-5 rounded-xl mt-2 animate-pulse'>
-                  <span className='bg-muted w-10 h-10 rounded-full'></span>
-                  <span className='bg-muted w-full h-8 rounded-xl'>
-                  </span>
-                </div>:
-                <div className='flex items-center justify-center gap-3 bg-muted p-4 rounded-xl mt-2'>
-                  <div className='flex flex-col items-center gap-2'>
-                <FlaskConical className=' font-extrabold' width={21} height={21}/>
-                <div className='flex flex-col items-center'>
-
-                <strong className='text-md font-semibold'>
-                Test your code
-                </strong>
-                <span className='text-md text-muted-foreground'>
-                Run your code with test case before submitting.
-                </span>
-                </div>
-                  </div>
-              </div>
-                }
+                          testCaseClicked !=="loading" && testCaseClicked ? responseT?.map((res:any, testCaseNumber) => (
+                            <div className='flex items-center gap-3 py-3 border-b font-mono lowercase' key={testCaseNumber}>
+                              {
+                                res.passed ? 
+                                <Check className='text-green-600 font-extrabold' width={14} height={14}/>
+                               : <X className='text-red-500 font-extrabold' width={14} height={14}/>
+                              }
+                              <span className='flex items-center gap-2'>
+                                <span className=''>{question.title}</span> <small>{'>'}</small> Testcase {testCaseNumber+1} <small>{'>'}</small> <span>{res.passed ? <span className='text-green-600'>Passed</span> : <span className='text-red-500'>Failed</span>}</span>
+                              </span>
+                            </div>
+                          )): testCaseClicked === "loading" ? 
+                          <div className='flex items-center gap-3 py-3 border-b font-mono lowercase '>
+                            <Flower className='text-primary font-extrabold animate-spin' width={14} height={14}/>
+                          <span className='flex items-center gap-2'>
+                            <span className='animate-pulse'>please wait: Evaluating your code</span>
+                          </span>
+                        </div>:
+                          <div className='flex items-center justify-center gap-3 bg-muted p-4 rounded-xl mt-2'>
+                            <div className='flex flex-col items-center gap-2'>
+                          <FlaskConical className=' font-extrabold' width={21} height={21}/>
+                          <div className='flex flex-col items-center'>
+          
+                          <strong className='text-md font-semibold'>
+                          Test your code
+                          </strong>
+                          <span className='text-md text-muted-foreground'>
+                          Run your code with test case before submitting.
+                          </span>
+                          </div>
+                            </div>
+                        </div>
+                        }
+                
+                
               </div>:
-              <div className='mt-7 text-xs overflow-y-auto'>
+              <div className='mt-4 text-xs overflow-y-auto'>
                 {/* Submit */}
                 {
                   submitClicked == "initial" ?
@@ -179,14 +185,14 @@ const CodeEvaluate = ({renderingInHomepage, question, code, setTestCaseWindowHei
                       <div className='overflow-y-auto  max-h-[100vh] mt-2'> 
                         {
                           response.map((res:any, testCaseNumber) => (
-                            <div className='flex items-center gap-3 bg-muted p-3 rounded-xl mt-2' key={testCaseNumber}>
+                            <div className='flex items-center gap-3 py-3 border-b font-mono lowercase' key={testCaseNumber}>
                               {
                                 res.passed ? 
-                                <Check className='text-green-600 font-extrabold' width={19} height={19}/>
-                               : <X className='text-red-600 font-extrabold' width={19} height={19}/>
+                                <Check className='text-green-600 font-extrabold' width={14} height={14}/>
+                               : <X className='text-red-500 font-extrabold' width={14} height={14}/>
                               }
-                              <span>
-                                Test Case {res.testCaseNumber} {'>'} input : {JSON.stringify(question.testCases[testCaseNumber].inputs)}
+                              <span className='flex items-center gap-2'>
+                                <span className=''>{question.title}</span> <small>{'>'}</small> Testcase {testCaseNumber+1} <small>{'>'}</small> <span>{res.passed ? <span className='text-green-600'>Passed</span> : <span className='text-red-500'>Failed</span>}</span>
                               </span>
                             </div>
                           ))
@@ -209,11 +215,12 @@ const CodeEvaluate = ({renderingInHomepage, question, code, setTestCaseWindowHei
               </div>
                 </div>
             </div>
-                :<div className='flex items-center gap-3 bg-muted/75 p-5 rounded-xl mt-2 animate-pulse'>
-                <span className='bg-muted w-10 h-10 rounded-full'></span>
-                <span className='bg-muted w-full h-8 rounded-xl'>
-                </span>
-              </div>
+                : <div className='flex items-center gap-3 py-3 border-b font-mono lowercase '>
+                <Flower className='text-primary font-extrabold animate-spin' width={14} height={14}/>
+              <span className='flex items-center gap-2'>
+                <span className='animate-pulse'>Please wait: running your code against hidden test cases</span>
+              </span>
+            </div>
             }
               </div>
             }
@@ -228,19 +235,5 @@ const CodeEvaluate = ({renderingInHomepage, question, code, setTestCaseWindowHei
     </div>
   )
 
-
-function fetchSolution(){
-  const request:any = {
-    userId: user.id,
-    questionId:question?.id,
-
-
-  }
-
-  axios.get(`http://localhost:8080/api/solved-by-user/get?userId=${user?.id}&questionId=${question?.id}`, request).then(res=>setPastSolution(res.data)).catch(err=>console.log(err))
-  // axios.get(`${BASE_URL}/api/solved-by-user/get?userId=${user.user.id}&questionId=${question.id}`, request).then(res=>setPastSolution(res.data)).catch(err=>console.log(err))
-    
 }
-}
-
 export default CodeEvaluate

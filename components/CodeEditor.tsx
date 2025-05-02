@@ -5,10 +5,10 @@ import { Code, CornerUpLeft, Undo } from 'lucide-react';
 
 
   
-const CodeEditor = ({quest, code, setCode}:any) => {
+const CodeEditor = ({question, code, setCode}:any) => {
   const [language, setLanguage] = useState("javascript");
   const [theme, setTheme] = useState("vs-dark");
-  const [question, setQuestion] = useState({} as any)
+
 
   const handleEditorChange = (value: string | undefined) => {
     setCode(value || "")
@@ -16,9 +16,9 @@ const CodeEditor = ({quest, code, setCode}:any) => {
 
   useEffect(()=>{
 
-        setCode(quest?.starter_code)
-        setQuestion(quest)
-  },[quest])
+        setCode(question?.starter_code)
+
+  },[question])
 
 
 
@@ -47,7 +47,7 @@ const CodeEditor = ({quest, code, setCode}:any) => {
             <option value="vs-dark">VS Dark</option>
             <option value="light">Light</option>
           </select>
-            <button className='text-muted-foreground cursor-pointer' onClick={()=>setCode(quest?.starterCode || "")}><Undo width={20} height={20}/></button>
+            <button className='text-muted-foreground cursor-pointer' onClick={()=>setCode(question?.starter_code || "")}><Undo width={20} height={20}/></button>
               </div>
         </div>
       </div>

@@ -5,6 +5,7 @@ import React, { useEffect } from 'react'
 import SubmissonTable from './SubmissonTable'
 import { Badge } from './ui/badge'
 import { useCategories } from '@/hooks/useCategories'
+import DisplayTags from './DisplayTags'
 
 const ReactQuestionDispScreen = ({ question, submitClicked }: any) => {
     const [window, setWindow] = React.useState(() => localStorage.getItem("window") || "description");
@@ -70,10 +71,10 @@ const ReactQuestionDispScreen = ({ question, submitClicked }: any) => {
                             !loading ? <Badge>{categories[question?.category_id]}</Badge> : <Badge className='animate-pulse '>Loading...</Badge>
                         }
                     </div>
-
+                    <DisplayTags question={question}/>
                     <div className='flex items-center gap-1'>
                         <Flame width={18} height={18} />
-                        <span className={`capitalize font-semibold ${question?.difficulty === "easy" ? "text-green-600" : question?.difficulty === "medium" ? "text-yellow-600" : "text-red-600"}`}>
+                        <span className={`capitalize font-semibold ${question?.difficulty === "easy" ? "text-green-500" : question?.difficulty === "medium" ? "text-yellow-500" : "text-red-500"}`}>
                             {question?.difficulty ? <>{question?.difficulty}</>: <>hard</>}
                         </span>
                     </div>

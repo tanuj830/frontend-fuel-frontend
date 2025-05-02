@@ -16,7 +16,7 @@ const Navbar = () => {
 
   
   return (
-    <>
+    <nav>
       {
         showAddBar &&
 
@@ -92,7 +92,7 @@ const Navbar = () => {
   <UserProfile/>
 </div>
 </div>
-    </>
+    </nav>
   )
 }
 

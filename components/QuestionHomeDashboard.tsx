@@ -92,7 +92,7 @@ React.useEffect(() => {
             <div className='flex items-center justify-center w-full'>
               <div className='bg-muted py-1 px-5 rounded-lg lg:w-[30vw] justify-center flex items-center text-xs gap-2'>
                 <Lock width={12} height={12} />
-                <span className='text-muted-foreground'>reactready.vercel.app</span>
+                <span className='text-muted-foreground'>greatreact.com</span>
               </div>
             </div>
           </div>

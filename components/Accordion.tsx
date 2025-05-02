@@ -4,6 +4,7 @@ import {
     AccordionItem,
     AccordionTrigger,
   } from "@/components/ui/accordion"
+
   const accordionData = [
     {
       "title": "What is this platform about?",

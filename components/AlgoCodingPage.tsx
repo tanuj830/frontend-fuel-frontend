@@ -48,7 +48,7 @@ const AlgoCodingPage = ({renderingInHomepage, params}:any) => {
 </div>
 
   <div className='pb-20'>
-        <TestCases renderingInHomepage={renderingInHomepage} question={question} code={code} submitClicked={submitClicked} setSubmitClicked={setSubmitClicked}/>
+        <TestCases renderingInHomepage={renderingInHomepage} disableTestcaseHeight={true} question={question} code={code} submitClicked={submitClicked} setSubmitClicked={setSubmitClicked}/>
     </div>      
       </div>
 
@@ -72,7 +72,7 @@ const AlgoCodingPage = ({renderingInHomepage, params}:any) => {
             </ResizablePanel>
             <ResizableHandle className='hover:bg-primary' />
             <ResizablePanel minSize={testCaseWindowHeight} defaultSize={10} className='rounded-2xl mt-1  bg-muted/50 '>
-              <TestCases renderingInHomepage={renderingInHomepage} question={question}  code={code} setTestCaseWindowHeight={setTestCaseWindowHeight} submitClicked={submitClicked} setSubmitClicked={setSubmitClicked}/>
+              <TestCases renderingInHomepage={renderingInHomepage} disableTestcaseHeight={false} question={question}  code={code} setTestCaseWindowHeight={setTestCaseWindowHeight} submitClicked={submitClicked} setSubmitClicked={setSubmitClicked}/>
             </ResizablePanel>
           </ResizablePanelGroup>
         </ResizablePanel>

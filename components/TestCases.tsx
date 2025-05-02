@@ -9,7 +9,7 @@ import Loader from './Loader'
 import { useUserSession } from '@/hooks/useUserSession'
 
 
-const CodeEvaluate = ({renderingInHomepage, question, code, setTestCaseWindowHeight, submitClicked, setSubmitClicked}:any) => {
+const CodeEvaluate = ({renderingInHomepage,disableTestcaseHeight, question, code, setTestCaseWindowHeight, submitClicked, setSubmitClicked}:any) => {
   const [window, setWindow] = React.useState("Test code")
   const [testCaseClicked, setTestCaseClicked] = React.useState("initial") // initial, loading, passed, failed
   const [responseT, setResponseT] = React.useState([])// response for single testcases 
@@ -27,6 +27,7 @@ const CodeEvaluate = ({renderingInHomepage, question, code, setTestCaseWindowHei
   const user:any = getCurrentUser();
 
   const handleTestCode = () => {
+    if(!disableTestcaseHeight)
 setTestCaseWindowHeight(50)
     setWindow("Test code")
     setTestCaseClicked("loading")
@@ -40,6 +41,7 @@ setTestCaseWindowHeight(50)
   }
 
   const handleSubmit = () => {
+    if(!disableTestcaseHeight)
     setTestCaseWindowHeight(50)
     setWindow("Submit")
     setSubmitClicked("loading")
@@ -92,14 +94,7 @@ setTestCaseWindowHeight(50)
       questionId: question.id,
       solved: pastSolution.solved ? false : true,
     };
-  
-    // axios
-    //   .put("http://localhost:8080/api/solved-by-user/update", request)
-    //   .then(() => fetchSolution()) // Fetch the updated solution after marking as completed
-    //   .catch((err) => console.log(err));
   };
-
-  // useEffect(()=>{fetchSolution()},[question, user])
 
   return (
     <div className='flex flex-col  min-w-[25vw] justify-between '>
@@ -125,7 +120,7 @@ setTestCaseWindowHeight(50)
               <div className='mt-4 text-xs'>
                 {/* Test code */}
                 {
-                          testCaseClicked !=="loading" && testCaseClicked ? responseT?.map((res:any, testCaseNumber) => (
+                          testCaseClicked ==="passed" || testCaseClicked==="failed" ? responseT?.map((res:any, testCaseNumber) => (
                             <div className='flex items-center gap-3 py-3 border-b font-mono lowercase' key={testCaseNumber}>
                               {
                                 res.passed ? 

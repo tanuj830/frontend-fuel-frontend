@@ -1,22 +1,22 @@
 "use client";
 
-import Navbar from '@/components/Navbar'
-import QuestionsPlayground from '@/components/QuestionsPlayground'
-import { Button } from '@/components/ui/button'
-import { DropdownMenu, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
-import { Input } from '@/components/ui/input'
-import { Separator } from '@/components/ui/separator'
-import { BASE_URL } from '@/lib/utils';
-import axios from 'axios'
-import { ArrowDown01, BadgeCheck, PanelTop, Search, TestTube } from 'lucide-react'
+
 import React, { useEffect } from 'react'
 import { supabase } from '@/lib/supabaseClient';
+import Sidebar from '@/components/Sidebar';
+import QuestionsLayout from '@/components/layouts/QuestionsLayout';
+import JSCodingLayout from '@/components/layouts/JSCodingLayout';
+import AlgoCodingLayout from '@/components/layouts/AlgoCodingLayout';
+import UICodingLayout from '@/components/layouts/UICodingLayout';
+import DashboardLayout from '@/components/layouts/DashboardLayout';
+import Navbar from '@/components/Navbar';
+// import Sidebar from '@/components/Sidebar';
 
 
 const Questions = () => {
 
     const [questions, setQuestions] = React.useState([])
-
+    const [layout, setLayout] = React.useState("dashboard-layout")
 
     useEffect(() => {
         const fetchQuestions = async () => {
@@ -40,34 +40,23 @@ const Questions = () => {
     }, [])
 
     return (
-        <div className='p-6 lg:p-14'>
-            <div>
+        <>
+          <Navbar  layout={layout} setLayout={setLayout}/>
+        <div className='lg:flex'>
+            <div className='relative w-[25vw] min-h-[70vh] border-r hidden lg:inline-block'>
+            <Sidebar layout={layout} setLayout={setLayout}/>
+            </div>
 
-                <h1 className='text-2xl lg:text-3xl font-bold leading-16'>All Practice Questions</h1>
-                <span className='leading-1 text-muted-foreground font-semibold text-sm lg:text-md'>The largest question bank of {questions?.length}+ practice questions for front end interviews
-                </span>
-            </div>
-            <div className='flex items-center flex-wrap  gap-5 my-5 text-muted-foreground text-sm w-full'>
-                <div className='flex items-center w-fit gap-2 whitespace-nowrap'>
-                    <BadgeCheck />
-                    <span>Solved by developers</span>
-                </div>
-                <div className='flex items-center w-fit gap-2'>
-                    <TestTube />
-                    <span>Test cases</span>
-                </div>
-                <div className='flex items-center w-fit gap-2'>
-                    <PanelTop />
-                    <span>Code in browser</span>
-                </div>
-            </div>
-            <Separator />
-            <div className='lg:w-[72%] py-10 text-muted-foreground text-sm lg:text-md'>
-                Save the trouble of searching the web for front end interview questions. We have 500+ practice questions in every framework, format, and topic, each with high quality answers and tests from big tech senior / staff engineers.
-            </div>
-            {/* questions playground for showing all questions */}
-            <QuestionsPlayground questions={questions}/>
+            {/* render layouts */}
+            {
+                layout === "questions-layout" ? <QuestionsLayout questions={questions}/> : 
+                layout === "dashboard-layout" ? <DashboardLayout questions={questions}/> : 
+                layout === "uicoding-layout" ? <UICodingLayout/> : 
+                layout === "algocoding-layout" ? <AlgoCodingLayout/> : 
+                layout === "jscoding-layout" ? <JSCodingLayout/> : null
+            }
         </div>
+            </>
     )
 }
 

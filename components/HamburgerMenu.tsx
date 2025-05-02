@@ -8,7 +8,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
-import { ArrowRight, ChevronRight, Menu, Moon, Sun, SunMoon } from 'lucide-react'
+import { ArrowRight, Brain, ChevronRight, LayoutDashboard, ListChecks, Menu, Moon, Sun, SunMoon } from 'lucide-react'
 import Logo from './Logo'
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
 import Link from 'next/link'
@@ -16,10 +16,12 @@ import Products from './Products'
 import { useTheme } from 'next-themes'
 import { supabase } from '@/lib/supabaseClient'
 import { useRouter } from 'next/navigation'
+import { SiReact } from 'react-icons/si'
+import { AiOutlineJavaScript } from 'react-icons/ai'
 
 
 // hamburger component for mobile devices
-const NavbarSheet = () => {
+const NavbarSheet = ({layout, setLayout}:any) => {
 
 const [supabaseUser, setSupabaseUser] = React.useState({} as any)
 
@@ -51,14 +53,34 @@ useEffect(()=>{
           </SheetHeader>
           <div className='flex flex-col justify-between h-full  pb-8'>
             {/* header */}
-            <div className='px-5 pt-5'>
+            <div className='px-3 mt-2'>
               {/* <h6 className='text-muted-foreground text-xs'>Quick links</h6> */}
-              <div className='flex flex-col gap-5'>
-                <Link href="/questions" className='text-muted-foreground '>Dashboard</Link>
-                <Link href="/questions" className='text-muted-foreground '>UI questions</Link>
-                <Link href="/questions" className='text-muted-foreground '>JS functions</Link>
-                <Link href="/questions" className='text-muted-foreground '>DSA questions</Link>
-              </div>
+              <div className=''>
+
+<div className=' flex flex-col gap-1 '>
+  <div className=''>
+      <button onClick={()=>setLayout("dashboard-layout")} className={`hover:bg-muted cursor-pointer w-full text-start text-[13px] rounded-lg text-muted-foreground py-2 px-2 flex items-center gap-2
+${layout === "dashboard-layout" && "bg-muted text-primary-foreground"}`}><LayoutDashboard width={16} height={16}/> Dashboard</button>
+  </div>
+  <div className=''>
+      <button onClick={()=>setLayout("questions-layout")} className={`hover:bg-muted cursor-pointer w-full text-start text-[13px] rounded-lg text-muted-foreground py-2 px-2 flex items-center gap-2
+${layout === "questions-layout" && "bg-muted text-primary-foreground"}`}><ListChecks width={16} height={16}/> All practice questions</button>
+  </div>
+  <div className=''>
+      <button onClick={()=>setLayout("uicoding-layout")} className={`hover:bg-muted cursor-pointer w-full text-start text-[13px] rounded-lg text-muted-foreground py-2 px-2 flex items-center gap-2
+${layout === "uicoding-layout" && "bg-muted text-primary-foreground"}`}><SiReact width={16} height={16}/> UI questions</button>
+  </div>
+  <div className=''>
+      <button onClick={()=>setLayout("algocoding-layout")} className={`hover:bg-muted cursor-pointer w-full text-start text-[13px] rounded-lg text-muted-foreground py-2 px-2 flex items-center gap-2
+${layout === "algocoding-layout" && "bg-muted text-primary-foreground"}`}><Brain width={16} height={16}/> Algorithms</button>
+  </div>
+  <div className=''>
+      <button onClick={()=>setLayout("jscoding-layout")} className={`hover:bg-muted cursor-pointer w-full text-start text-[13px] rounded-lg text-muted-foreground py-2 px-2 flex items-center gap-2
+${layout === "jscoding-layout" && "bg-muted text-primary-foreground"}`}><AiOutlineJavaScript width={16} height={16}/> Javascript questions</button>
+  </div>
+</div>
+
+  </div>
             </div>
 
             {/* footer */}
@@ -97,7 +119,7 @@ useEffect(()=>{
 
                     </button> 
 
-                    <button onClick={logout} className='cursor-pointer w-full border-b  text-start px-3 py-3'>Sign out</button>
+                    {/* <button onClick={logout} className='cursor-pointer w-full border-b  text-start px-3 py-3'>Sign out</button> */}
                     </>:
                     <div className='w-full flex'>
 

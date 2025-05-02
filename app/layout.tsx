@@ -3,6 +3,9 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider"
 import Navbar from "@/components/Navbar";
+import { Sidebar } from "lucide-react";
+import { SidebarProvider } from "@/components/ui/sidebar";
+import { AppSidebar } from "@/components/app-sidebar";
 
 
 const geistSans = Geist({
@@ -30,19 +33,23 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <SidebarProvider>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
           >
+             
           <main className="w-full">
             <div className="w-[100%]">
-              <Navbar />
+              
+            
               {children}
             </div>
           </main>
         </ThemeProvider>
+            </SidebarProvider>
       </body>
     </html>
   );

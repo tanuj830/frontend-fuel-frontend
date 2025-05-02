@@ -11,7 +11,7 @@ import Products from './Products';
 import UserProfile from './UserProfile';
 import NavbarSheet from './HamburgerMenu';
 
-const Navbar = () => {
+const Navbar = ({layout, setLayout}:any) => {
   const [showAddBar, setShowAddBar] = React.useState(true)
 
   
@@ -30,7 +30,7 @@ const Navbar = () => {
       }
 
   {/* mobile view */}
-  <div className='bg-muted/50 lg:hidden flex justify-between items-center gap-5 px-5 lg:px-10 py-2  text-sm '>
+  <div className='border-b lg:hidden flex justify-between items-center gap-5 px-5 lg:px-10 py-2.5  text-sm '>
 
 <div className='flex items-center gap-4'>
 
@@ -52,13 +52,13 @@ const Navbar = () => {
 
 <div className='flex items-center gap-3'>
   <button className='rounded-full bg-primary text-primary-foreground text-xs py-2 px-3 text-nowrap font-semibold cursor-pointer'>Get full access</button>
-      <NavbarSheet/>
+      <NavbarSheet layout={layout} setLayout={setLayout}/>
 </div>
 </div>
 
 
   {/* pc view */}
-  <div className='hidden lg:flex bg-muted/50  justify-between items-center gap-5 px-6 lg:px-10 py-2  text-sm '>
+  <div className='hidden lg:flex border-b  justify-between items-center gap-5 px-6 lg:px-10 py-2.5  text-sm '>
 
 <div className='flex items-center gap-20'>
 

@@ -12,6 +12,7 @@ import { motion } from "framer-motion";
 import AnimatedHeading from './AnimatedHeading';
 import { useQuestion } from '@/hooks/useQuestion';
 import { supabase } from '@/lib/supabaseClient';
+import Navbar from './Navbar';
 
 const Home = () => {
   const [questions, setQuestions] = React.useState<any[]>([]);
@@ -34,6 +35,8 @@ const Home = () => {
   }, []);
 
   return (
+    <>
+      <Navbar />
     <div className='p-6 mt-5'>
       <div className='flex flex-col gap-8 lg:px-[10vw] lg:pt-10 lg:w-[60vw] transition-all ease-in duration-3000'>
         <div className='flex flex-col gap-3'>
@@ -52,7 +55,7 @@ const Home = () => {
           <Link
             href="/questions"
             className='bg-primary text-primary-foreground flex items-center py-2 px-5 rounded-lg text-sm gap-2'
-          >
+            >
             <span>Get started now</span><ArrowRight width={16} />
           </Link>
           {questions.length > 0 ? (
@@ -67,6 +70,7 @@ const Home = () => {
             <QuestionHomeDashboard/>
       </div>
     </div>
+          </>
   );
 };
 

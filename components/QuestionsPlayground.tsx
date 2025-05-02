@@ -8,6 +8,8 @@ import { Badge } from './ui/badge';
 import DisplayQuestions from './DisplayQuestions';
 import QuestionsSortBy from './QuestionsSortBy';
 import { useCategories } from '@/hooks/useCategories';
+import FilterQuestions from './FilterQuestions';
+// import Sidebar from './Sidebar';
 
 
 
@@ -61,11 +63,11 @@ const QuestionsPlayground = ({ questions }:any) => {
 
 
     return (
-        <div className='lg:w-[60vw]'>
+        <div className='lg:w-[75vw]'>
             <div>
 
                 {/* input */}
-                <form className='flex items-center gap-3'>
+                <form className='flex items-center gap-3 w-full lg:w-[60vw]'>
                     <div className='relative w-full'>
                         <Input placeholder='Search within this list of questions' className='px-10 py-3 text-xs lg:text-sm' onChange={handleQuery} />
                         <span className='absolute top-2 left-2 text-muted-foreground'>
@@ -102,16 +104,22 @@ const QuestionsPlayground = ({ questions }:any) => {
                 </div>
 
                 {/* questions playground */}
-                <div className='mt-5 w-full'>
+                <div className='mt-5 w-full flex flex-col lg:flex-row gap-8 '>
+                    <div className='w-full lg:w-[70%]'>
+
                     {
                         filteredQuestions.length > 0 ? <DisplayQuestions questions={filteredQuestions} /> :
-                            questions?.length > 0 ? <DisplayQuestions questions={questions} />
-                                : <div className='h-96 w-full flex justify-center items-center flex-col border bg-muted rounded-lg'>
+                        questions?.length > 0 ? <DisplayQuestions questions={questions} />
+                        : <div className='h-96 w-full flex justify-center items-center flex-col border bg-muted rounded-lg'>
                                     <span className='text-muted-foreground pb-3'><Ghost width={40} height={40} /></span>
                                     <span className='font-semibold py-1'>No questions</span>
                                     <span className='text-muted-foreground text-sm' >Try changing your search terms or filters</span>
                                 </div>
                     }
+                    </div>
+                    <div className='relative w-full lg:w-[30%]'>
+                    <FilterQuestions questions={questions}/>
+                    </div>
                 </div>
 
             </div>

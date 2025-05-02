@@ -42,7 +42,8 @@ background: #000;
 }
 
 .dark {
-  --background: oklch(0.141 0.005 285.823);
+  /* --background: oklch(0.141 0.005 285.823); */
+  --background: rgb(24, 24, 27);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.21 0.006 285.885);
   --card-foreground: oklch(0.985 0 0);
@@ -74,7 +75,6 @@ background: #000;
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.646 0.222 41.116);
 }
-
 
 @theme inline {
   --color-background: var(--background);
@@ -116,7 +116,6 @@ background: #000;
   --radius-xl: calc(var(--radius) + 4px);
 }
 
-
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -125,9 +124,6 @@ background: #000;
     @apply bg-background text-foreground;
   }
 }
-
-
-
 
 #disp pre{
   @apply bg-muted text-muted-foreground rounded-xl p-3 my-3 overflow-auto
@@ -143,8 +139,6 @@ background: #000;
   @apply py-5
 }
 
-
-
 [data-testid='file'][data-active='true'] {
   color: #0ea5e9 !important; /* sky-500 */
   font-weight: bold !important;
@@ -156,7 +150,6 @@ background: #000;
   background-color: #fee2e2 !important; /* red-100 */
 }
 
-
 /* global.css or tailwind styles with custom class */
 .slanted {
   transform: rotate(-50deg);
@@ -165,4 +158,10 @@ background: #000;
 
 .straight {
   transform: rotate(0deg);
+}
+
+
+
+.layouts{
+  @apply hover:bg-muted cursor-pointer w-full text-start text-[13px] rounded-lg text-muted-foreground py-2 px-2 flex items-center gap-2
 }

@@ -1,8 +1,9 @@
 import { ArrowRight, BadgeCheck, Flame } from 'lucide-react';
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useCategories } from '@/hooks/useCategories'; // Import custom hook for categories
-import { useTags } from '@/hooks/useTags'; // Import custom hook for tags
+
+import DisplayTags from './DisplayTags';
 const { htmlToText } = require('html-to-text');
 
 interface ChallengeInterface {
@@ -21,9 +22,10 @@ interface QuestionsPlaygroundProps {
   questions: ChallengeInterface[];
 }
 
+
 const DisplayQuestions: React.FC<QuestionsPlaygroundProps> = ({ questions }) => {
   const { categories, loading: categoryLoading } = useCategories();
-  const { tagsMap, loading: tagsLoading } = useTags();
+
   return (
     <div className="flex flex-col">
       {questions.map((question:any) => (
@@ -46,15 +48,20 @@ const DisplayQuestions: React.FC<QuestionsPlaygroundProps> = ({ questions }) => 
           <div className="min-w-[73%] max-w-[73%] lg:min-w-[85%] lg:max-w-[85%]">
             <h6>{question.title}</h6>
             <p className="truncate text-muted-foreground text-sm pt-2 lg:py-3">
-              {htmlToText(question.description)}
+              {htmlToText(question.text)}
             </p>
-            <div className="flex lg:items-center flex-col lg:flex-row text-xs text-muted-foreground gap-3 lg:gap-8 mt-2">
-              <div className="flex items-center gap-2">
+            <div className="flex lg:items-center flex-col lg:flex-row text-xs text-muted-foreground gap-3 lg:gap-7 mt-2">
+              <div className="flex items-center gap-7">
+                <div>
+
                 {categoryLoading ? (
                   <span>Loading category...</span>
                 ) : (
                   <span className="whitespace-nowrap">{categories[question.category_id] || 'Unknown'}</span>
                 )}
+                </div>
+                <div className='flex gap-2 items-center'>
+
                 <Flame width={21} height={21} />
                 {question.difficulty === 'easy' ? (
                   <span className="capitalize text-green-600 font-semibold">{question.difficulty}</span>
@@ -63,18 +70,9 @@ const DisplayQuestions: React.FC<QuestionsPlaygroundProps> = ({ questions }) => 
                 ) : (
                   <span className="capitalize text-red-600 font-semibold">{question.difficulty}</span>
                 )}
+                </div>
               </div>
-              <div className="flex gap-1 items-center">
-                {tagsLoading ? (
-                  <span>Loading tags...</span>
-                ) : (
-                  (tagsMap[question.id] || []).map((tag) => (
-                    <span key={tag.id} className="border p-1 rounded-lg">
-                      {tag.name}
-                    </span>
-                  ))
-                )}
-              </div>
+             <DisplayTags question={question}/>
             </div>
           </div>
           <div className="w-full">

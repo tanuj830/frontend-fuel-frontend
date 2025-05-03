@@ -126,7 +126,7 @@ ${layout === "jscoding-layout" && "bg-muted text-secondary-foreground"}`}><AiOut
                 {
                   supabaseUser ?
                     <>
-                    <button className='cursor-pointer flex w-full justify-between items-center '>
+                    <Link href="/profile" className='cursor-pointer flex w-full justify-between items-center '>
                       <div className='flex items-center gap-3  '>
 
                         <Avatar>
@@ -137,7 +137,7 @@ ${layout === "jscoding-layout" && "bg-muted text-secondary-foreground"}`}><AiOut
                       </div>
                       <span><ChevronRight /></span>
 
-                    </button> 
+                    </Link> 
 s
                     {/* <button onClick={logout} className='cursor-pointer w-full border-b  text-start px-3 py-3'>Sign out</button> */}
                     </>:

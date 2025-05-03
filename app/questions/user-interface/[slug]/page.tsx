@@ -9,7 +9,7 @@ import React from 'react'
 
 const page = () => {
   const params = useParams()
-if(!params)return null
+
   
   const router = useRouter()
 

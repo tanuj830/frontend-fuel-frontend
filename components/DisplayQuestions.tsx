@@ -24,6 +24,7 @@ interface QuestionsPlaygroundProps {
 
 
 const DisplayQuestions: React.FC<QuestionsPlaygroundProps> = ({ questions }) => {
+
   const { categories, loading: categoryLoading } = useCategories();
 
   return (
@@ -33,9 +34,9 @@ const DisplayQuestions: React.FC<QuestionsPlaygroundProps> = ({ questions }) => 
           href={
             categories[question.category_id] === 'Algo coding' || categories[question.category_id] === 'JS functions'
               ? '/questions/algo/' + question.id
-              : categories[question.category_id] === 'UI coding'
-              ? '/questions/user-interface/' + question.id
-              : '#'
+              // : categories[question.category_id] === 'UI coding'
+              : '/questions/user-interface/' + question.id
+
           }
           key={question.id}
           className="w-full border flex items-center gap-3 lg:gap-5 p-3 lg:p-5 bg-muted rounded-lg hover:border hover:border-primary"

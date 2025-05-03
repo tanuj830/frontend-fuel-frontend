@@ -1,7 +1,7 @@
 {
     "redirects": [
       {
-        "source": "https://greatreact.com/:path*",
+        "source": "/:path*",
         "destination": "https://www.greatreact.com/:path*",
         "permanent": true
       }

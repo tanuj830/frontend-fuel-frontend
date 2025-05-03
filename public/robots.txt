@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://greatreact.com
+Host: https://www.greatreact.com
 
 # Sitemaps
-Sitemap: https://greatreact.com/sitemap.xml
+Sitemap: https://www.greatreact.com/sitemap.xml

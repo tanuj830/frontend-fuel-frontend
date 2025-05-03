@@ -20,7 +20,7 @@ const AlgoCodingLayout = () => {
     <div className='p-6 lg:p-14'>
             <div>
 
-                <h1 className='text-2xl lg:text-3xl font-bold leading-16'>All algorithms based questions</h1>
+                <h1 className='text-2xl lg:text-3xl font-bold leading-7 lg:leading-16'>All algorithms based questions</h1>
                 <span className='leading-1 text-muted-foreground font-semibold text-sm lg:text-md'>The largest question bank of {algoQuestions?.length}+ practice questions for front end interviews
                 </span>
             </div>

@@ -64,7 +64,7 @@ useEffect(()=>{
         setLayout("dashboard-layout");
       }}
        className={`hover:bg-muted cursor-pointer w-full text-start text-[13px] rounded-lg text-muted-foreground py-2 px-2 flex items-center gap-2
-${layout === "dashboard-layout" && "bg-muted text-primary-foreground"}`}><LayoutDashboard width={16} height={16}/> Dashboard</button>
+${layout === "dashboard-layout" && "bg-muted text-secondary-foreground"}`}><LayoutDashboard width={16} height={16}/> Dashboard</button>
   </div>
   <div className=''>
       <button onClick={()=>{
@@ -72,7 +72,7 @@ ${layout === "dashboard-layout" && "bg-muted text-primary-foreground"}`}><Layout
         setLayout("questions-layout");
       }}
        className={`hover:bg-muted cursor-pointer w-full text-start text-[13px] rounded-lg text-muted-foreground py-2 px-2 flex items-center gap-2
-${layout === "questions-layout" && "bg-muted text-primary-foreground"}`}><ListChecks width={16} height={16}/> All practice questions</button>
+${layout === "questions-layout" && "bg-muted text-secondary-foreground"}`}><ListChecks width={16} height={16}/> All practice questions</button>
   </div>
   <div className=''>
       <button onClick={()=>{
@@ -80,7 +80,7 @@ ${layout === "questions-layout" && "bg-muted text-primary-foreground"}`}><ListCh
         setLayout("uicoding-layout");
       }}
        className={`hover:bg-muted cursor-pointer w-full text-start text-[13px] rounded-lg text-muted-foreground py-2 px-2 flex items-center gap-2
-${layout === "uicoding-layout" && "bg-muted text-primary-foreground"}`}><SiReact width={16} height={16}/> UI questions</button>
+${layout === "uicoding-layout" && "bg-muted text-secondary-foreground"}`}><SiReact width={16} height={16}/> UI questions</button>
   </div>
   <div className=''>
       <button onClick={()=>{
@@ -88,7 +88,7 @@ ${layout === "uicoding-layout" && "bg-muted text-primary-foreground"}`}><SiReact
         setLayout("algocoding-layout");
       }}
        className={`hover:bg-muted cursor-pointer w-full text-start text-[13px] rounded-lg text-muted-foreground py-2 px-2 flex items-center gap-2
-${layout === "algocoding-layout" && "bg-muted text-primary-foreground"}`}><Brain width={16} height={16}/> Algorithms</button>
+${layout === "algocoding-layout" && "bg-muted text-secondary-foreground"}`}><Brain width={16} height={16}/> Algorithms</button>
   </div>
   <div className=''>
       <button onClick={()=>{
@@ -96,7 +96,7 @@ ${layout === "algocoding-layout" && "bg-muted text-primary-foreground"}`}><Brain
         setLayout("jscoding-layout");
       }}
        className={`hover:bg-muted cursor-pointer w-full text-start text-[13px] rounded-lg text-muted-foreground py-2 px-2 flex items-center gap-2
-${layout === "jscoding-layout" && "bg-muted text-primary-foreground"}`}><AiOutlineJavaScript width={16} height={16}/> Javascript questions</button>
+${layout === "jscoding-layout" && "bg-muted text-secondary-foreground"}`}><AiOutlineJavaScript width={16} height={16}/> Javascript questions</button>
   </div>
 </div>
 

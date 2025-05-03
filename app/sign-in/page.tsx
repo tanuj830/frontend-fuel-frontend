@@ -11,6 +11,7 @@ import React, { useEffect } from 'react'
 import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { useTheme } from 'next-themes';
+import Navbar from '@/components/Navbar';
 
 
 
@@ -19,6 +20,8 @@ const page = () => {
   const {theme, setTheme} = useTheme()
 
   return (
+        <>
+        <Navbar/>
     <div className='flex justify-center items-center min-h-[80vh]'>
           
       <div className='w-full lg:w-[40vw] min-h-[40vh] p-6'>
@@ -41,6 +44,7 @@ const page = () => {
       />
     </div>
     </div>
+    </>
   )
 }
 

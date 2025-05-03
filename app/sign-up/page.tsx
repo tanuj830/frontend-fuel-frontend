@@ -1,4 +1,5 @@
 "use client";
+import Navbar from '@/components/Navbar';
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { supabase } from '@/lib/supabaseClient';
@@ -41,6 +42,8 @@ const page = () => {
     setUser({...user, [name]: value})
   }
   return (
+    <>
+    <Navbar/>
     <div className='flex justify-center items-center min-h-[80vh]'>
       <form className='w-full lg:w-[40vw] p-6 min-h-[40vh]' onSubmit={createAccount}>
         <div className='flex flex-col items-center gap-4 lg:gap-6'>
@@ -59,13 +62,13 @@ const page = () => {
                     <div className='border-t w-full mt-2.5'/>
                 </div>
                 {
-          status === "failed" ? <div className='text-destructive text-xs text-start w-full'>{message}</div>
-          : status === "success" ? <div className='text-green-600 text-xs text-start w-full'>{message}</div> : null
-        }
+                  status === "failed" ? <div className='text-destructive text-xs text-start w-full'>{message}</div>
+                  : status === "success" ? <div className='text-green-600 text-xs text-start w-full'>{message}</div> : null
+                }
         {/* <div className='w-full'>
             <label className="text-sm" >* Username</label>
             <Input name='username' onChange={handleChange} placeholder='Ex: johndoe'/>
-        </div> */}
+            </div> */}
         <div className='w-full'>
             <label className="text-sm">* Email</label>
             <Input name='email' onChange={handleChange} placeholder='Ex: johndoe@gmail.com'/>
@@ -78,11 +81,12 @@ const page = () => {
         {
           status === "loading" ? 
           <Button disabled className={`w-full rounded-lg text-sm cursor-pointer`}>Sign Up</Button>
-        :  <Button className={`w-full rounded-lg text-sm `}>Sign Up</Button>
+          :  <Button className={`w-full rounded-lg text-sm `}>Sign Up</Button>
         }
         </div>
       </form>
     </div>
+        </>
   )
 }
 

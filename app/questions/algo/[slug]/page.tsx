@@ -2,6 +2,7 @@
 
 import AlgoCodingPage from '@/components/AlgoCodingPage';
 import Loader from '@/components/Loader';
+import Navbar from '@/components/Navbar';
 import { useUserSession } from '@/hooks/useUserSession';
 import { useParams, useRouter } from 'next/navigation';
 import React, { useEffect } from 'react';
@@ -22,6 +23,7 @@ const Page = () => {
 
   return (
     <div>
+      <Navbar/>
       <AlgoCodingPage params={params} />
     </div>
   );

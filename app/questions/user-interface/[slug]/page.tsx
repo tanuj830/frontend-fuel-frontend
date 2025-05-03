@@ -1,5 +1,6 @@
 "use client"
 
+import Navbar from '@/components/Navbar'
 import UICodingPage from '@/components/UICodingPage'
 import { supabase } from '@/lib/supabaseClient'
 import { useParams } from 'next/navigation'
@@ -8,7 +9,7 @@ import React from 'react'
 
 const page = () => {
   const params = useParams()
-
+if(!params)return null
   
   const router = useRouter()
 
@@ -24,6 +25,7 @@ const page = () => {
   }, []);
   return (
     <div>
+      <Navbar/>
       <UICodingPage params={params}/>
     </div>
   )

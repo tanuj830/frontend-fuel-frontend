@@ -1,0 +1,10 @@
+{
+    "redirects": [
+      {
+        "source": "https://greatreact.com/:path*",
+        "destination": "https://www.greatreact.com/:path*",
+        "permanent": true
+      }
+    ]
+  }
+  

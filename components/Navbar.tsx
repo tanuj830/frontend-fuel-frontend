@@ -10,6 +10,7 @@ import Prepare from './Prepare';
 import Products from './Products';
 import UserProfile from './UserProfile';
 import NavbarSheet from './HamburgerMenu';
+import GetfullAccess from './GetfullAccess';
 
 const Navbar = ({layout, setLayout}:any) => {
   const [showAddBar, setShowAddBar] = React.useState(true)
@@ -51,7 +52,7 @@ const Navbar = ({layout, setLayout}:any) => {
 
 
 <div className='flex items-center gap-3'>
-  <button className='rounded-full bg-primary text-primary-foreground text-xs py-2 px-3 text-nowrap font-semibold cursor-pointer'>Get full access</button>
+  <GetfullAccess/>
       <NavbarSheet layout={layout} setLayout={setLayout}/>
 </div>
 </div>
@@ -88,8 +89,8 @@ const Navbar = ({layout, setLayout}:any) => {
   
 
   <ModeToggle  />
-  <button className='rounded-full bg-primary text-primary-foreground text-xs py-2 px-3 font-semibold cursor-pointer'>Get full access</button>
-  <UserProfile/>
+  <GetfullAccess/>
+    <UserProfile/>
 </div>
 </div>
     </nav>

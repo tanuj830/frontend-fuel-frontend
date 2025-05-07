@@ -13,6 +13,7 @@ import AnimatedHeading from './AnimatedHeading';
 import { useQuestion } from '@/hooks/useQuestion';
 import { supabase } from '@/lib/supabaseClient';
 import Navbar from './Navbar';
+import CheckoutButton from './payments/CheckoutButton';
 
 const Home = () => {
   const [questions, setQuestions] = React.useState<any[]>([]);
@@ -67,7 +68,6 @@ const Home = () => {
         </div>
       </div>
       <div className='mt-10'>
-
             <QuestionHomeDashboard/>
       </div>
     </div>

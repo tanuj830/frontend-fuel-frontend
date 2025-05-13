@@ -24,10 +24,6 @@ export const metadata: Metadata = {
 
 export default function ProfileLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-    <body
-      className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-    >
         <main className="">
           <Navbar/>
           <div className='flex  justify-center w-full'>
@@ -42,7 +38,5 @@ export default function ProfileLayout({ children }: { children: ReactNode }) {
             </div>
           </div>
           </main>
-      </body>
-    </html>
   )
 }

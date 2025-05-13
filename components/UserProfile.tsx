@@ -51,7 +51,7 @@ user &&<div>
         <h6 className='text-sm font-semibold capitalize'>{user  && user.email}</h6>
         </div>
         <div className='flex flex-col transition-all duration-2000 pt-2'>
-            <Link href="/settings" className=' hover:bg-muted py-1 px-2 rounded-lg text-muted-foreground text-sm'>Settings</Link>
+            <Link href="/profile" className=' hover:bg-muted py-1 px-2 rounded-lg text-muted-foreground text-sm'>Settings</Link>
             {
             user ?
               <button className='cursor-pointer hover:bg-muted py-1 px-2 rounded-lg text-muted-foreground text-sm text-start' onClick={logout}>Sign out</button>

@@ -11,7 +11,7 @@ const DisplayTags = ({ question }: any) => {
 
           return (
             <span className={`flex items-center gap-1 ${colorClass}`} key={tag}>
-              {Icon && <Icon className="w-4 h-4" />}
+              {Icon && <Icon className="w-5 h-5 rounded-md" />}
             </span>
           );
         })}

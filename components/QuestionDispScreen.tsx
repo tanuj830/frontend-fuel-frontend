@@ -105,14 +105,14 @@ const QuestionDispScreen = ({ question, submitClicked }: any) => {
                     </div>
                         <DisplayTags question={question}/>
                     <div className='flex items-center gap-1'>
-                        <Flame width={18} height={18} />
+                        <Flame width={15} height={15} />
                         <span className={`capitalize font-semibold ${question?.difficulty === "easy" ? "text-green-600" : question?.difficulty === "medium" ? "text-yellow-600" : "text-red-600"}`}>
                             {question?.difficulty ? <>{question?.difficulty}</>: <>hard</>}
                         </span>
                     </div>
 
                     <div className='flex items-center gap-1'>
-                        <Clock3 width={19} height={19} />
+                        <Clock3 width={15} height={15} />
                         <span className='text-muted-foreground text-xs'>{question?.duration ? <>{question?.duration}</>: <>0</>} mins</span>
                     </div>
                 </div>

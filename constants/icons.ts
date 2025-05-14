@@ -10,10 +10,10 @@ export const tagIconMap:any = {
 };
 
 export const tagColorMap:any = {
-    javascript: "text-lg text-yellow-500",
-    css: "text-lg text-blue-500",
-    react: "text-lg text-cyan-500",
-    html: "text-lg text-orange-500",
+    javascript: "text-lg text-yellow-400",
+    css: "text-lg text-blue-400",
+    react: "text-lg text-cyan-400",
+    html: "text-lg text-orange-400",
     code: "text-lg dark:text-white text-black",
 
   };

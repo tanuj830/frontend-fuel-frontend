@@ -22,7 +22,7 @@ const Page = () => {
   if (loading || !user) return <Loader />;
 
   return (
-    <div>
+    <div className=''>
       <Navbar/>
       <AlgoCodingPage params={params} />
     </div>

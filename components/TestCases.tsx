@@ -1,3 +1,4 @@
+"use client";
 import React, { useEffect } from 'react'
 import { Button } from './ui/button'
 import { Ban, Captions, Check, CircleCheck, Cross, EyeOff, FlaskConical, Flower, Play, TestTube, X } from 'lucide-react'
@@ -16,15 +17,14 @@ const CodeEvaluate = ({renderingInHomepage,disableTestcaseHeight, question, code
   const [response, setResponse] = React.useState([])// response for all testcases 
   const [showXpCard, setShowXpCard] = React.useState(false);
   const [pastSolution, setPastSolution] = React.useState({} as any);
-
-  const getCurrentUser = async () => {
-    const { user, loading } = useUserSession();
-    if (loading) return <Loader/>;
-  console.log(user, "usa")
-    return user;
-  };
+  const [user, setUser] = React.useState({} as any);
+  const { user: sessionUser, loading }:any = useUserSession();
   
-  const user:any = getCurrentUser();
+  useEffect(() => {
+    if (!loading && sessionUser) {
+      setUser(sessionUser);
+    }
+  }, [sessionUser, loading]);
 
   const handleTestCode = () => {
     if(!disableTestcaseHeight)
@@ -35,58 +35,68 @@ setTestCaseWindowHeight(50)
       code,
       testCases: [question?.test_cases[0]]
     }
-    axios.post("http://localhost:8000/run/js", data).then(res=>{setResponseT(res.data.results); res.data.results[0].passed == true ? setTestCaseClicked("passed"): setTestCaseClicked("failed")}).catch(err=>console.log(err))
-    // axios.post("https://codeexecutor.onrender.com/run", data).then(res=>{setResponseT(res.data.results); res.data.results[0].passed == true ? setTestCaseClicked("passed"): setTestCaseClicked("failed")}).catch(err=>console.log(err))
+    axios.post("https://codeexecutor.onrender.com/run", data).then(res=>{setResponseT(res.data.results); res.data.results[0].passed == true ? setTestCaseClicked("passed"): setTestCaseClicked("failed")}).catch(err=>console.log(err))
 
   }
 
-  const handleSubmit = () => {
-    if(!disableTestcaseHeight)
-    setTestCaseWindowHeight(50)
-    setWindow("Submit")
-    setSubmitClicked("loading")
+
+  const handleSubmit = async () => {
+    if (!disableTestcaseHeight) setTestCaseWindowHeight(50);
+    setWindow("Submit");
+    setSubmitClicked("loading");
+  
     const data = {
       code,
-      testCases: question.test_cases
-    }
-
-    // axios.post("http://localhost:8000/run", data).then(res=>{
-    axios.post("https://codeexecutor.onrender.com/run", data).then(res=>{
-      res.data.results?.length > 0 ? setSubmitClicked("showResults"): setSubmitClicked("failed")
-      setResponse(res.data.results)
-      let allCasesPassed = true
-      res.data.results.map((res:any)=>{if(res.passed == false) allCasesPassed = false})
-        if(allCasesPassed){
-
-          if(user){
-
-            const { data, error }:any = supabase
-            .from('submissions')
-            .insert([
-              {
-                user_id: user?.id,
-                question_id: question?.id,
-                code,
-                is_correct: true,
-                runtime: 0.234,
-                memory: 15.2
-              }
-            ])
-        
-          if (error) {
-            console.error('Insert error:', error)
-          } else {
-            console.log('Submission inserted:', data)
-            setShowXpCard(true)
-          }
-
-            
+      testCases: question.test_cases,
+    };
+  
+    try {
+      const res = await axios.post("https://codeexecutor.onrender.com/run", data);
+      const results = res.data.results;
+      setResponse(results);
+  
+      if (results?.length > 0) {
+        setSubmitClicked("showResults");
+      } else {
+        setSubmitClicked("failed");
       }
+  
+      let allCasesPassed = true;
+      results.forEach((res: any) => {
+        if (res.passed === false) allCasesPassed = false;
+      });
+  
+      if (allCasesPassed && user) {
+        const { data: insertData, error } = await supabase.from("submissions")
+        .upsert(
+          [
+            {
+              user_id: user.id,
+              question_id: question?.id,
+              code,
+              submitted_at: new Date().toISOString(),
+              is_correct: true,
+              runtime: 0.234, // Replace with real values if available
+              memory: 15.2,
+            },
+          ],
+          {
+            onConflict: ['user_id,question_id'] as any // Define fields to check for conflicts
+          }
+        );
+  
+        if (error) {
+          console.error("Insert error:", error);
+        } else {
+          console.log("Submission inserted:", insertData);
+          setShowXpCard(true);
+        }
+      }
+    } catch (err) {
+      console.log("Submission error:", err);
     }
-  }
-    ).catch(err=>console.log(err))
+  };
 
-  }
 
   const handleCompleted = () => {
     const request = {

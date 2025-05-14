@@ -125,15 +125,34 @@ background: #000;
   }
 }
 
+#disp{
+  @apply text-muted-foreground text-sm
+}
+#disp h6{
+  @apply text-black dark:text-white text-lg font-semibold mt-6 py-2
+}
+
+.exampleCode{
+  @apply  rounded-xl overflow-auto  text-xs font-medium bg-[#282A36]
+}
+
+
 #disp pre{
-  @apply bg-muted text-muted-foreground rounded-xl p-3 my-3 overflow-auto
+  @apply  text-primary-foreground rounded-xl p-5 my-3 overflow-auto  text-xs bg-[#282A36]
+}
+#disp img{
+  @apply  rounded-xl
 }
 
 #disp p{
-  @apply py-1 text-card-foreground leading-7 
+  @apply py-1 text-black/65 dark:text-muted-foreground leading-6
 }
 #disp ul{
-  @apply py-1 text-card-foreground leading-7
+  list-style-type: disc;
+  @apply py-1 text-muted-foreground leading-6
+}
+#disp li{
+  margin-left: 20px;
 }
 #disp div{
   @apply py-5

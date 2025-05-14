@@ -1,18 +1,48 @@
-import { BASE_URL } from '@/lib/utils'
+import { BASE_URL, copyToClipboard } from '@/lib/utils'
 import axios from 'axios'
-import { Captions, Clock3, Flame, Lightbulb, NotebookText } from 'lucide-react'
+import { Captions, Clock3, Copy, Flame, Lightbulb, NotebookText } from 'lucide-react'
 import React, { useEffect } from 'react'
 import SubmissonTable from './SubmissonTable'
 import { Badge } from './ui/badge'
 import { useCategories } from '@/hooks/useCategories'
 import DisplayTags from './DisplayTags'
+import { supabase } from '@/lib/supabaseClient'
+import { useUserSession } from '@/hooks/useUserSession'
 
 const QuestionDispScreen = ({ question, submitClicked }: any) => {
     const [window, setWindow] = React.useState(() =>  "description");
     // const [window, setWindow] = React.useState("description");
-    const [submissions, setSubmissions] = React.useState<any>([]);
+    const [submissions, setSubmissions] = React.useState<any>({});
     
     const {categories, loading} = useCategories()
+
+    const [user, setUser] = React.useState({} as any);
+    const { user: sessionUser, loading:loadingUser }:any = useUserSession();
+    const [copied, setCopied] = React.useState(false)
+
+  const handleCopy = (code:string) => {
+    setCopied(true)
+    copyToClipboard(code)
+    setTimeout(()=>{setCopied(false)}, 3000)
+  }
+
+
+  useEffect(() => {
+    if (!loading && sessionUser) {
+      setUser(sessionUser);
+    }
+  }, [sessionUser, loading]);
+
+    useEffect(() => {
+        const fetchSubmissions = async () => {
+          if (user?.id && question?.id) {
+            const submissions = await getSubmissionsByUserAndQuestion(user.id, question.id);
+            setSubmissions(submissions[0]); // Set latest submission or empty object
+          }
+        };
+      
+        fetchSubmissions();
+      }, [user?.id, question?.id, submitClicked]);
 
     React.useEffect(() => {
         const storedWindow = localStorage.getItem("window");
@@ -90,13 +120,28 @@ const QuestionDispScreen = ({ question, submitClicked }: any) => {
 
             {
                 window === "description" ? (
-                    <div className='text-secondary-foreground' id='disp' dangerouslySetInnerHTML={{ __html: question?.text }} />
+                    <div className='text-secondary-foreground' id='disp' dangerouslySetInnerHTML={{ __html: question?.description }} />
                 ) : window === "solution" ? (
-                    <div className='text-secondary-foreground' id='disp' dangerouslySetInnerHTML={{ __html: question?.solution_code }} />
+                    <div className='relative'>
+                     {
+            copied && <span className='absolute -top-5 right-2 text-xs bg-primary text-primary-foreground px-3 py-1 rounded-full'>Copied</span>
+          }
+          <button className='absolute top-5 right-5  hover:text-muted-foreground/50 cursor-pointer' onClick={()=>handleCopy(question?.solution_code)}>
+              <Copy width={15} height={15}/>
+          </button>
+          <div id='disp'>
+
+                    <pre>
+                        <code>
+                            {question?.solution_code}
+                        </code>
+                    </pre>
+          </div>
+                    </div>
                 ) : (
-                    <div className='flex p-5 bg-muted min-w-[46vw] h-[50vh]'>
+                    <div className='flex  bg-mute min-w-[46vw] h-[50vh]'>
                         {
-                            submissions?.length > 0 ? (
+                            submissions != undefined ? (
                                 <SubmissonTable question={question} submissons={submissions} />
                             ) : (
                                 <div className='flex flex-col justify-center items-center w-full text-muted-foreground text-center'>
@@ -112,21 +157,23 @@ const QuestionDispScreen = ({ question, submitClicked }: any) => {
     );
 
 
+   
     
-
-    // function fetchSubmisson (){
-    //     const savedUser = localStorage.getItem("user");
-
-    //     if (savedUser) {
-    //         const userData = JSON.parse(savedUser);
-    //         setUser(userData); // Store user data in state
-
-    //         // Fetch submissions based on user id
-    //         axios.post(`${BASE_URL}/api/questions/submissons/${userData.id}`, question)
-    //             .then(res => setSubmissions(res.data))
-    //             .catch(err => console.log(err));
-    //     }
-    // }
 };
 
+const getSubmissionsByUserAndQuestion = async (userId: string, questionId: string) => {
+    const { data, error } = await supabase
+      .from('submissions')
+      .select('*')
+      .eq('user_id', userId)
+      .eq('question_id', questionId)
+    //   .order('created_at', { ascending: false }); // Optional: Get latest submissions first
+  
+    if (error) {
+      console.error('Error fetching submissions:', error);
+      return [];
+    }
+  
+    return data;
+  };
 export default QuestionDispScreen;

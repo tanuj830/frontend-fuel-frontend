@@ -17,6 +17,18 @@ const difficultyOrder:any = {
 };
 
 
+// utils/copyToClipboard.ts
+export const copyToClipboard = async (text: string) => {
+  try {
+    await navigator.clipboard.writeText(text);
+    console.log("Copied to clipboard:", text);
+  } catch (err) {
+    console.error("Failed to copy:", err);
+  }
+};
+
+
+
 export const sortByEasyToHard = (questions:any, filteredQuestions:any, setFilteredQuestions:any) => {
   const listToSort = filteredQuestions?.length > 0 ? [...filteredQuestions] : [...questions];
   const sorted = listToSort.sort((a: any, b: any) => difficultyOrder[a.difficulty] - difficultyOrder[b.difficulty]);

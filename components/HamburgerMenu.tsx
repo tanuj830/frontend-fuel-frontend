@@ -130,15 +130,14 @@ ${layout === "jscoding-layout" && "bg-muted text-secondary-foreground"}`}><AiOut
                       <div className='flex items-center gap-3  '>
 
                         <Avatar>
-                          <AvatarImage src="https://github.com/shadcn.png" />
-                          <AvatarFallback className='uppercase pl-3 '>{supabaseUser.email && supabaseUser?.email.slice(0, 2)}</AvatarFallback>
+                          <AvatarImage src={supabaseUser?.user_metadata?.avatar_url} />
+                          <AvatarFallback className='uppercase pl-3 '>{supabaseUser?.user_metadata?.full_name && supabaseUser?.user_metadata?.full_name.slice(0, 2)}</AvatarFallback>
                         </Avatar>
-                        <span className='capitalize'>{supabaseUser?.email}</span>
+                        <span className='capitalize'>{supabaseUser?.user_metadata?.full_name}</span>
                       </div>
                       <span><ChevronRight /></span>
 
                     </Link> 
-s
                     {/* <button onClick={logout} className='cursor-pointer w-full border-b  text-start px-3 py-3'>Sign out</button> */}
                     </>:
                     <div className='w-full flex'>

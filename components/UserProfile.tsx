@@ -24,7 +24,7 @@ const UserProfile = () => {
       if(error)return <small>Something went wrong...</small>
       router.push("/sign-in")
     }
-
+console.log(user, "usersex")
   return (
 user &&<div>
 
@@ -48,7 +48,7 @@ user &&<div>
     <div className='p-1'>
         <div className='pb-3 border-b'>
 
-        <h6 className='text-sm font-semibold capitalize'>{user  && user.email}</h6>
+        <h6 className='text-sm font-semibold capitalize'>{user  && user.user_metadata.full_name}</h6>
         </div>
         <div className='flex flex-col transition-all duration-2000 pt-2'>
             <Link href="/profile" className=' hover:bg-muted py-1 px-2 rounded-lg text-muted-foreground text-sm'>Settings</Link>

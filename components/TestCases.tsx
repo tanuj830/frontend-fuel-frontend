@@ -137,8 +137,8 @@ setTestCaseWindowHeight(50)
                                 <Check className='text-green-600 font-extrabold' width={14} height={14}/>
                                : <X className='text-red-500 font-extrabold' width={14} height={14}/>
                               }
-                              <span className='flex items-center gap-2'>
-                                <span className=''>{question.title}</span> <small>{'>'}</small> Testcase {testCaseNumber+1} <small>{'>'}</small> <span>{res.passed ? <span className='text-green-600'>Passed</span> : <span className='text-red-500'>Failed</span>}</span>
+                              <span className='flex items-center gap-2 text-nowrap'>
+                                <span className='text-nowrap'>{question.title}</span> <small>{'>'}</small> Testcase {testCaseNumber+1} <small>{'>'}</small> <span>{res.passed ? <span className='text-green-600'>Passed</span> : <span className='text-red-500'>Failed</span>}</span>
                               </span>
                             </div>
                           )): testCaseClicked === "loading" ? 
@@ -196,8 +196,8 @@ setTestCaseWindowHeight(50)
                                 <Check className='text-green-600 font-extrabold' width={14} height={14}/>
                                : <X className='text-red-500 font-extrabold' width={14} height={14}/>
                               }
-                              <span className='flex items-center gap-2'>
-                                <span className=''>{question.title}</span> <small>{'>'}</small> Testcase {testCaseNumber+1} <small>{'>'}</small> <span>{res.passed ? <span className='text-green-600'>Passed</span> : <span className='text-red-500'>Failed</span>}</span>
+                              <span className='flex items-center gap-2 text-nowrap'>
+                                <span className='text-nowrap'>{question.title}</span> <small>{'>'}</small> Testcase {testCaseNumber+1} <small>{'>'}</small> <span>{res.passed ? <span className='text-green-600'>Passed</span> : <span className='text-red-500'>Failed</span>}</span>
                               </span>
                             </div>
                           ))

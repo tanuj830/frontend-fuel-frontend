@@ -468,8 +468,8 @@ ReactDOM.render(
       import React from 'react';
       import useTailwindCDN from './useTailwindCDN';
       export default function App() {
-      useTailwindCDN();
-  return <h1 className="title">Hello from App.js</h1>;
+        useTailwindCDN();
+        return <h1 className="title">Hello from App.js</h1>;
 }`;
     }
     return ` import React from 'react';

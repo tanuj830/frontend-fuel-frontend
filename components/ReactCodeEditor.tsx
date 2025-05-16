@@ -419,7 +419,6 @@ export default function ReactIDE() {
       return parsed["/public/index.html"].code || `<!DOCTYPE html>
 <html lang="en">
   <head><meta charset="UTF-8" /><title>React IDE</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet">
   </head>
   <body><div id="root"></div></body>
 </html>`;
@@ -427,7 +426,6 @@ export default function ReactIDE() {
     return `<!DOCTYPE html>
 <html lang="en">
   <head><meta charset="UTF-8" /><title>React IDE</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet">
   </head>
   <body><div id="root"></div></body>
 </html>`;
@@ -466,11 +464,16 @@ ReactDOM.render(
     const stored = localStorage.getItem("files");
     if (stored) {
       const parsed = JSON.parse(stored);
-      return parsed["/src/App.js"].code || `export default function App() {
+      return parsed["/src/App.js"].code || `
+      import useTailwindCDN from './useTailwindCDN';
+      export default function App() {
+      useTailwindCDN();
   return <h1 className="title">Hello from App.js</h1>;
 }`;
     }
-    return `export default function App() {
+    return ` import useTailwindCDN from './useTailwindCDN';
+      export default function App() {
+      useTailwindCDN();
   return <h1 className="title">Hello from App.js</h1>;
 }`;
   });
@@ -634,7 +637,7 @@ function getParameters(files:any) {
                 </div>
 
                 <div className="flex-grow flex h-full">
-                  <div className="flex-grow h-full ">
+                  <div className="flex-grow w-full h-full ">
                     {showFileExplorer ? (
                       <CustomFileExplorer setFile={setActiveFile} setShowFileExplorer={setShowFileExplorer} />
                     ) : (

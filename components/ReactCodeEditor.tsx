@@ -597,7 +597,7 @@ function getParameters(files:any) {
         "/src/App.js": { code: app, active: true },
         "/src/style.css": { code: style },
         "/package.json": { code: packageJson },
-        "/useTailwindCDN.js.js": { code: useTailwindCDN },
+        "/useTailwindCDN.js": { code: useTailwindCDN },
       }}
     >
       <SandpackLayout style={{ backgroundColor: "transparent", border: "none" }}>

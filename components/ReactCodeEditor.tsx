@@ -465,13 +465,15 @@ ReactDOM.render(
     if (stored) {
       const parsed = JSON.parse(stored);
       return parsed["/src/App.js"].code || `
+      import React from 'react';
       import useTailwindCDN from './useTailwindCDN';
       export default function App() {
       useTailwindCDN();
   return <h1 className="title">Hello from App.js</h1>;
 }`;
     }
-    return ` import useTailwindCDN from './useTailwindCDN';
+    return ` import React from 'react';
+    import useTailwindCDN from './useTailwindCDN';
       export default function App() {
       useTailwindCDN();
   return <h1 className="title">Hello from App.js</h1>;
@@ -514,6 +516,41 @@ ReactDOM.render(
     "react-dom": "^18.2.0"
   }
 }`;
+  });
+ 
+  const [useTailwindCDN, setUseTailwindCDN] = React.useState<string>(() => {
+    const stored = localStorage.getItem("files");
+    if (stored) {
+      const parsed = JSON.parse(stored);
+      return parsed["/useTailwindCDN.js"].code || `import { useEffect } from 'react';
+
+export default function useTailwindCDN() {
+  useEffect(() => {
+    if (!document.getElementById('tailwind-cdn')) {
+      const script = document.createElement('script');
+      script.id = 'tailwind-cdn';
+      script.src = 'https://cdn.tailwindcss.com';
+      script.async = true;
+      document.head.appendChild(script);
+    }
+  }, []);
+}
+`;
+    }
+    return `import { useEffect } from 'react';
+
+export default function useTailwindCDN() {
+  useEffect(() => {
+    if (!document.getElementById('tailwind-cdn')) {
+      const script = document.createElement('script');
+      script.id = 'tailwind-cdn';
+      script.src = 'https://cdn.tailwindcss.com';
+      script.async = true;
+      document.head.appendChild(script);
+    }
+  }, []);
+}
+`;
   });
 
   useEffect(() => setMode(theme), [theme]);

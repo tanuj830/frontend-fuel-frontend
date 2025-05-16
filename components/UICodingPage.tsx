@@ -23,7 +23,7 @@ const UICodingPage = ({ params }: any) => {
         <QuestionDispScreen question={question} />
       </div>
       <div className='min-h-[50vh]'>
-        <ReactCodeEditor  />
+        <ReactCodeEditor  question={question}/>
       </div>
     </div>
     {/* pc view */}
@@ -36,7 +36,7 @@ const UICodingPage = ({ params }: any) => {
         </ResizablePanel>
         <ResizableHandle className='hover:bg-primary' />
         <ResizablePanel defaultSize={70} className='rounded-2xl h-full '>
-          <ReactCodeEditor />
+          <ReactCodeEditor question={question} />
         </ResizablePanel>
       </ResizablePanelGroup>
     </div>

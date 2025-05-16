@@ -1,6 +1,6 @@
-import { BASE_URL } from '@/lib/utils'
+import { BASE_URL, copyToClipboard } from '@/lib/utils'
 import axios from 'axios'
-import { Captions, Clock3, Flame, Lightbulb, NotebookText } from 'lucide-react'
+import { Captions, Clock3, Copy, Flame, Lightbulb, NotebookText } from 'lucide-react'
 import React, { useEffect } from 'react'
 import SubmissonTable from './SubmissonTable'
 import { Badge } from './ui/badge'
@@ -11,7 +11,15 @@ const ReactQuestionDispScreen = ({ question, submitClicked }: any) => {
     const [window, setWindow] = React.useState(() => localStorage.getItem("window") || "description");
     // const [user, setUser] = React.useState<any>(null);
     const [submissions, setSubmissions] = React.useState<any>([]);
-    
+    const [copied, setCopied] = React.useState(false)
+
+    const handleCopy = (code:string) => {
+      setCopied(true)
+      copyToClipboard(code)
+      setTimeout(()=>{setCopied(false)}, 3000)
+    }
+
+
     const {categories, loading} = useCategories()
 
     // Effect to fetch user data from localStorage and then fetch submissions
@@ -92,7 +100,22 @@ const ReactQuestionDispScreen = ({ question, submitClicked }: any) => {
                     <div className='' id='disp' dangerouslySetInnerHTML={{ __html: question?.description }} />
                     </>
                 ) : window === "solution" ? (
-                    <div className='' id='disp' dangerouslySetInnerHTML={{ __html: question?.solution_code }} />
+                    <div className='relative'>
+                    {
+           copied && <span className='absolute -top-5 right-2 text-xs bg-primary text-primary-foreground px-3 py-1 rounded-full'>Copied</span>
+         }
+         <button className='absolute top-5 right-5  hover:text-muted-foreground/50 cursor-pointer' onClick={()=>handleCopy(question?.solution_code)}>
+             <Copy width={15} height={15}/>
+         </button>
+         <div id='disp'>
+
+                   <pre>
+                       <code>
+                           {question?.solution_code}
+                       </code>
+                   </pre>
+         </div>
+                   </div>
                 ) : (
                     <div className='flex p-5 bg-muted  h-[50vh]'>
                         {

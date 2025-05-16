@@ -27,12 +27,12 @@ const FilterQuestions = ({questions}:any) => {
   return (
     <div className='sticky top-0 w-full'>
       <div className='w-full'>
-        <span className='font-medium'>Topics</span>
+        <span className='font-medium'>Topics Covered</span>
       <div className='flex flex-wrap gap-4 text-muted-foreground text-sm mt-3'>
             {
                 tags.map(tag=>(
                     <div key={tag} className='flex items-center gap-2 flex-row '>
-                        <input type='checkbox' className='h-4 w-4 appearance-none border rounded-lg border-muted-foreground/35 checked:bg-primary'/>
+                        {/* <input type='checkbox' className='h-4 w-4 appearance-none border rounded-lg border-muted-foreground/35 checked:bg-primary'/> */}
                         <span className='capitalize'>{tag}</span>
                     </div>
                 ))

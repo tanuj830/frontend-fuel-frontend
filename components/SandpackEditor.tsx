@@ -16,7 +16,7 @@ useEffect(()=>{setActiveFile(file)},[file])
   return (
 <>
 {/* mobile view */}
-<div className='inline-block lg:hidden h-full'>
+<div className='inline-block lg:hidden h-full w-full'>
 
  <SandpackCodeEditor
                     style={{ height: "100%", width:"92vw" , backgroundColor: "transparent"}}
@@ -25,7 +25,7 @@ useEffect(()=>{setActiveFile(file)},[file])
                     
                     />
                     </div>
-                    <div className='lg:inline-block hidden h-full w-full'>
+                    <div className='lg:inline-block hidden h-full w-full overflow-y-scroll overflow-x-scroll'>
       <SandpackCodeEditor
                     showTabs={true}
                     showLineNumbers

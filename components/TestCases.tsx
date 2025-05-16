@@ -35,8 +35,16 @@ setTestCaseWindowHeight(50)
       code,
       testCases: [question?.test_cases[0]]
     }
-    axios.post("https://codeexecutor.onrender.com/run", data).then(res=>{setResponseT(res.data.results); res.data.results[0].passed == true ? setTestCaseClicked("passed"): setTestCaseClicked("failed")}).catch(err=>console.log(err))
 
+    if(question.category_id === "52f876e3-de64-46d4-b9e3-91c83e12a518") {// algo coding  codeexecutor.onrender.com
+      axios.post("https://codeexecutor.onrender.com/run", data).then(res=>{setResponseT(res.data.results); res.data.results[0].passed == true ? setTestCaseClicked("passed"): setTestCaseClicked("failed")}).catch(err=>console.log(err))
+
+   }
+
+   else if(question.category_id === "2ba2cdee-70e8-42bb-8fdd-6a7bb04367a0"){ // js functions
+      axios.post("https://codeexecutor.onrender.com/run-js-function", data).then(res=>{setResponseT(res.data.results); res.data.results[0].passed == true ? setTestCaseClicked("passed"): setTestCaseClicked("failed")}).catch(err=>console.log(err))
+
+   }
   }
 
 
@@ -51,7 +59,17 @@ setTestCaseWindowHeight(50)
     };
   
     try {
-      const res = await axios.post("https://codeexecutor.onrender.com/run", data);
+      let res:any = undefined
+      console.log(question, "objectss")
+      
+      if(question.category_id === "52f876e3-de64-46d4-b9e3-91c83e12a518") {// algo coding  codeexecutor.onrender.com
+         res = await axios.post("https://codeexecutor.onrender.com/run", data);
+      }
+
+      else if(question.category_id === "2ba2cdee-70e8-42bb-8fdd-6a7bb04367a0"){ // js functions
+         res = await axios.post("https://codeexecutor.onrender.com/run-js-function", data);
+      }
+
       const results = res.data.results;
       setResponse(results);
   

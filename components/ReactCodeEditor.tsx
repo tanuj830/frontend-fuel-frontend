@@ -464,16 +464,15 @@ ReactDOM.render(
     const stored = localStorage.getItem("files");
     if (stored) {
       const parsed = JSON.parse(stored);
-      return parsed["/src/App.js"].code || `
-      import React from 'react';
-      import useTailwindCDN from './useTailwindCDN';
+      return parsed["/src/App.js"].code || `import React from 'react';
+      import useTailwindCDN from '../useTailwindCDN';
       export default function App() {
         useTailwindCDN();
         return <h1 className="title">Hello from App.js</h1>;
 }`;
     }
-    return ` import React from 'react';
-    import useTailwindCDN from './useTailwindCDN';
+    return `import React from 'react';
+    import useTailwindCDN from '../useTailwindCDN';
       export default function App() {
       useTailwindCDN();
   return <h1 className="title">Hello from App.js</h1>;

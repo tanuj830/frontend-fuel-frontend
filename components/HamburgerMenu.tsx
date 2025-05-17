@@ -52,7 +52,7 @@ useEffect(()=>{
             </SheetTitle>
 
           </SheetHeader>
-          <div className='flex flex-col justify-between h-full  pb-8'>
+          <div className='flex flex-col justify-between h-full  pb-4'>
             {/* header */}
             <div className='px-3 mt-2'>
               {/* <h6 className='text-muted-foreground text-xs'>Quick links</h6> */}
@@ -143,7 +143,7 @@ ${layout === "jscoding-layout" && "bg-muted text-secondary-foreground"}`}><AiOut
                     </>:
                     <div className='w-full flex'>
 
-                      <Link href="/sign-in" className='cursor-pointer w-fullbg-gradient-to-r from-muted to-[rgb(24, 24, 27)] border dark:border-muted   text-start px-3 py-3'>Sign in/up</Link>
+                      <Link href="/sign-in" className='cursor-pointer w-full bg-gradient-to-r from-muted to-[rgb(24, 24, 27)] border dark:border-muted text-start px-3 py-3'>Sign in/up</Link>
                     </div>
                 }
               </div>

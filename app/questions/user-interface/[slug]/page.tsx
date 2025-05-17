@@ -24,7 +24,7 @@ const page = () => {
     checkUser();
   }, []);
   return (
-    <div>
+    <div className='mt-20'>
       <Navbar/>
       <UICodingPage params={params}/>
     </div>

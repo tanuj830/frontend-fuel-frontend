@@ -85,7 +85,7 @@ export default function ReactIDE({question}:any) {
     const stored = localStorage.getItem("files");
     if (stored) {
       const parsed = JSON.parse(stored);
-      return parsed["/useTailwindCDN.js"].code || starterCode.useTailwindCDNJs;
+      return parsed["/useTailwindCDN.js"]?.code || starterCode.useTailwindCDNJs;
     }
     return starterCode.useTailwindCDNJs;
   });
@@ -184,10 +184,10 @@ function getParameters(files:any) {
         </div>
 
         {/* PC View */}
-        <div className="hidden lg:inline-block w-full"> 
+        <div className="hidden lg:inline-block w-full "> 
 
           <ResizablePanelGroup direction="horizontal">
-            <ResizablePanel defaultSize={65} className="w-full h-full rounded-2xl mr-1">
+            <ResizablePanel defaultSize={65} className="w-full h-full rounded-2xl mr-1  overflow-hidden border">
               <div className="h-[83vh] flex flex-col">
                 <div className="flex items-center pl-6 py-3 bg-popover gap-2">
                   {showFileExplorer ? (
@@ -214,7 +214,7 @@ function getParameters(files:any) {
                   )}
                 </div>
 
-                <div className="flex-grow flex h-full">
+                <div className="flex-grow flex h-full ">
                   <div className="flex-grow w-full h-full ">
                     {showFileExplorer ? (
                       <CustomFileExplorer setFile={setActiveFile} setShowFileExplorer={setShowFileExplorer} />
@@ -228,7 +228,7 @@ function getParameters(files:any) {
 
             <ResizableHandle className="hover:bg-primary" />
 
-            <ResizablePanel defaultSize={35} className="w-full h-full rounded-2xl ml-1 bg-muted/50">
+            <ResizablePanel defaultSize={35} className="w-full h-full rounded-2xl ml-1 bg-muted/50 border">
               <div className="h-[83vh] flex flex-col">
                 <div className="bg-popover px-4 pt-5 pb-1 pr-6 font-semibold flex items-center gap-6">
                   <button

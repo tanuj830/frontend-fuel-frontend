@@ -16,7 +16,7 @@ const UICodingPage = ({ params }: any) => {
   if (error || !question) return <div>Question not found</div>;
 
   return (
-    <div className='w-full  lg:p-6 bg-muted relative'>
+    <div className='w-full  lg:p-6 relative'>
     {/* mobile view */}
     <div className="flex flex-col  gap-5 lg:hidden ">
       <div>

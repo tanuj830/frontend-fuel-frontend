@@ -25,7 +25,7 @@ useEffect(()=>{setActiveFile(file)},[file])
                     
                     />
                     </div>
-                    <div className='lg:inline-block hidden h-full w-full overflow-y-scroll overflow-x-scroll'>
+                    <div className='lg:inline-block hidden h-full w-full overflow-y-scroll overflow-x-scroll' >
       <SandpackCodeEditor
                     showTabs={true}
                     showLineNumbers

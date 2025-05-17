@@ -29,6 +29,9 @@ const DisplayQuestions: React.FC<QuestionsPlaygroundProps> = ({ questions }) => 
   return (
     <div className="flex flex-col">
       {questions.map((question:any) => (
+        <div className='hover:bg-gradient-to-r from-orange-500 to-pink-600 p-[1.5px] rounded-lg' key={question.id}>
+
+
         <Link
           href={
             categories[question.category_id] === 'Algo coding' || categories[question.category_id] === 'JS functions'
@@ -38,7 +41,7 @@ const DisplayQuestions: React.FC<QuestionsPlaygroundProps> = ({ questions }) => 
               : '/questions/user-interface/#'
           }
           key={question.id}
-          className="w-full border flex items-center gap-3 lg:gap-5 p-3 lg:p-5 bg-muted rounded-lg hover:border hover:border-primary"
+          className="w-full border flex items-center gap-3 lg:gap-5 p-3 lg:p-5 bg-muted rounded-lg hover:border hover:border-"
         >
           <div>
             <button className="text-muted-foreground hover:text-green-600">
@@ -81,6 +84,7 @@ const DisplayQuestions: React.FC<QuestionsPlaygroundProps> = ({ questions }) => 
             </span>
           </div>
         </Link>
+          </div>
       ))}
     </div>
   );

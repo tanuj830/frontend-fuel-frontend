@@ -17,11 +17,11 @@ const Navbar = ({layout, setLayout}:any) => {
 
   
   return (
-    <nav>
+    <nav className='fixed top-0 w-screen h-20 dark:bg-background bg-white z-[100000]'>
       {
         showAddBar &&
 
-        <div className='text-[10px] lg:text-[12px] bg-primary text-primary-foreground p-1 text-center flex'>
+        <div className='text-[10px] lg:text-[12px] gradient text-primary-foreground p-1 text-center flex'>
           <div className='w-full'>
           Platform is in building phase, launching soon 🔥
           </div>
@@ -59,7 +59,7 @@ const Navbar = ({layout, setLayout}:any) => {
 
 
   {/* pc view */}
-  <div className='hidden lg:flex border-b  justify-between items-center gap-5 px-6 lg:px-10 py-2.5  text-sm '>
+  <div className='hidden lg:flex  border-b  justify-between items-center gap-5 px-6 lg:px-10 py-2.5  text-sm '>
 
 <div className='flex items-center gap-20'>
 

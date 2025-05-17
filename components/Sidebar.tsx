@@ -4,16 +4,19 @@ import {  usePathname } from 'next/navigation'
 import React, { useEffect } from 'react'
 import { Button } from './ui/button'
 import { DropdownMenu } from '@radix-ui/react-dropdown-menu'
-import { Brain, LayoutDashboard, ListChecks } from 'lucide-react'
+import { Brain, LayoutDashboard, ListChecks, LucideListCollapse } from 'lucide-react'
 import { SiJavascript, SiReact } from 'react-icons/si'
-import { AiOutlineJavaScript } from "react-icons/ai";
+import { AiOutlineJavaScript, AiOutlineNodeCollapse } from "react-icons/ai";
+import { FaInstagram, FaLinkedin } from 'react-icons/fa'
+import FeaturedItem from './FeaturedItem'
 
 
 const Sidebar = ({layout, setLayout}:any) => {
 
   return (
-    <div className='w-full sticky top-0 '>
-        <div className=''>
+    <div className=' fixed top-20 min-w-[20vw] max-w-[20vw] w-[20vw] h-screen'>
+        <div className=' h-full  w-full flex flex-col justify-between pb-20'>
+    <div>
 
 <div className=' flex flex-col gap-1 pt-5 pr-5 pl-5'>
   <div className=''>
@@ -37,8 +40,25 @@ ${layout === "algocoding-layout" && "bg-muted text-secondary-foreground"}`}><Bra
 ${layout === "jscoding-layout" && "bg-muted text-secondary-foreground"}`}><AiOutlineJavaScript width={16} height={16}/> Javascript questions</button>
   </div>
 </div>
+</div>
 
+
+{/* footer */}
+<div>
+<FeaturedItem/>
+  {/* social links */}
+  <div className='pr-2'>
+  <div className='border-t p-5 flex  items-center justify-between gap-2'>
+    <div className='flex  items-center gap-2'>
+
+        <Link href="https://www.linkedin.com/company/greatreact/about" target='_blank' className='border p-2 text-sm rounded-full'><FaLinkedin/></Link>
+        <Link href="https://www.instagram.com/greatreact?igsh=eGx2Y2lxdTFjMjRm&utm_source=qr" target='_blank' className='border p-2 text-sm rounded-full'><FaInstagram/></Link>
+    </div>
+        <Link href="#" className='border p-2 text-sm rounded-full'><AiOutlineNodeCollapse/></Link>
   </div>
+  </div>
+  </div>
+</div>
     </div>
   )
 }

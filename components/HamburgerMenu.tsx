@@ -8,7 +8,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
-import { ArrowRight, Brain, ChevronRight, LayoutDashboard, ListChecks, Menu, Moon, Sun, SunMoon } from 'lucide-react'
+import { ArrowRight, Brain, ChevronRight, Flame, LayoutDashboard, ListChecks, Menu, Moon, Sun, SunMoon } from 'lucide-react'
 import Logo from './Logo'
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
 import Link from 'next/link'
@@ -18,6 +18,7 @@ import { supabase } from '@/lib/supabaseClient'
 import { useRouter } from 'next/navigation'
 import { SiReact } from 'react-icons/si'
 import { AiOutlineJavaScript } from 'react-icons/ai'
+import FeaturedItem from './FeaturedItem'
 
 
 // hamburger component for mobile devices
@@ -105,7 +106,7 @@ ${layout === "jscoding-layout" && "bg-muted text-secondary-foreground"}`}><AiOut
 
             {/* footer */}
             <div>
-              {/* <img src="/discount.png" alt="" /> */}
+            <FeaturedItem/>
               <div className='py-4 px-5 bg-muted '>
 
                 {

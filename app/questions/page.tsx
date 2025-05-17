@@ -39,18 +39,21 @@ const Questions = () => {
         <>
           <Navbar  layout={layout} setLayout={setLayout}/>
         <div className='lg:flex'>
-            <div className='relative w-[25vw] min-h-[70vh] border-r hidden lg:inline-block'>
+            <div className='relative  min-w-[20vw] max-w-[20vw] w-[20vw] min-h-[70vh] border-r hidden lg:inline-block'>
             <Sidebar layout={layout} setLayout={setLayout}/>
             </div>
 
             {/* render layouts */}
+            <div className='mt-10'>
+
             {
-                layout === "questions-layout" ? <QuestionsLayout questions={questions}/> : 
-                layout === "dashboard-layout" ? <DashboardLayout questions={questions}/> : 
-                layout === "uicoding-layout" ? <UICodingLayout/> : 
-                layout === "algocoding-layout" ? <AlgoCodingLayout/> : 
-                layout === "jscoding-layout" ? <JSCodingLayout/> : null
+              layout === "questions-layout" ? <QuestionsLayout questions={questions}/> : 
+              layout === "dashboard-layout" ? <DashboardLayout questions={questions}/> : 
+              layout === "uicoding-layout" ? <UICodingLayout/> : 
+              layout === "algocoding-layout" ? <AlgoCodingLayout/> : 
+              layout === "jscoding-layout" ? <JSCodingLayout/> : null
             }
+            </div>
         </div>
             </>
     )

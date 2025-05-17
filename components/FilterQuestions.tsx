@@ -25,7 +25,7 @@ const FilterQuestions = ({questions}:any) => {
     }, [questions])
 
   return (
-    <div className='sticky top-0 w-full'>
+    <div className='sticky top-24 w-full'>
       <div className='w-full'>
         <span className='font-medium'>Topics Covered</span>
       <div className='flex flex-wrap gap-4 text-muted-foreground text-sm mt-3'>

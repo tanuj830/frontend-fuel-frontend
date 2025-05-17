@@ -116,6 +116,11 @@ background: #000;
   --radius-xl: calc(var(--radius) + 4px);
 }
 
+
+.gradient{
+  @apply bg-gradient-to-r from-orange-600 to-pink-500
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

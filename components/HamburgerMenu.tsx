@@ -107,23 +107,23 @@ ${layout === "jscoding-layout" && "bg-muted text-secondary-foreground"}`}><AiOut
             {/* footer */}
             <div>
             <FeaturedItem/>
-              <div className='py-4 px-5 bg-muted '>
+              <div className='py-3 px-5 bg-gradient-to-r from-muted to-[rgb(24, 24, 27)] border dark:border-muted text-xs'>
 
                 {
                   theme === "dark" ?
                     <button onClick={() => setTheme("light")} className='flex items-center justify-between w-full '>
                       <span>Light mode</span>
-                      <Sun />
+                      <Sun width={14} height={14}/>
                     </button>
                     :
 
                     <button onClick={() => setTheme("dark")} className='flex items-center justify-between w-full '>
                       <span>Dark mode</span>
-                      <Moon />
+                      <Moon width={14} height={14}/>
                     </button>
                 }
               </div>
-              <div className={`border-t  w-full ${supabaseUser ? "px-5 pt-4" : "px-0"}`}>
+              <div className={`border-t  w-full text-xs ${supabaseUser ? "px-5 pt-3" : "px-0"}`}>
                 {
                   supabaseUser ?
                     <>
@@ -143,7 +143,7 @@ ${layout === "jscoding-layout" && "bg-muted text-secondary-foreground"}`}><AiOut
                     </>:
                     <div className='w-full flex'>
 
-                      <Link href="/sign-in" className='cursor-pointer w-full border-b  text-start px-3 py-3'>Sign in/up</Link>
+                      <Link href="/sign-in" className='cursor-pointer w-fullbg-gradient-to-r from-muted to-[rgb(24, 24, 27)] border dark:border-muted   text-start px-3 py-3'>Sign in/up</Link>
                     </div>
                 }
               </div>

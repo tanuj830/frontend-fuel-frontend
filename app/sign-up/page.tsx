@@ -44,7 +44,7 @@ const page = () => {
   return (
     <>
     <Navbar/>
-    <div className='flex justify-center items-center min-h-[80vh]'>
+    <div className='flex justify-center items-center min-h-[80vh] mt-20'>
       <form className='w-full lg:w-[40vw] p-6 min-h-[40vh]' onSubmit={createAccount}>
         <div className='flex flex-col items-center gap-4 lg:gap-6'>
             <div>

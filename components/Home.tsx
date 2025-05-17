@@ -39,7 +39,7 @@ const Home = () => {
   return (
     <>
       <Navbar layout={layout} setLayout={setLayout}/>
-    <div className='p-6 mt-5'>
+    <div className='p-6 mt-20'>
       <div className='flex flex-col gap-8 lg:px-[10vw] lg:pt-10 lg:w-[60vw] transition-all ease-in duration-3000'>
         <div className='flex flex-col gap-3'>
           <div className='flex gap-3 items-center'>

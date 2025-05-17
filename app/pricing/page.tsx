@@ -8,11 +8,11 @@ const page = () => {
   return (
     <>
      <Navbar/>
-      <div className='px-6 lg:px-[10vw] pt-5 pb-20 lg:py-[10vh] flex flex-col gap-6'>
+      <div className='px-6 lg:px-[10vw] pt-5 pb-20 mt-20 lg:py-[10vh] flex flex-col gap-6'>
         <span className=' border text-xs w-fit py-1 px-3 rounded-full'>
         Purchasing power parity for India - 50% discount applied!
         </span>
-        <h1 className='text-4xl  lg:w-[40vw] font-semibold'>Streamline your preparation, excel in interviews, and land lucrative job opportunities.</h1>
+        <h1 className='text-2xl lg:text-4xl  lg:w-[40vw] font-semibold'>Streamline your preparation, excel in interviews, and land lucrative job opportunities.</h1>
         
         {/* pricing cards */}
         <div className='grid lg:grid-cols-3 grid-cols-1 gap-5'>

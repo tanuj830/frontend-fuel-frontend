@@ -22,7 +22,7 @@ const page = () => {
   return (
         <>
         <Navbar/>
-    <div className='flex justify-center items-center min-h-[80vh]'>
+    <div className='flex justify-center items-center min-h-[80vh] mt-20'>
           
       <div className='w-full lg:w-[40vw] min-h-[40vh] p-6'>
       <Auth

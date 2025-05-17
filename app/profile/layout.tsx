@@ -26,7 +26,7 @@ export default function ProfileLayout({ children }: { children: ReactNode }) {
   return (
         <main className="">
           <Navbar/>
-          <div className='flex  justify-center w-full'>
+          <div className='flex  justify-center w-full mt-20'>
             <div className='lg:w-[79vw] w-full flex flex-col lg:flex-row'>
               <div className='relative lg:w-[40%] border-r border-l'>
               <UserDetails/>

@@ -52,7 +52,7 @@ useEffect(()=>{
             </SheetTitle>
 
           </SheetHeader>
-          <div className='flex flex-col justify-between h-full  pb-4'>
+          <div className='flex flex-col justify-between h-full  pb-0.5'>
             {/* header */}
             <div className='px-3 mt-2'>
               {/* <h6 className='text-muted-foreground text-xs'>Quick links</h6> */}

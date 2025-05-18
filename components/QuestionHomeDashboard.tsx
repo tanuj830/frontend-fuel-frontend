@@ -81,7 +81,7 @@ React.useEffect(() => {
           overflow: 'hidden',
         }}
       >
-        <div className='border my-10 w-full h-[70vh] lg:h-[90vh] overflow-y-scroll relative rounded-xl'>
+        <div className='border my-10 w-full h-[70vh] lg:h-[80vh] overflow-y-scroll relative rounded-xl'>
           {/* Top bar */}
           <div className='flex items-center px-2 sticky top-0 py-2 dark:bg-black bg-white z-[100]'>
             <div className='w-fit flex items-center gap-1'>
@@ -90,7 +90,7 @@ React.useEffect(() => {
               <div className='w-4 h-4 rounded-full bg-muted' />
             </div>
             <div className='flex items-center justify-center w-full'>
-              <div className='bg-muted py-1 px-5 rounded-lg lg:w-[30vw] justify-center flex items-center text-xs gap-2'>
+              <div className='bg-muted py-1 px-5 rounded-lg w-[55vw] lg:w-[30vw] justify-center flex items-center text-xs gap-2'>
                 <Lock width={12} height={12} />
                 <span className='text-muted-foreground'>greatreact.com</span>
               </div>
@@ -101,8 +101,8 @@ React.useEffect(() => {
           {
             featuredQuestions && <div className="w-full">
             {
-              index === 0 ? <UICodingPage  params={{slug:featuredQuestions[index].id}}/> :
-            <AlgoCodingPage renderingInHomepage={true} params={{slug:featuredQuestions[index].id}} />
+              index === 0 ? <UICodingPage height={"[70vh]"}  params={{slug:featuredQuestions[index].id}}/> :
+            <AlgoCodingPage height={"[70vh]"} renderingInHomepage={true} params={{slug:featuredQuestions[index].id}} />
             }
           </div>
   

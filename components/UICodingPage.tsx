@@ -8,7 +8,7 @@ import ReactQuestionDispScreen from '@/components/ReactQuestionDispScreen';
 import { useQuestion } from '@/hooks/useQuestion';
 import Loader from './Loader';
 
-const UICodingPage = ({ params }: any) => {
+const UICodingPage = ({ height, params }: any) => {
   const { question, loading, error } = useQuestion(params.slug);
   const [submitClicked, setSubmitClicked] = useState("initial");
 
@@ -27,7 +27,7 @@ const UICodingPage = ({ params }: any) => {
       </div>
     </div>
     {/* pc view */}
-    <div className='hidden lg:inline-block w-[100%] '>
+    <div className={`hidden lg:inline-block w-[100%] ${height ? `h-${height}` : 'h-full'}`}>
       <ResizablePanelGroup
         direction="horizontal"
         className=" ">

@@ -10,7 +10,7 @@ import { BASE_URL } from '@/lib/utils';
 import { useQuestion } from '@/hooks/useQuestion';
 
 
-const AlgoCodingPage = ({renderingInHomepage, params}:any) => {
+const AlgoCodingPage = ({height, renderingInHomepage, params}:any) => {
 
 
   const [code, setCode] = React.useState("")
@@ -53,7 +53,7 @@ const AlgoCodingPage = ({renderingInHomepage, params}:any) => {
       </div>
 
 {/* pc view */}
-<div className='hidden lg:inline-block w-[100%] '>
+<div className={`hidden lg:inline-block w-[100%] ${height ? `h-${height}` : 'h-full'}`}>
 
       <ResizablePanelGroup
         direction="horizontal"

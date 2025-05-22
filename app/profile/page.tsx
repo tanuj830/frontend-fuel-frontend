@@ -12,6 +12,8 @@ const page = () => {
   const router = useRouter()
 
   return (
+    <>
+    
     <div className='h-[10000px] p-5'>
       <div className='flex items-center gap-2'>
         <button onClick={()=>setWindow("activity")} className={`px-3 py-2 text-xs text-muted-foreground ${window === "activity" && "bg-muted border rounded-lg dark:text-white text-secondary-foreground"}`}>Activity</button>
@@ -26,12 +28,13 @@ const page = () => {
         :window === "account" ? <Account/>
         :window === "security" ? <Security/>
         :window === "saved-code" ? <SavedCode/>
-        :window === "account" && <Account/>
+        : <Account/>
         
       }
       </div>
 
     </div>
+      </>
   )
 }
 

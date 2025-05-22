@@ -3,9 +3,9 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* body{
-background: #000;
-} */
+body{
+@apply overflow-x-hidden
+}
 :root {
   --radius: 0.3rem;
   --background: oklch(1 0 0);

@@ -51,7 +51,7 @@ const DisplayQuestions: React.FC<QuestionsPlaygroundProps> = ({ questions }) => 
           <div className="min-w-[73%] max-w-[73%] lg:min-w-[85%] lg:max-w-[85%]">
             <h6>{question.title}</h6>
             <p className="truncate text-muted-foreground text-sm pt-2 lg:py-3">
-              {htmlToText(question.text)}
+              {htmlToText(question.short_description)}
             </p>
             <div className="flex lg:items-center flex-col lg:flex-row text-xs text-muted-foreground gap-3 lg:gap-7 mt-2">
               <div className="flex items-center gap-7">

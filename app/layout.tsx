@@ -20,7 +20,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "GreatReact",
+  title: "GreatReact | Ace frontend interview",
   description: "Ace your next frontend interview",
 };
 

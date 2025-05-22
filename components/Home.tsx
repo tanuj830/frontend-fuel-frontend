@@ -42,9 +42,9 @@ const Home = () => {
     <div className='p-6 mt-20'>
       <div className='flex flex-col gap-8 lg:px-[10vw] lg:pt-10 lg:w-[60vw] transition-all ease-in duration-3000'>
         <div className='flex flex-col gap-3'>
-          <div className='flex gap-3 items-center'>
-            <span className='py-1 px-2 bg-primary text-xs rounded-md text-primary-foreground'>New</span>
-            <Link href="/questions" className='flex gap-1 items-center text-sm'>
+          <div className='flex gap-3 items-center bg-muted w-fit rounded-full px-2'>
+            <span className='py-0.5 px-2 bg-primary text-[10px] rounded-full text-primary-foreground'>New</span>
+            <Link href="/questions" className='flex gap-1 items-center text-xs'>
               <span>React questions</span> <ArrowRight width={15} />
             </Link>
           </div>
@@ -56,7 +56,7 @@ const Home = () => {
         <div className='w-fit flex flex-col gap-2'>
           <Link
             href="/questions"
-            className='bg-primary text-primary-foreground flex items-center py-2 px-5 rounded-lg text-sm gap-2'
+            className='bg-primary text-primary-foreground flex items-center py-2 px-5 rounded-full  font-semibold gap-2'
             >
             <span>Get started now</span><ArrowRight width={16} />
           </Link>

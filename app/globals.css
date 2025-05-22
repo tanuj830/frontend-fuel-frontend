@@ -43,7 +43,7 @@ background: #000;
 
 .dark {
   /* --background: oklch(0.141 0.005 285.823); */
-  --background: rgb(24, 24, 27);
+  --background: #18181B;
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.21 0.006 285.885);
   --card-foreground: oklch(0.985 0 0);
@@ -189,3 +189,16 @@ background: #000;
 .layouts{
   @apply hover:bg-muted cursor-pointer w-full text-start text-[13px] rounded-lg text-muted-foreground py-2 px-2 flex items-center gap-2
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

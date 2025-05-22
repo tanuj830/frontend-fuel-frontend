@@ -10,6 +10,7 @@ import AlgoCodingLayout from '@/components/layouts/AlgoCodingLayout';
 import UICodingLayout from '@/components/layouts/UICodingLayout';
 import DashboardLayout from '@/components/layouts/DashboardLayout';
 import Navbar from '@/components/Navbar';
+import CheatSheetLayout from '@/components/layouts/CheatsheetLayout';
 // import Sidebar from '@/components/Sidebar';
 
 
@@ -51,7 +52,8 @@ const Questions = () => {
               layout === "dashboard-layout" ? <DashboardLayout questions={questions}/> : 
               layout === "uicoding-layout" ? <UICodingLayout/> : 
               layout === "algocoding-layout" ? <AlgoCodingLayout/> : 
-              layout === "jscoding-layout" ? <JSCodingLayout/> : null
+              layout === "cheatsheet-layout" ? <CheatSheetLayout/>
+              : layout === "jscoding-layout" ? <JSCodingLayout/> : null
             }
             </div>
         </div>

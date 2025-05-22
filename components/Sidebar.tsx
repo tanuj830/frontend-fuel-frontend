@@ -4,7 +4,7 @@ import {  usePathname } from 'next/navigation'
 import React, { useEffect } from 'react'
 import { Button } from './ui/button'
 import { DropdownMenu } from '@radix-ui/react-dropdown-menu'
-import { Brain, LayoutDashboard, ListChecks, LucideListCollapse } from 'lucide-react'
+import { Brain, LayoutDashboard, ListChecks, LucideListCollapse, Sheet } from 'lucide-react'
 import { SiJavascript, SiReact } from 'react-icons/si'
 import { AiOutlineJavaScript, AiOutlineNodeCollapse } from "react-icons/ai";
 import { FaInstagram, FaLinkedin } from 'react-icons/fa'
@@ -22,6 +22,10 @@ const Sidebar = ({layout, setLayout}:any) => {
   <div className=''>
       <button onClick={()=>setLayout("dashboard-layout")} className={`hover:bg-muted cursor-pointer w-full text-start text-[13px] rounded-lg text-muted-foreground py-2 px-2 flex items-center gap-2
 ${layout === "dashboard-layout" && "bg-muted text-secondary-foreground"}`}><LayoutDashboard width={16} height={16}/> Dashboard</button>
+  </div>
+  <div className=''>
+      <button onClick={()=>setLayout("cheatsheet-layout")} className={`hover:bg-muted cursor-pointer w-full text-start text-[13px] rounded-lg text-muted-foreground py-2 px-2 flex items-center gap-2
+${layout === "cheatsheet-layout" && "bg-muted text-secondary-foreground"}`}><Sheet width={16} height={16}/> Cheatsheets</button>
   </div>
   <div className=''>
       <button onClick={()=>setLayout("questions-layout")} className={`hover:bg-muted cursor-pointer w-full text-start text-[13px] rounded-lg text-muted-foreground py-2 px-2 flex items-center gap-2

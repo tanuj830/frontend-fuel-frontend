@@ -56,7 +56,7 @@ const Home = () => {
         <div className='w-fit flex flex-col gap-2'>
           <Link
             href="/questions"
-            className='bg-primary text-primary-foreground flex items-center py-2 px-5 rounded-full  font-semibold gap-2'
+            className='gradient text-primary-foreground flex items-center py-2 px-5 rounded-full  font-semibold gap-2'
             >
             <span>Get started now</span><ArrowRight width={16} />
           </Link>

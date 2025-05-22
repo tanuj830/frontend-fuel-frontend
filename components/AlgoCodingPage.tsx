@@ -20,7 +20,11 @@ const AlgoCodingPage = ({height, renderingInHomepage, params}:any) => {
   const [submitClicked, setSubmitClicked] = React.useState("initial") // initial, loading, showResults, failed
   
   
+  const { question, loading, error } = useQuestion(params.slug);
+  useEffect(()=>{
+    if(error)alert("Something went wrong...")
 
+    },[params])
 
 
   useEffect(()=>{setTestCaseWindowHeight(0)}, [testCaseWindowHeight])

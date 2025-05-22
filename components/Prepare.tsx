@@ -46,9 +46,9 @@ const Prepare = () => {
                     The largest question bank for front end interviews to ace your next frontend interview
                     </div>
                     <div className='flex flex-wrap gap-2 items-center'>
-                      <span className='text-[9px] rounded-lg p-1 bg-primary text-primary-foreground'>User Interface coding</span>
-                      <span className='text-[9px] rounded-lg p-1 bg-primary text-primary-foreground'>Algorithm coding</span>
-                      <span className='text-[9px] rounded-lg p-1 bg-primary text-primary-foreground'>JavaScript functions</span>
+                      <span className='text-[9px] rounded-lg p-1 gradient text-primary-foreground'>User Interface coding</span>
+                      <span className='text-[9px] rounded-lg p-1 gradient text-primary-foreground'>Algorithm coding</span>
+                      <span className='text-[9px] rounded-lg p-1 gradient text-primary-foreground'>JavaScript functions</span>
                     </div>
                   </div>
                   <div className=' '> <span className='text-muted-foreground hover:text-primary'><ArrowRight width={30} height={30} /></span></div>
@@ -66,8 +66,8 @@ const Prepare = () => {
   Targeted practice in specific frontend questions to ace your next frontend interview
   </div>
   <div className='flex flex-wrap gap-2 items-center'>
-    <span className='text-[9px] rounded-lg p-1 bg-primary text-primary-foreground'>React</span>
-    <span className='text-[9px] rounded-lg p-1 bg-primary text-primary-foreground'>JavaScript</span>
+    <span className='text-[9px] rounded-lg p-1 gradient text-primary-foreground'>React</span>
+    <span className='text-[9px] rounded-lg p-1 gradient text-primary-foreground'>JavaScript</span>
   </div>
 </div>
 <div className=' '> <span className='text-muted-foreground hover:text-primary'><ArrowRight width={30} height={30} /></span></div>
@@ -85,9 +85,9 @@ const Prepare = () => {
   Targeted category wise curated questions to ace your next frontend interview
   </div>
   <div className='flex flex-wrap gap-2 items-center'>
-    <span className='text-[9px] rounded-lg p-1 bg-primary text-primary-foreground'>User Interface coding</span>
-    <span className='text-[9px] rounded-lg p-1 bg-primary text-primary-foreground'>Algorithm coding</span>
-    <span className='text-[9px] rounded-lg p-1 bg-primary text-primary-foreground'>JavaScript functions</span>
+    <span className='text-[9px] rounded-lg p-1 gradient text-primary-foreground'>User Interface coding</span>
+    <span className='text-[9px] rounded-lg p-1 gradient text-primary-foreground'>Algorithm coding</span>
+    <span className='text-[9px] rounded-lg p-1 gradient text-primary-foreground'>JavaScript functions</span>
   </div>
 </div>
 <div className=' '> <span className='text-muted-foreground hover:text-primary'><ArrowRight width={30} height={30} /></span></div>

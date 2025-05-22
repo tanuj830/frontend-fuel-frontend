@@ -45,7 +45,7 @@ const Questions = () => {
             </div>
 
             {/* render layouts */}
-            <div className='mt-20'>
+            <div className='mt-15'>
 
             {
               layout === "questions-layout" ? <QuestionsLayout questions={questions}/> : 

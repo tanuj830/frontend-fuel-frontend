@@ -250,9 +250,9 @@ setTestCaseWindowHeight(50)
         </div>
      {
       !renderingInHomepage &&  <div className='flex items-center gap-3 fixed bottom-1 lg:bottom-0 right-1 lg:right-8 '>
-      <button className={`bg-muted rounded-lg py-1 px-2 flex items-center gap-2 text-xs cursor-pointer ${pastSolution?.solved && 'bg-primary'}`} onClick={handleCompleted}> <Check width={16} height={16} />Mark as completed</button>
+      <button className={`bg-muted rounded-lg py-1 px-2 flex items-center gap-2 text-xs cursor-pointer ${pastSolution?.solved && 'gradient'}`} onClick={handleCompleted}> <Check width={16} height={16} />Mark as completed</button>
       <button className='bg-muted rounded-lg py-1 px-2 flex items-center gap-2 text-xs cursor-pointer' onClick={handleTestCode}> <Play width={16} height={16}/>Run</button>
-      <button className='bg-primary text-primary-foreground rounded-lg py-1 px-2 flex items-center gap-2 text-xs cursor-pointer' onClick={handleSubmit}>Submit</button>
+      <button className='gradient text-primary-foreground rounded-lg py-1 px-2 flex items-center gap-2 text-xs cursor-pointer' onClick={handleSubmit}>Submit</button>
     </div>
      }
     </div>

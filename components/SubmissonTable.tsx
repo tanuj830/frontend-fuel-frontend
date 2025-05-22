@@ -43,7 +43,7 @@ const SubmissonTable = ({ question, submissons }: any) => {
         </div>
         <div className='relative' id='disp'>
           {
-            copied && <span className='absolute -top-5 right-2 text-xs bg-primary text-primary-foreground px-3 py-1 rounded-full'>Copied</span>
+            copied && <span className='absolute -top-5 right-2 text-xs gradient text-primary-foreground px-3 py-1 rounded-full'>Copied</span>
           }
           <button className='absolute top-5 right-5  hover:text-muted-foreground/50 cursor-pointer' onClick={()=>handleCopy(submissons?.code)}>
               <Copy width={15} height={15}/>

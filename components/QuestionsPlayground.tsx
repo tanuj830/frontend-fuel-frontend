@@ -84,7 +84,7 @@ const QuestionsPlayground = ({ questions }:any) => {
                             <div key={key+ind}>
                                 {
                                     filterClicked == key ?
-                                        <Badge variant="outline" className={`cursor-pointer bg-primary text-primary-foreground`} onClick={() => handleFilterQuestions(key)} >{categories[key]}</Badge>
+                                        <Badge variant="outline" className={`cursor-pointer gradient text-primary-foreground`} onClick={() => handleFilterQuestions(key)} >{categories[key]}</Badge>
                                         : <Badge variant="outline" className={`cursor-pointer`} onClick={() => handleFilterQuestions(key)} >{categories[key]}</Badge>
                                 }
                             </div>

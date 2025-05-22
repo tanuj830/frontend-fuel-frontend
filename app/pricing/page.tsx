@@ -22,7 +22,7 @@ const page = () => {
           <div className='flex flex-col gap-2'>
             <div className='flex items-center justify-between'>
             <span className='mb-3 font-semibold'>Free plan</span>
-            <span className='mb-3 font-semibold bg-primary text-xs p-1 rounded-md'>Active</span>
+            <span className='mb-3 font-semibold gradient text-xs p-1 rounded-md'>Active</span>
             </div>
             <span className='line-through text-muted-foreground'>₹499 /month</span>
             <span> <span className='text-4xl font-semibold'>₹0</span> <span className='text-muted-foreground'>/month</span></span>

@@ -43,7 +43,7 @@ const Home = () => {
       <div className='flex flex-col gap-8 lg:px-[10vw] lg:pt-10 lg:w-[60vw] transition-all ease-in duration-3000'>
         <div className='flex flex-col gap-3'>
           <div className='flex gap-3 items-center bg-muted w-fit rounded-full px-2'>
-            <span className='py-0.5 px-2 bg-primary text-[10px] rounded-full text-primary-foreground'>New</span>
+            <span className='py-0.5 px-2 gradient text-[10px] rounded-full text-primary-foreground'>New</span>
             <Link href="/questions" className='flex gap-1 items-center text-xs'>
               <span>React questions</span> <ArrowRight width={15} />
             </Link>

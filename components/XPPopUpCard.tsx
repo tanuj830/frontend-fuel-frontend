@@ -16,7 +16,7 @@ const XpPopupCard = ({ question, xp, onClose }:any) => {
         <div className='flex justify-between items-center'>
             <div className='flex items-center gap-2'>
 
-        <Check className='bg-primary rounded-full p-1 font-extrabold' width={20} height={20}/>
+        <Check className='gradient rounded-full p-1 font-extrabold' width={20} height={20}/>
             <h5 className='font-semibold text-md'>{question.title} Completed!</h5>
             </div>
             <button  className="cursor-pointer" onClick={onClose}><X/></button>

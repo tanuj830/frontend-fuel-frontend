@@ -24,7 +24,6 @@ const UserProfile = () => {
       if(error)return <small>Something went wrong...</small>
       router.push("/sign-in")
     }
-console.log(user, "usersex")
   return (
 user &&<div>
 

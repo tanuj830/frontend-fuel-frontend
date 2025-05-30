@@ -31,7 +31,8 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 export default function AlgoQuestionLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode,
+  params: { slug: string };
 }) {
   return <>{children}</>;
 }

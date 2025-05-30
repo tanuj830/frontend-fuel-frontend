@@ -1,7 +1,7 @@
 
 import { supabase } from '@/lib/supabaseClient';
 
-export async function generateMetadata({ params }: { params: { slug: any } }) {
+export async function generateMetadata({ params }: { params: { slug: string } }) {
     const { slug } = params;
   
     const { data: question, error }:any = await supabase

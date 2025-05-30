@@ -1,5 +1,4 @@
 "use client"
-
 import AlgoCodingPage from '@/components/AlgoCodingPage';
 import Loader from '@/components/Loader';
 import Navbar from '@/components/Navbar';

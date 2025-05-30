@@ -1,3 +1,4 @@
+
 import AlgoCodingInitial from '@/components/AlgoCodingInitial';
 import { supabase } from '@/lib/supabaseClient';
 import { Metadata } from 'next';

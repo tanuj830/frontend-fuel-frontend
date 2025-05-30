@@ -26,9 +26,9 @@ export default function App() {
           <About />
         </div>
        
-        <div className="lg:px-[12vw] px-6">
+        {/* <div className="lg:px-[12vw] px-6">
           <CodingEnv />
-        </div>
+        </div> */}
         
         <div className="lg:px-[12vw] px-6">
           <AccordionDemo />

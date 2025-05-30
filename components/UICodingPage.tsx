@@ -18,7 +18,7 @@ const UICodingPage = ({ height, params }: any) => {
   return (
     <div className='w-full  lg:p-6 relative'>
     {/* mobile view */}
-    <div className="flex flex-col  gap-5 lg:hidden ">
+    <div className="flex flex-col bg-muted/50  gap-5 lg:hidden ">
       <div>
         <QuestionDispScreen question={question} />
       </div>

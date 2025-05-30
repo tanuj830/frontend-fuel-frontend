@@ -9,6 +9,7 @@ const DisplayTags = ({ question }: any) => {
           const Icon = tagIconMap[tag];
           const colorClass = tagColorMap[tag];
 
+          if(tag && colorClass)
           return (
             <span className={`flex items-center gap-1 ${colorClass}`} key={tag}>
               {Icon && <Icon className="w-5 h-5 rounded-md" />}

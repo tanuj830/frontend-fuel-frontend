@@ -37,7 +37,7 @@ const AlgoCodingPage = ({height, renderingInHomepage, params}:any) => {
 <div
         className="flex flex-col  gap-5 lg:hidden"
       >
-        <div>
+        <div className='bg-muted/50 '>
 
           <QuestionDispScreen question={question} />
         </div>

@@ -138,12 +138,12 @@ body{
 }
 
 .exampleCode{
-  @apply  rounded-xl overflow-auto  text-xs font-medium dark:bg-[#282828] bg-[#282c34] text-white
+  @apply  rounded-xl overflow-auto  text-xs font-medium bg-[#282A36]
 }
 
 
 #disp pre{
-  @apply   rounded-xl p-5 my-3 overflow-auto  text-xs dark:bg-[#282828] bg-[#282c34] text-white
+  @apply  text-primary-foreground rounded-xl p-5 my-3 overflow-auto  text-xs bg-[#282A36]
 }
 #disp img{
   @apply  rounded-xl

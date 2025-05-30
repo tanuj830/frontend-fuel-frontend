@@ -1,6 +1,6 @@
 import { BASE_URL, copyToClipboard } from '@/lib/utils'
 import axios from 'axios'
-import { Captions, Clock3, Copy, Flame, Lightbulb, NotebookText } from 'lucide-react'
+import { Captions, CircleCheckBig, Clock3, Copy, Flame, HeartIcon, Lightbulb, NotebookText, Sparkles } from 'lucide-react'
 import React, { useEffect } from 'react'
 import SubmissonTable from './SubmissonTable'
 import { Badge } from './ui/badge'
@@ -8,6 +8,15 @@ import { useCategories } from '@/hooks/useCategories'
 import DisplayTags from './DisplayTags'
 import { supabase } from '@/lib/supabaseClient'
 import { useUserSession } from '@/hooks/useUserSession'
+import { FaHeart } from 'react-icons/fa'
+import {
+    Accordion,
+    AccordionContent,
+    AccordionItem,
+    AccordionTrigger,
+  } from "@/components/ui/accordion"
+import { Span } from 'next/dist/trace'
+
 
 const QuestionDispScreen = ({ question, submitClicked }: any) => {
     const [window, setWindow] = React.useState(() =>  "description");
@@ -58,7 +67,10 @@ const QuestionDispScreen = ({ question, submitClicked }: any) => {
     };
 
     return (
-        <div className='p-5 lg:h-[83vh] min-w-[20vw] overflow-auto'>
+        <div className='px-5 lg:h-[83vh] min-w-[20vw] overflow-auto'>
+        <div className=''>
+            {/* fixed header */}
+            <div className='sticky top-0 bg-[#202022] pt-5 pb-3 z-[100]'>
             {/* toggle window buttons */}
             <div className='flex items-center gap-5'>
                 <button
@@ -85,9 +97,9 @@ const QuestionDispScreen = ({ question, submitClicked }: any) => {
                     <span>Submission</span>
                 </button>
             </div>
-
+</div>
             <div>
-                <h1 className='text-xl lg:text-2xl font-bold leading-9 lg:leading-16 py-3 '>{question?.title}</h1>
+                <h1 className='text-xl lg:text-2xl font-bold pb-5 pt-2 '>{question?.title}</h1>
 
                 <div className='text-xs text-muted-foreground flex items-center flex-wrap gap-5 lg:gap-7 pb-6'>
                     <div className='flex items-center gap-1'>
@@ -100,7 +112,7 @@ const QuestionDispScreen = ({ question, submitClicked }: any) => {
 
                     <div className='flex items-center gap-1'>
                         {
-                            !loading ? <Badge>{categories[question?.category_id]}</Badge> : <Badge className='animate-pulse '>Loading...</Badge>
+                            !loading ? <span className='gradient text-white px-2 py-1 rounded-lg text-xs font-semibold'>{categories[question?.category_id]}</span> : <span className='animate-pulse gradient text-white px-2 py-1 rounded-lg text-xs font-semibold'>Loading...</span>
                         }
                     </div>
                         <DisplayTags question={question}/>
@@ -112,8 +124,8 @@ const QuestionDispScreen = ({ question, submitClicked }: any) => {
                     </div>
 
                     <div className='flex items-center gap-1'>
-                        <Clock3 width={15} height={15} />
-                        <span className='text-muted-foreground text-xs'>{question?.duration ? <>{question?.duration}</>: <>0</>} mins</span>
+                        <HeartIcon className='' width={15} height={15} />
+                        <span className='text-muted-foreground text-xs'>{question?.likes ? <>{question?.likes}</>: <>0</>}</span>
                     </div>
                 </div>
             </div>
@@ -154,12 +166,45 @@ const QuestionDispScreen = ({ question, submitClicked }: any) => {
                 )
             }
         </div>
+        {/* question disp footer */}
+        <div className='pt-5 flex items-center gap-5 mt-5'>
+        <div className='flex items-center gap-1 text-nowrap'>
+                        <CircleCheckBig width={15} height={15} />
+                        <span className='text-muted-foreground text-sm'>{question?.solved_by ? <>{question?.solved_by}</>: <>0</>} done</span>
+                    </div>
+        <div className='flex items-center gap-1 text-nowrap'>
+                        <Sparkles width={15} height={15} />
+                        <span className='text-muted-foreground text-sm'>{question?.skill_level ? <span className='capitalize'>{question?.skill_level}</span>: <>"Beginner"</>} skill required</span>
+                    </div>
+                    <div className='flex items-center gap-1 text-nowrap'>
+                        <Clock3 width={15} height={15} />
+                        <span className='text-muted-foreground text-sm'>{question?.duration ? <>{question?.duration}</>: <>0</>} mins</span>
+                    </div>
+        </div>
+                    <div>
+                    <Accordion type="single" collapsible className="w-full mt-2">
+                <AccordionItem className="" value={`item-${1}`} >
+          <AccordionTrigger className="text-sm hover:decoration-0">Hint</AccordionTrigger>
+          <AccordionContent className="text-[17px] text-sm text-muted-foreground flex gap-2 items-center">
+            {question?.hint}
+          </AccordionContent>
+        </AccordionItem>
+                <AccordionItem className="" value={`item-${2}`} >
+          <AccordionTrigger className="text-sm hover:decoration-0">Topics</AccordionTrigger>
+          <AccordionContent className="text-[17px] text-sm text-muted-foreground flex gap-2 items-center">
+            {question?.tags?.map((tag:any, ind:any)=>(<span key={tag+ind}>{tag}{ind < question?.tags?.length-1 && <>,</>}</span>))}
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
+                    </div>
+        </div>
     );
 
 
    
     
 };
+
 
 const getSubmissionsByUserAndQuestion = async (userId: string, questionId: string) => {
     const { data, error } = await supabase

@@ -28,11 +28,13 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     };
   }
 
-export default function AlgoQuestionLayout({
-  children,
-}: {
-  children: React.ReactNode,
-  params: { slug: string };
-}) {
-  return <>{children}</>;
-}
+  export default function AlgoQuestionLayout({
+    children,
+    params,
+  }: {
+    children: React.ReactNode;
+    params: { slug: string };
+  }) {
+    return <>{children}</>;
+  }
+  

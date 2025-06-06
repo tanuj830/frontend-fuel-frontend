@@ -29,7 +29,7 @@ const DisplayQuestions: React.FC<QuestionsPlaygroundProps> = ({ questions }) => 
   return (
     <div className="flex flex-col">
       {questions.map((question:any) => (
-        <div className='hover:bg-gradient-to-r from-orange-500 to-pink-600 p-[1.5px] rounded-lg' key={question.id}>
+        <div className={`hover:bg-gradient-to-r from-orange-500 to-pink-600 p-[1.5px] rounded-lg`} key={question.id}>
 
 
         <Link
@@ -41,8 +41,12 @@ const DisplayQuestions: React.FC<QuestionsPlaygroundProps> = ({ questions }) => 
               : '/questions/user-interface/#'
           }
           key={question.id}
-          className="w-full border flex items-center gap-3 lg:gap-5 p-3 lg:p-5 bg-muted rounded-lg hover:border hover:border-"
+          className="w-full border flex items-center relative overflow-hidden gap-3 lg:gap-5 p-3 lg:p-5 bg-muted rounded-lg hover:border hover:border-"
         >
+         {
+          question?.is_featured &&  <div className='h-fit py-1 px-3 w-fit  gradient absolute top-0 right-0 text-xs'>
+          Featured</div>
+         }
           <div>
             <button className="text-muted-foreground hover:text-green-600">
               <BadgeCheck width={30} height={30} />

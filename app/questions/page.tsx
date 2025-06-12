@@ -1,7 +1,6 @@
 "use client";
 
-
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { supabase } from '@/lib/supabaseClient';
 import Sidebar from '@/components/Sidebar';
 import QuestionsLayout from '@/components/layouts/QuestionsLayout';
@@ -11,54 +10,61 @@ import UICodingLayout from '@/components/layouts/UICodingLayout';
 import DashboardLayout from '@/components/layouts/DashboardLayout';
 import Navbar from '@/components/Navbar';
 import CheatSheetLayout from '@/components/layouts/CheatsheetLayout';
-// import Sidebar from '@/components/Sidebar';
-
+import ConceptsLayout from '@/components/layouts/ConceptsLayout';
 
 const Questions = () => {
+    const [questions, setQuestions] = useState([]);
+    const [layout, setLayoutState] = useState("dashboard-layout");
 
-    const [questions, setQuestions] = React.useState([])
-    const [layout, setLayout] = React.useState("dashboard-layout")
+    // Handle setLayout with localStorage
+    const setLayout = (value: string) => {
+        setLayoutState(value);
+        localStorage.setItem("selectedLayout", value);
+    };
 
     useEffect(() => {
+        const savedLayout = localStorage.getItem("selectedLayout");
+        if (savedLayout) {
+            setLayoutState(savedLayout);
+        }
+
         const fetchQuestions = async () => {
-            const { data, error }:any = await supabase
-              .from('questions')
-              .select('*'); // specify columns or use * for all
-      
+            const { data, error }: any = await supabase
+                .from('questions')
+                .select('*');
             if (error) {
-              console.error('Error fetching questions:', error);
+                console.error('Error fetching questions:', error);
             } else {
-                console.log(data)
-              setQuestions(data);
+                setQuestions(data);
             }
-          };
-      
-          fetchQuestions();
-    }, [])
+        };
+
+        fetchQuestions();
+    }, []);
 
     return (
         <>
-          <Navbar  layout={layout} setLayout={setLayout}/>
-        <div className='lg:flex'>
-            <div className='relative  min-w-[20vw] max-w-[20vw] w-[20vw] min-h-[70vh] border-r hidden lg:inline-block'>
-            <Sidebar layout={layout} setLayout={setLayout}/>
+            <Navbar layout={layout} setLayout={setLayout} />
+            <div className='lg:flex'>
+                <div className='relative min-w-[20vw] max-w-[20vw] w-[20vw] min-h-[70vh] border-r hidden lg:inline-block'>
+                    <Sidebar layout={layout} setLayout={setLayout} />
+                </div>
+
+                <div className='mt-15'>
+                    {
+                        layout === "questions-layout" ? <QuestionsLayout questions={questions} /> :
+                        layout === "dashboard-layout" ? <DashboardLayout questions={questions} /> :
+                        layout === "uicoding-layout" ? <UICodingLayout /> :
+                        layout === "algocoding-layout" ? <AlgoCodingLayout /> :
+                        layout === "concepts-layout" ? <ConceptsLayout /> :
+                        layout === "cheatsheet-layout" ? <CheatSheetLayout /> :
+                        layout === "jscoding-layout" ? <JSCodingLayout /> :
+                        null
+                    }
+                </div>
             </div>
+        </>
+    );
+};
 
-            {/* render layouts */}
-            <div className='mt-15'>
-
-            {
-              layout === "questions-layout" ? <QuestionsLayout questions={questions}/> : 
-              layout === "dashboard-layout" ? <DashboardLayout questions={questions}/> : 
-              layout === "uicoding-layout" ? <UICodingLayout/> : 
-              layout === "algocoding-layout" ? <AlgoCodingLayout/> : 
-              layout === "cheatsheet-layout" ? <CheatSheetLayout/>
-              : layout === "jscoding-layout" ? <JSCodingLayout/> : null
-            }
-            </div>
-        </div>
-            </>
-    )
-}
-
-export default Questions
+export default Questions;

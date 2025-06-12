@@ -24,10 +24,6 @@ const Sidebar = ({layout, setLayout}:any) => {
 ${layout === "dashboard-layout" && "bg-muted text-secondary-foreground"}`}><LayoutDashboard width={16} height={16}/> Dashboard</button>
   </div>
   <div className=''>
-      <button onClick={()=>setLayout("cheatsheet-layout")} className={`hover:bg-muted cursor-pointer w-full text-start text-[13px] rounded-lg text-muted-foreground py-2 px-2 flex items-center gap-2
-${layout === "cheatsheet-layout" && "bg-muted text-secondary-foreground"}`}><Sheet width={16} height={16}/> Cheatsheets</button>
-  </div>
-  <div className=''>
       <button onClick={()=>setLayout("questions-layout")} className={`hover:bg-muted cursor-pointer w-full text-start text-[13px] rounded-lg text-muted-foreground py-2 px-2 flex items-center gap-2
 ${layout === "questions-layout" && "bg-muted text-secondary-foreground"}`}><ListChecks width={16} height={16}/> All practice questions</button>
   </div>
@@ -43,6 +39,14 @@ ${layout === "algocoding-layout" && "bg-muted text-secondary-foreground"}`}><Bra
       <button onClick={()=>setLayout("jscoding-layout")} className={`hover:bg-muted cursor-pointer w-full text-start text-[13px] rounded-lg text-muted-foreground py-2 px-2 flex items-center gap-2
 ${layout === "jscoding-layout" && "bg-muted text-secondary-foreground"}`}><AiOutlineJavaScript width={16} height={16}/> Javascript questions</button>
   </div>
+<div className=''>
+    <button onClick={()=>setLayout("concepts-layout")} className={`hover:bg-muted cursor-pointer w-full text-start text-[13px] rounded-lg text-muted-foreground py-2 px-2 flex items-center gap-2
+${layout === "concepts-layout" && "bg-muted text-secondary-foreground"}`}><Sheet width={16} height={16}/> Great concepts</button>
+</div>
+<div className=''>
+    <button onClick={()=>setLayout("cheatsheet-layout")} className={`hover:bg-muted cursor-pointer w-full text-start text-[13px] rounded-lg text-muted-foreground py-2 px-2 flex items-center gap-2
+${layout === "cheatsheet-layout" && "bg-muted text-secondary-foreground"}`}><Sheet width={16} height={16}/>Great Cheatsheets</button>
+</div>
 </div>
 </div>
 

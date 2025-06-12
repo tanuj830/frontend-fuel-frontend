@@ -8,7 +8,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
-import { ArrowRight, Brain, ChevronRight, Flame, LayoutDashboard, ListChecks, Menu, Moon, Sun, SunMoon } from 'lucide-react'
+import { ArrowRight, Brain, ChevronRight, Flame, LayoutDashboard, ListChecks, Menu, Moon, SheetIcon, Sun, SunMoon } from 'lucide-react'
 import Logo from './Logo'
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
 import Link from 'next/link'
@@ -99,6 +99,14 @@ ${layout === "algocoding-layout" && "bg-muted text-secondary-foreground"}`}><Bra
        className={`hover:bg-muted cursor-pointer w-full text-start text-[13px] rounded-lg text-muted-foreground py-2 px-2 flex items-center gap-2
 ${layout === "jscoding-layout" && "bg-muted text-secondary-foreground"}`}><AiOutlineJavaScript width={16} height={16}/> Javascript questions</button>
   </div>
+  <div className=''>
+    <button onClick={()=>setLayout("concepts-layout")} className={`hover:bg-muted cursor-pointer w-full text-start text-[13px] rounded-lg text-muted-foreground py-2 px-2 flex items-center gap-2
+${layout === "concepts-layout" && "bg-muted text-secondary-foreground"}`}><SheetIcon width={16} height={16}/> Great concepts</button>
+</div>
+<div className=''>
+    <button onClick={()=>setLayout("cheatsheet-layout")} className={`hover:bg-muted cursor-pointer w-full text-start text-[13px] rounded-lg text-muted-foreground py-2 px-2 flex items-center gap-2
+${layout === "cheatsheet-layout" && "bg-muted text-secondary-foreground"}`}><SheetIcon width={16} height={16}/>Great Cheatsheets</button>
+</div>
 </div>
 
   </div>

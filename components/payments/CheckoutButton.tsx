@@ -31,7 +31,7 @@ export default function CheckoutButton() {
     const res = await fetch('/api/razorpay', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ amount: 99 }), // Amount in INR (₹99)
+      body: JSON.stringify({ amount: 249 }), // Amount in INR (₹99)
     });
 
     if (!res.ok) {
@@ -75,7 +75,7 @@ export default function CheckoutButton() {
         disabled={loading}
         className=" px-4 py-2 text-sm rounded-full  border w-full hover:bg-muted text-muted-foreground hover:dark:text-white hover:text-black"
       >
-        {loading ? 'Processing...' : 'Buy for ₹99'}
+        {loading ? 'Processing...' : 'Buy for ₹249'}
       </button>
     </>
   );

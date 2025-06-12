@@ -33,7 +33,7 @@ const page = () => {
             default: {
               colors: {
                 brand: 'oklch(0.705 0.213 47.604)',
-                brandAccent: '' 
+                brandAccent: 'oklch(0.705 0.213 25.604)' 
               },
             },
           },

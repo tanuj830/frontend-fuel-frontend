@@ -118,7 +118,7 @@ body{
 
 
 .gradient{
-  @apply bg-gradient-to-r from-orange-600 to-pink-500
+  @apply bg-gradient-to-r from-orange-600 to-pink-500 text-white
 }
 
 @layer base {

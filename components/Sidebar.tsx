@@ -11,10 +11,10 @@ import { FaInstagram, FaLinkedin } from 'react-icons/fa'
 import FeaturedItem from './FeaturedItem'
 
 
-const Sidebar = ({layout, setLayout}:any) => {
+const Sidebar = ({setShowSidebar, layout, setLayout}:any) => {
 
   return (
-    <div className=' fixed top-20 min-w-[20vw] max-w-[20vw] w-[20vw] h-screen'>
+    <div className="fixed top-20 min-w-[20vw] max-w-[20vw] w-[20vw] h-screen">
         <div className=' h-full  w-full flex flex-col justify-between pb-20'>
     <div>
 
@@ -62,7 +62,7 @@ ${layout === "cheatsheet-layout" && "bg-muted text-secondary-foreground"}`}><She
         <Link href="https://www.linkedin.com/company/greatreact/about" target='_blank' className='border p-2 text-sm rounded-full'><FaLinkedin/></Link>
         <Link href="https://www.instagram.com/greatreact?igsh=eGx2Y2lxdTFjMjRm&utm_source=qr" target='_blank' className='border p-2 text-sm rounded-full'><FaInstagram/></Link>
     </div>
-        <Link href="#" className='border p-2 text-sm rounded-full'><AiOutlineNodeCollapse/></Link>
+        <button onClick={()=>setShowSidebar(false)} className='border p-2 text-sm rounded-full cursor-pointer'><AiOutlineNodeCollapse/></button>
   </div>
   </div>
   </div>

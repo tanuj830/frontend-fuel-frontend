@@ -15,6 +15,7 @@ import ConceptsLayout from '@/components/layouts/ConceptsLayout';
 const Questions = () => {
     const [questions, setQuestions] = useState([]);
     const [layout, setLayoutState] = useState("dashboard-layout");
+    const [showSidebar, setShowSidebar] = useState(true);
 
     // Handle setLayout with localStorage
     const setLayout = (value: string) => {
@@ -44,11 +45,14 @@ const Questions = () => {
 
     return (
         <>
-            <Navbar layout={layout} setLayout={setLayout} />
+            <Navbar showSidebar={showSidebar} setShowSidebar={setShowSidebar} layout={layout} setLayout={setLayout} />
             <div className='lg:flex'>
+                    {
+                        showSidebar &&
                 <div className='relative min-w-[20vw] max-w-[20vw] w-[20vw] min-h-[70vh] border-r hidden lg:inline-block'>
-                    <Sidebar layout={layout} setLayout={setLayout} />
+                         <Sidebar setShowSidebar={setShowSidebar} layout={layout} setLayout={setLayout} />
                 </div>
+                    }
 
                 <div className='mt-15'>
                     {

@@ -30,7 +30,7 @@ const About = () => {
             <div className='flex flex-col gap-2'>
                 <div className='flex gap-3'>
               <span className='font-semibold'>Tanuj Bhatt</span>
-<Link href="https://www.linkedin.com/in/tanuj-bhatt-85a2511b5/" target='_blank' className='border p-1 rounded-lg'><FaLinkedinIn/></Link>
+<Link href="https://www.linkedin.com/in/tanuj-bhatt-85a2511b5/" target='_blank' className='border p-1 rounded-lg text-cyan-700'><FaLinkedinIn/></Link>
                 </div>
                 <div className='flex flex-col'>
               <small className='text-muted-foreground text-[11px] lg:text-xs'>Founder, Creator of GreatReact</small>

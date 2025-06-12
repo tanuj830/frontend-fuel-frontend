@@ -63,8 +63,8 @@ const page = () => {
         <div className='border lg:w-[25vw] rounded-xl py-5 px-7 text-sm bg-gradient-to-tr from-[rgb(24, 24, 27)] to-muted'>
           <div className='flex flex-col gap-2'>
             <span className='mb-3 font-semibold'>Monthly plan</span>
-            <span className='line-through text-muted-foreground'>₹99 /month</span>
-            <span> <span className='text-4xl font-semibold'>₹99</span> <span className='text-muted-foreground'>/month</span></span>
+            <span className='line-through text-muted-foreground'>₹499 /month</span>
+            <span> <span className='text-4xl font-semibold'>₹249</span> <span className='text-muted-foreground'>/month</span></span>
             <span className='text-muted-foreground'>Billed monthly</span>
           </div>
           <div className='mt-5'>

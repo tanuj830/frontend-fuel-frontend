@@ -8,7 +8,7 @@ import { Input } from '@/components/ui/input'
 import { Separator } from '@/components/ui/separator'
 import { BASE_URL } from '@/lib/utils';
 import axios from 'axios'
-import { ArrowDown01, ArrowRight, BadgeCheck, PanelTop, Search, Sheet, TestTube } from 'lucide-react'
+import { ArrowDown01, ArrowLeft, ArrowRight, BadgeCheck, PanelTop, Search, Sheet, TestTube } from 'lucide-react'
 import { supabase } from '@/lib/supabaseClient'
 import Link from 'next/link'
 
@@ -50,7 +50,12 @@ const CheatSheetLayout = ({questions}:any) => {
       <div>
           <div>
 
+                                <div className='flex gap-2 flex-row flex-nowrap'>
+                                    <button className='cursor-pointer' onClick={()=>setShowCheatsheet(false)}><ArrowLeft /></button>
+                                  
           <h6 className='text-2xl lg:text-3xl font-bold leading-16'>{cheatsheet.title}</h6>
+         
+          </div>
           <span className='leading-1 text-muted-foreground font-semibold text-sm lg:text-md'>{cheatsheet.description}</span>
           </div>
           <div className='mt-10 flex flex-col gap-10'>

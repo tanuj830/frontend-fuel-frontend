@@ -70,7 +70,7 @@ const QuestionDispScreen = ({ question, submitClicked }: any) => {
         <div className='px-5 lg:h-[83vh] min-w-[20vw] overflow-auto'>
         <div className=''>
             {/* fixed header */}
-            <div className='sticky top-0 bg-[#202022] pt-5 pb-3 z-[100]'>
+            <div className='sticky top-0 bg-white dark:bg-[#202022] pt-5 pb-3 z-[100]'>
             {/* toggle window buttons */}
             <div className='flex items-center gap-5'>
                 <button

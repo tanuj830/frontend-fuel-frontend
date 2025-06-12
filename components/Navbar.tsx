@@ -4,7 +4,7 @@ import { Menubar } from './ui/menubar'
 import { Menu } from './Menu'
 import { ModeToggle } from './ModeToggle'
 import Link from 'next/link'
-import { X } from 'lucide-react'
+import { AlignJustify, X } from 'lucide-react'
 import Logo from './Logo';
 import Prepare from './Prepare';
 import Products from './Products';
@@ -12,7 +12,7 @@ import UserProfile from './UserProfile';
 import NavbarSheet from './HamburgerMenu';
 import GetfullAccess from './GetfullAccess';
 
-const Navbar = ({layout, setLayout}:any) => {
+const Navbar = ({showSidebar, setShowSidebar, layout, setLayout}:any) => {
   const [showAddBar, setShowAddBar] = React.useState(true)
 
   
@@ -66,6 +66,9 @@ const Navbar = ({layout, setLayout}:any) => {
   <div className='flex items-center gap-5'>
 
     < div className='flex items-center gap-5'>
+    {
+      !showSidebar &&<button onClick={()=>setShowSidebar(true)} className='cursor-pointer'><AlignJustify/></button>
+    }
     <Link href="/" className='cursor-pointer'>
       <Logo  showFull={true}/>
     </Link>

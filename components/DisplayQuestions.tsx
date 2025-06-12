@@ -44,7 +44,7 @@ const DisplayQuestions: React.FC<QuestionsPlaygroundProps> = ({ questions }) => 
           className="w-full border flex items-center relative overflow-hidden gap-3 lg:gap-5 p-3 lg:p-5 bg-muted rounded-lg hover:border hover:border-"
         >
          {
-          question?.is_featured &&  <div className='h-fit py-1 px-3 w-fit  gradient absolute top-0 right-0 text-xs'>
+          question?.is_featured &&  <div className='h-fit py-1 px-3 w-fit text-white gradient absolute top-0 right-0 text-xs'>
           Featured</div>
          }
           <div>

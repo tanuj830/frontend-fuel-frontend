@@ -40,7 +40,7 @@ const page = () => {
         }}
         theme={theme === "light" ? "light" : "dark"}
         providers={['github', 'google']}
-        // redirectTo="https://reactready.vercel.app"
+        // redirectTo="https://greatreact.com"
       />
     </div>
     </div>

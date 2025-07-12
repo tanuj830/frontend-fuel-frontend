@@ -33,7 +33,7 @@ export default function AnimatedHeading({sentence}:any) {
     };
   return (
     <motion.h4
-      className="text-4xl lg:text-6xl font-semibold flex flex-wrap gap-x-2"
+      className="text-5xl lg:text-6xl font-semibold flex flex-wrap gap-x-2 break-all"
       variants={container}
       initial="hidden"
       animate="visible"

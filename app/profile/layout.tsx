@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ReactReady | Profile",
+  title: "GreatReact | Profile",
   description: "Ace your next frontend interview",
 };
 
